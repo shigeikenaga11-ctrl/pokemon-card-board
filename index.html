@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
 <title>Pokémon Card Board</title>
 
 <style>
-*{box-sizing:border-box}
 
-html,body{
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
   margin:0;
   width:100%;
   height:100%;
   overflow:hidden;
+
   background:
-    radial-gradient(circle at 15% 15%,#18213a 0%,transparent 38%),
-    radial-gradient(circle at 90% 90%,#201323 0%,transparent 35%),
-    #06080d;
-  color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+    radial-gradient(
+      circle at 50% 0%,
+      #17202b 0%,
+      #080c12 42%,
+      #030507 100%
+    );
+
+  color:#eef2f6;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 body{
@@ -31,798 +49,1541 @@ body{
     env(safe-area-inset-left);
 }
 
-#app{
+
+/* =========================
+   BOARD
+========================= */
+
+.board{
   width:100%;
   height:100%;
-  padding:30px 46px;
+
+  display:grid;
+
+  grid-template-rows:
+    74px
+    1fr
+    48px;
+
+  padding:
+    14px
+    24px
+    14px;
+
+  gap:12px;
 }
+
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
-  height:9%;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.10);
+
+  padding:
+    0 4px 10px;
 }
 
-.title{
-  font-size:17px;
-  letter-spacing:4px;
-  color:#aeb7c5;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  width:12px;
+  height:42px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e0c875,
+      #846c27
+    );
+
+  box-shadow:
+    0 0 18px rgba(221,193,98,.25);
+}
+
+.brand-title{
+  font-size:25px;
   font-weight:700;
+
+  letter-spacing:.08em;
 }
 
-.clock{
-  font-size:14px;
-  color:#697485;
+.brand-sub{
+  margin-top:3px;
+
+  font-size:10px;
+
+  letter-spacing:.22em;
+
+  color:#717c8b;
 }
+
+.mode{
+  min-width:126px;
+
+  padding:
+    10px 18px;
+
+  border:
+    1px solid rgba(255,255,255,.14);
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  text-align:center;
+
+  font-size:12px;
+  font-weight:700;
+
+  letter-spacing:.18em;
+
+  color:#aeb7c2;
+}
+
+.mode.want{
+  color:#dfc66e;
+
+  border-color:
+    rgba(223,198,110,.45);
+
+  background:
+    rgba(223,198,110,.06);
+}
+
+
+/* =========================
+   MAIN
+========================= */
 
 .main{
-  height:84%;
+  min-height:0;
+
   display:grid;
-  grid-template-columns:32% 68%;
-  gap:36px;
+
+  grid-template-columns:
+    minmax(280px,.88fr)
+    minmax(440px,1.45fr);
+
+  gap:22px;
+}
+
+
+/* =========================
+   GLASS PANEL
+========================= */
+
+.panel{
+  min-height:0;
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
+  border-radius:25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.018)
+    );
+
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.34);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.image-panel{
+  position:relative;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+}
+
+.image-panel::before{
+  content:"";
+
+  position:absolute;
+
+  width:300px;
+  height:300px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(216,194,110,.10),
+      transparent 67%
+    );
+
+  filter:blur(10px);
 }
 
 .image-area{
+  position:relative;
+  z-index:2;
+
+  width:100%;
+  height:100%;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   transform:translateY(-35px);
 }
 
-.card-frame{
-  width:min(100%,330px);
-  aspect-ratio:63/88;
-  border-radius:18px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.17);
-  background:linear-gradient(
-    145deg,
-    rgba(255,255,255,.09),
-    rgba(255,255,255,.02)
-  );
-  box-shadow:0 25px 60px rgba(0,0,0,.5);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+.card-image{
+  display:none;
 
-.card-frame img{
-  width:100%;
-  height:100%;
+  max-width:78%;
+  max-height:83%;
+
   object-fit:contain;
+
+  border-radius:16px;
+
+  filter:
+    drop-shadow(
+      0 20px 28px rgba(0,0,0,.48)
+    );
 }
 
-.placeholder{
-  text-align:center;
-  color:#687382;
-  line-height:1.8;
-}
+.image-placeholder{
+  width:72%;
+  aspect-ratio:63 / 88;
 
-.info{
-  padding-top:3%;
   display:flex;
   flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  border:
+    1px solid rgba(255,255,255,.12);
+
+  border-radius:19px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.04),
+      rgba(255,255,255,.012)
+    );
+
+  color:#56616e;
+
+  font-size:12px;
+
+  letter-spacing:.17em;
 }
 
-.name{
-  font-size:clamp(34px,4vw,54px);
+.placeholder-circle{
+  width:72px;
+  height:72px;
+
+  margin-bottom:18px;
+
+  border:
+    1px solid rgba(255,255,255,.11);
+
+  border-radius:50%;
+
+  position:relative;
+}
+
+.placeholder-circle::after{
+  content:"";
+
+  position:absolute;
+
+  top:50%;
+  left:0;
+
+  width:100%;
+
+  border-top:
+    1px solid rgba(255,255,255,.11);
+}
+
+
+/* =========================
+   INFORMATION
+========================= */
+
+.info-panel{
+  padding:
+    25px 29px 22px;
+
+  display:grid;
+
+  grid-template-rows:
+    auto
+    auto
+    auto
+    minmax(120px,1fr);
+
+  gap:16px;
+}
+
+.card-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+
+  gap:20px;
+}
+
+.card-name{
+  font-size:
+    clamp(25px,3vw,40px);
+
+  font-weight:750;
+
+  line-height:1.08;
+
+  letter-spacing:.01em;
+}
+
+.card-number{
+  margin-top:8px;
+
+  font-size:13px;
+
+  color:#737f8e;
+
+  letter-spacing:.13em;
+}
+
+.qty{
+  padding:
+    7px 11px;
+
+  border:
+    1px solid rgba(255,255,255,.11);
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  font-size:11px;
+
+  color:#8994a1;
+
+  white-space:nowrap;
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+.price-section{
+  padding:
+    17px 0 15px;
+
+  border-top:
+    1px solid rgba(255,255,255,.07);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.07);
+}
+
+.price-label{
+  font-size:10px;
+
+  letter-spacing:.19em;
+
+  color:#727d8b;
+}
+
+.current-price{
+  margin-top:4px;
+
+  font-size:
+    clamp(38px,5.2vw,66px);
+
+  line-height:1;
+
   font-weight:760;
+
+  letter-spacing:-.045em;
 }
 
-.number{
-  color:#8994a4;
-  font-size:18px;
-  margin-top:5px;
+.source{
+  margin-top:7px;
+
+  font-size:10px;
+
+  color:#66717f;
+
+  letter-spacing:.12em;
 }
 
-.rule{
-  height:1px;
-  margin:22px 0;
-  background:linear-gradient(
-    90deg,
-    rgba(255,255,255,.2),
-    transparent
-  );
-}
+
+/* =========================
+   METRICS
+========================= */
 
 .metrics{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px 35px;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:10px;
 }
 
 .metric{
-  padding:9px 0;
+  min-width:0;
+
+  padding:
+    13px 14px;
+
+  border:
+    1px solid rgba(255,255,255,.075);
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.022);
 }
 
-.label{
-  font-size:12px;
-  letter-spacing:1.5px;
-  color:#778291;
+.metric-label{
+  margin-bottom:7px;
+
+  font-size:9px;
+
+  letter-spacing:.14em;
+
+  color:#697482;
 }
 
-.value{
-  font-size:clamp(25px,3vw,39px);
-  font-weight:720;
-  margin-top:5px;
+.metric-value{
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+  font-size:
+    clamp(15px,1.8vw,22px);
+
+  font-weight:680;
 }
 
-.sub{
-  margin-top:3px;
-  font-size:15px;
+.positive{
+  color:#79cfa0;
 }
 
-.up{color:#52d798}
-.down{color:#ff6d7d}
-.neutral{color:#aeb7c4}
-.gold{color:#dfc26e}
+.negative{
+  color:#e48686;
+}
 
-.graph{
-  flex:1;
-  min-height:150px;
-  margin-top:12px;
-  border:1px solid rgba(255,255,255,.08);
+.neutral{
+  color:#a9b2bd;
+}
+
+.gold{
+  color:#dfc66e;
+}
+
+
+/* =========================
+   CHART
+========================= */
+
+.chart-box{
+  min-height:0;
+
+  position:relative;
+
+  padding:
+    14px 12px 4px;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
   border-radius:17px;
-  background:rgba(255,255,255,.025);
-  padding:14px 18px;
+
+  background:
+    rgba(0,0,0,.13);
 }
 
-.graph-title{
-  color:#697484;
-  letter-spacing:2px;
-  font-size:11px;
+.chart-title{
+  position:absolute;
+
+  top:10px;
+  left:15px;
+
+  z-index:2;
+
+  font-size:9px;
+
+  letter-spacing:.16em;
+
+  color:#65717e;
 }
 
-canvas{
+#chart{
   width:100%;
-  height:calc(100% - 18px);
+  height:100%;
 }
+
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
-  height:7%;
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:flex-end;
-  color:#596371;
-  font-size:12px;
-  letter-spacing:1px;
+
+  padding:0 5px;
+
+  font-size:10px;
+
+  color:#606b78;
+
+  letter-spacing:.11em;
 }
 
-.mode-owned{
-  color:#8fa5c9;
+.footer-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
-.mode-wanted{
-  color:#d9bd69;
+.dot{
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:#62bd8b;
+
+  box-shadow:
+    0 0 10px rgba(98,189,139,.45);
 }
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(
+  max-width:760px
+){
+
+  .board{
+    grid-template-rows:
+      60px
+      1fr
+      38px;
+
+    padding:
+      10px;
+  }
+
+  .main{
+    grid-template-columns:
+      .8fr
+      1.2fr;
+
+    gap:10px;
+  }
+
+  .info-panel{
+    padding:
+      17px;
+  }
+
+  .metrics{
+    gap:6px;
+  }
+
+  .metric{
+    padding:
+      10px;
+  }
+
+  .brand-title{
+    font-size:18px;
+  }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<div id="app">
+<div class="board">
 
-  <div class="header">
-    <div id="headerTitle" class="title">MY COLLECTION</div>
-    <div id="clock" class="clock"></div>
-  </div>
 
-  <div class="main">
+<!-- =========================
+     HEADER
+========================= -->
 
-    <div class="image-area">
-      <div id="cardFrame" class="card-frame"></div>
-    </div>
+<header class="header">
 
-    <div class="info">
+  <div class="brand">
 
-      <div id="cardName" class="name"></div>
-      <div id="cardNumber" class="number"></div>
+    <div class="logo"></div>
 
-      <div class="rule"></div>
+    <div>
 
-      <div id="metrics" class="metrics"></div>
+      <div class="brand-title">
+        POKÉMON CARD BOARD
+      </div>
 
-      <div class="graph">
-        <div id="graphTitle" class="graph-title">
-          PRICE HISTORY
-        </div>
-        <canvas id="chart"></canvas>
+      <div class="brand-sub">
+        COLLECTION · MARKET TRACKER
       </div>
 
     </div>
+
   </div>
 
-  <div class="footer">
-    <div id="count"></div>
-    <div>AUTO ROTATE · 16 SEC</div>
+
+  <div
+    id="mode"
+    class="mode"
+  >
+    OWNED
   </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+  <!-- IMAGE -->
+
+  <section class="panel image-panel">
+
+    <div class="image-area">
+
+      <img
+        id="cardImage"
+        class="card-image"
+        alt=""
+      >
+
+      <div
+        id="imagePlaceholder"
+        class="image-placeholder"
+      >
+
+        <div
+          class="placeholder-circle"
+        ></div>
+
+        CARD IMAGE
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- INFO -->
+
+  <section class="panel info-panel">
+
+
+    <div class="card-top">
+
+      <div>
+
+        <div
+          id="cardName"
+          class="card-name"
+        >
+          —
+        </div>
+
+        <div
+          id="cardNumber"
+          class="card-number"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div
+        id="qty"
+        class="qty"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="price-section">
+
+      <div class="price-label">
+        カードラッシュ相場
+      </div>
+
+      <div
+        id="currentPrice"
+        class="current-price"
+      >
+        —
+      </div>
+
+      <div class="source">
+        CARD RUSH · NORMAL CONDITION
+      </div>
+
+    </div>
+
+
+    <div
+      id="metrics"
+      class="metrics"
+    >
+    </div>
+
+
+    <div class="chart-box">
+
+      <div class="chart-title">
+        PRICE HISTORY · LAST 30 DAYS
+      </div>
+
+      <canvas
+        id="chart"
+      ></canvas>
+
+    </div>
+
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+  <div
+    id="count"
+  >
+    —
+  </div>
+
+
+  <div class="footer-right">
+
+    <span>
+      AUTO 16 SEC
+    </span>
+
+    <span
+      id="clock"
+    >
+      —
+    </span>
+
+    <div class="dot"></div>
+
+  </div>
+
+</footer>
+
 
 </div>
 
+
 <script>
 
-const PAGE_INTERVAL = 16000;
+/* =========================================================
+   SETTINGS
+========================================================= */
 
-let data;
+const ROTATE_MS =
+  16000;
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let data = null;
+
 let physicalCards = [];
 
-let lastOwnedIndex = -1;
+let previousOwnedIndex = -1;
+
 let wantedIndex = 0;
 
-/*
-  0 = 保有カード
-  1 = WANT
-  2 = 保有カード
-  3 = WANT
-*/
 let modeCounter = 0;
 
 
-/* -------------------------
-   基本表示
-------------------------- */
+/* =========================================================
+   UTILITIES
+========================================================= */
 
-function yen(v){
+function yen(value){
 
-  if(v === null || v === undefined)
+  if(
+    value === null ||
+    value === undefined ||
+    Number.isNaN(
+      Number(value)
+    )
+  ){
     return "—";
+  }
 
-  return "¥" +
-    Math.round(v).toLocaleString("ja-JP");
+  return (
+    "¥" +
+    Number(value)
+      .toLocaleString(
+        "ja-JP"
+      )
+  );
+
 }
 
 
-function pct(v){
+function percentChange(
+  current,
+  base
+){
 
-  if(v === null || !isFinite(v))
-    return "—";
+  if(
+    current === null ||
+    current === undefined ||
+    base === null ||
+    base === undefined ||
+    Number(base) === 0
+  ){
+    return null;
+  }
 
-  return (v > 0 ? "+" : "") +
-    v.toFixed(1) + "%";
+
+  return (
+    (
+      Number(current) /
+      Number(base)
+      - 1
+    )
+    * 100
+  );
+
 }
 
 
-function cls(v){
+function signedPercent(value){
 
-  if(v === null || v === 0)
+  if(
+    value === null ||
+    value === undefined ||
+    Number.isNaN(value)
+  ){
+    return "—";
+  }
+
+
+  const sign =
+    value > 0
+      ? "+"
+      : "";
+
+
+  return (
+    sign +
+    value.toFixed(1) +
+    "%"
+  );
+
+}
+
+
+function valueClass(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
     return "neutral";
+  }
 
-  return v > 0 ? "up" : "down";
+  if(value > 0){
+    return "positive";
+  }
+
+  if(value < 0){
+    return "negative";
+  }
+
+  return "neutral";
+
 }
 
 
-function signedYen(v){
+/* =========================================================
+   CLOCK
+========================================================= */
 
-  if(v === null)
-    return "—";
+function updateClock(){
 
-  if(v > 0)
-    return "+" + yen(v);
+  const now =
+    new Date();
 
-  if(v < 0)
-    return "-" + yen(Math.abs(v));
 
-  return "¥0";
+  document.getElementById(
+    "clock"
+  ).textContent =
+    now.toLocaleTimeString(
+      "ja-JP",
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
 }
 
 
-/* -------------------------
-   120枚へ展開
-------------------------- */
+/* =========================================================
+   OWNED → PHYSICAL CARDS
+========================================================= */
 
 function expandOwnedCards(){
 
   physicalCards = [];
 
-  data.owned.forEach(card => {
 
-    for(let i=0; i<card.qty; i++){
+  for(
+    const card
+    of data.owned || []
+  ){
+
+    const qty =
+      Math.max(
+        1,
+        Number(
+          card.qty || 1
+        )
+      );
+
+
+    const purchasePrices =
+      Array.isArray(
+        card.purchasePrices
+      )
+        ? card.purchasePrices
+        : [];
+
+
+    for(
+      let i = 0;
+      i < qty;
+      i++
+    ){
 
       physicalCards.push({
 
         ...card,
 
-        copy:i + 1,
+        physicalIndex:
+          i + 1,
+
+        physicalQty:
+          qty,
 
         purchasePrice:
-          card.purchasePrices?.[i] ??
-          card.purchasePrices?.[0] ??
-          null,
+          purchasePrices[i]
+          ??
+          purchasePrices[0]
+          ??
+          null
 
-        currentPrice:
-          card.currentPrice ?? null,
-
-        yesterdayPrice:
-          card.yesterdayPrice ?? null,
-
-        image:
-          card.image ?? ""
       });
 
     }
-
-  });
-
-}
-
-
-/* -------------------------
-   画像
-------------------------- */
-
-function showImage(card){
-
-  const frame =
-    document.getElementById("cardFrame");
-
-  if(card.image){
-
-    frame.innerHTML =
-      `<img src="${card.image}"
-            alt="${card.name}">`;
-
-  }else{
-
-    frame.innerHTML = `
-      <div class="placeholder">
-        CARD IMAGE<br><br>
-        ${card.name}<br>
-        ${card.number}
-      </div>
-    `;
 
   }
 
 }
 
 
-/* -------------------------
-   保有カード
-------------------------- */
+/* =========================================================
+   RANDOM OWNED
+========================================================= */
 
 function randomOwned(){
 
-  if(physicalCards.length === 0)
-    return;
+  if(
+    physicalCards.length === 0
+  ){
+    return null;
+  }
+
+
+  if(
+    physicalCards.length === 1
+  ){
+
+    previousOwnedIndex = 0;
+
+    return physicalCards[0];
+
+  }
+
 
   let index;
+
 
   do{
 
     index =
       Math.floor(
-        Math.random() *
+        Math.random()
+        *
         physicalCards.length
       );
 
   }while(
-    physicalCards.length > 1 &&
-    index === lastOwnedIndex
+    index ===
+    previousOwnedIndex
   );
 
-  lastOwnedIndex = index;
 
-  showOwned(
-    physicalCards[index]
-  );
+  previousOwnedIndex =
+    index;
+
+
+  return physicalCards[
+    index
+  ];
 
 }
 
 
-function showOwned(card){
+/* =========================================================
+   IMAGE
+========================================================= */
 
-  document.getElementById(
-    "headerTitle"
-  ).innerHTML =
-    `<span class="mode-owned">
-      MY COLLECTION
-     </span>`;
+function setImage(card){
 
-  document.getElementById(
-    "cardName"
-  ).textContent =
-    card.name;
-
-  document.getElementById(
-    "cardNumber"
-  ).textContent =
-    card.number +
-    (card.qty > 1
-      ? ` · ${card.copy}/${card.qty}`
-      : "");
-
-  showImage(card);
+  const image =
+    document.getElementById(
+      "cardImage"
+    );
 
 
-  const purchase =
-    card.purchasePrice;
-
-  const current =
-    card.currentPrice;
-
-  const yesterday =
-    card.yesterdayPrice;
+  const placeholder =
+    document.getElementById(
+      "imagePlaceholder"
+    );
 
 
-  const fromPurchase =
-    purchase !== null &&
-    current !== null
-      ? current - purchase
-      : null;
+  if(card.image){
+
+    image.src =
+      card.image;
+
+    image.alt =
+      card.name || "";
+
+    image.style.display =
+      "block";
+
+    placeholder.style.display =
+      "none";
 
 
-  const fromPurchasePct =
-    purchase &&
-    current !== null
-      ? (
-          (current / purchase) - 1
-        ) * 100
-      : null;
+    image.onerror = () => {
+
+      image.style.display =
+        "none";
+
+      placeholder.style.display =
+        "flex";
+
+    };
+
+  }else{
+
+    image.removeAttribute(
+      "src"
+    );
+
+    image.style.display =
+      "none";
+
+    placeholder.style.display =
+      "flex";
+
+  }
+
+}
 
 
-  const fromYesterday =
-    yesterday !== null &&
-    current !== null
-      ? current - yesterday
-      : null;
+/* =========================================================
+   METRIC
+========================================================= */
 
+function metricHTML(
+  label,
+  value,
+  className="neutral"
+){
 
-  const fromYesterdayPct =
-    yesterday &&
-    current !== null
-      ? (
-          (current / yesterday) - 1
-        ) * 100
-      : null;
-
-
-  document.getElementById(
-    "metrics"
-  ).innerHTML = `
-
-    <div class="metric">
-      <div class="label">
-        購入価格
-      </div>
-
-      <div class="value">
-        ${yen(purchase)}
-      </div>
-    </div>
-
-
-    <div class="metric">
-      <div class="label">
-        現在相場
-      </div>
-
-      <div class="value">
-        ${yen(current)}
-      </div>
-    </div>
-
-
+  return `
     <div class="metric">
 
-      <div class="label">
-        購入時から
+      <div class="metric-label">
+        ${label}
       </div>
 
-      <div class="value
-                  ${cls(fromPurchase)}">
-
-        ${signedYen(fromPurchase)}
-
-      </div>
-
-      <div class="sub
-                  ${cls(fromPurchasePct)}">
-
-        ${pct(fromPurchasePct)}
-
-      </div>
-
-    </div>
-
-
-    <div class="metric">
-
-      <div class="label">
-        昨日から
-      </div>
-
-      <div class="value
-                  ${cls(fromYesterday)}">
-
-        ${signedYen(fromYesterday)}
-
-      </div>
-
-      <div class="sub
-                  ${cls(fromYesterdayPct)}">
-
-        ${pct(fromYesterdayPct)}
-
+      <div class="metric-value ${className}">
+        ${value}
       </div>
 
     </div>
   `;
 
-
-  document.getElementById(
-    "graphTitle"
-  ).textContent =
-    "PRICE HISTORY / PURCHASE";
-
-
-  document.getElementById(
-    "count"
-  ).textContent =
-    `OWNED ${physicalCards.length} CARDS`;
-
-
-  drawChart({
-    purchase,
-    current,
-    yesterday,
-    target:null
-  });
-
 }
 
 
-/* -------------------------
-   WANT LIST
-------------------------- */
+/* =========================================================
+   OWNED
+========================================================= */
 
-function showNextWanted(){
-
-  if(data.wanted.length === 0)
-    return;
+function showOwned(){
 
   const card =
-    data.wanted[wantedIndex];
-
-  wantedIndex =
-    (wantedIndex + 1) %
-    data.wanted.length;
-
-  showWanted(card);
-
-}
+    randomOwned();
 
 
-function showWanted(card){
-
-  document.getElementById(
-    "headerTitle"
-  ).innerHTML =
-    `<span class="mode-wanted">
-      WANT LIST
-     </span>`;
-
-  document.getElementById(
-    "cardName"
-  ).textContent =
-    card.name;
-
-  document.getElementById(
-    "cardNumber"
-  ).textContent =
-    card.number;
-
-  showImage(card);
-
-
-  const current =
-    card.currentPrice;
-
-  const reference =
-    card.referencePrice;
-
-  const yesterday =
-    card.yesterdayPrice;
-
-
-  /*
-    登録時価格の50%。
-    referencePriceは今後固定する。
-  */
-
-  const target =
-    reference !== null
-      ? reference * 0.5
-      : null;
-
-
-  const dayDiff =
-    current !== null &&
-    yesterday !== null
-      ? current - yesterday
-      : null;
-
-
-  const dayPct =
-    current !== null &&
-    yesterday
-      ? (
-          (current / yesterday) - 1
-        ) * 100
-      : null;
-
-
-  const targetDiff =
-    current !== null &&
-    target !== null
-      ? current - target
-      : null;
-
-
-  let targetStatus = "—";
-
-  if(
-    current !== null &&
-    target !== null
-  ){
-
-    const ratio =
-      current / target;
-
-    if(ratio <= 1)
-      targetStatus =
-        "BUY ZONE";
-
-    else if(ratio <= 1.10)
-      targetStatus =
-        "NEAR BUY";
-
-    else if(ratio <= 1.25)
-      targetStatus =
-        "WATCH";
-
-    else
-      targetStatus =
-        "WAIT";
+  if(!card){
+    return;
   }
 
 
+  const current =
+    card.currentPrice
+    ?? null;
+
+
+  const yesterday =
+    card.yesterdayPrice
+    ?? null;
+
+
+  const purchase =
+    card.purchasePrice
+    ?? null;
+
+
+  const purchaseChange =
+    percentChange(
+      current,
+      purchase
+    );
+
+
+  const dayChange =
+    percentChange(
+      current,
+      yesterday
+    );
+
+
+  /* MODE */
+
+  const mode =
+    document.getElementById(
+      "mode"
+    );
+
+  mode.textContent =
+    "OWNED";
+
+  mode.className =
+    "mode";
+
+
+  /* CARD */
+
+  document.getElementById(
+    "cardName"
+  ).textContent =
+    card.name || "—";
+
+
+  document.getElementById(
+    "cardNumber"
+  ).textContent =
+    card.number || "—";
+
+
+  document.getElementById(
+    "qty"
+  ).textContent =
+    card.physicalQty > 1
+      ? `${card.physicalIndex} / ${card.physicalQty}`
+      : "OWNED";
+
+
+  document.getElementById(
+    "currentPrice"
+  ).textContent =
+    yen(current);
+
+
+  /* IMAGE */
+
+  setImage(
+    card
+  );
+
+
+  /* METRICS */
+
   document.getElementById(
     "metrics"
-  ).innerHTML = `
+  ).innerHTML =
 
-    <div class="metric">
+    metricHTML(
+      "PURCHASE",
+      yen(purchase)
+    )
 
-      <div class="label">
-        現在相場
-      </div>
+    +
 
-      <div class="value">
-        ${yen(current)}
-      </div>
+    metricHTML(
+      "FROM PURCHASE",
+      signedPercent(
+        purchaseChange
+      ),
+      valueClass(
+        purchaseChange
+      )
+    )
 
-    </div>
+    +
 
-
-    <div class="metric">
-
-      <div class="label">
-        狙い価格
-      </div>
-
-      <div class="value gold">
-        ${yen(target)}
-      </div>
-
-      <div class="sub gold">
-        登録時相場 × 50%
-      </div>
-
-    </div>
-
-
-    <div class="metric">
-
-      <div class="label">
-        昨日から
-      </div>
-
-      <div class="value
-                  ${cls(dayDiff)}">
-
-        ${signedYen(dayDiff)}
-
-      </div>
-
-      <div class="sub
-                  ${cls(dayPct)}">
-
-        ${pct(dayPct)}
-
-      </div>
-
-    </div>
+    metricHTML(
+      "DAY CHANGE",
+      signedPercent(
+        dayChange
+      ),
+      valueClass(
+        dayChange
+      )
+    );
 
 
-    <div class="metric">
-
-      <div class="label">
-        狙い価格まで
-      </div>
-
-      <div class="value">
-        ${
-          targetDiff === null
-          ? "—"
-          : yen(
-              Math.max(
-                targetDiff,
-                0
-              )
-            )
-        }
-      </div>
-
-      <div class="sub gold">
-        ${targetStatus}
-      </div>
-
-    </div>
-
-  `;
-
-
-  document.getElementById(
-    "graphTitle"
-  ).textContent =
-    "PRICE HISTORY / TARGET";
-
+  /* FOOTER */
 
   document.getElementById(
     "count"
   ).textContent =
-    `WANT ${data.wanted.length} CARDS`;
+    `OWNED ${physicalCards.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
 
 
-  drawChart({
-    purchase:null,
-    current,
-    yesterday,
-    target
+  /* CHART */
+
+  drawHistoryChart({
+
+    history:
+      card.history || [],
+
+    purchase:
+      purchase,
+
+    target:
+      null
+
   });
 
 }
 
 
-/* -------------------------
-   グラフ
-------------------------- */
+/* =========================================================
+   WANT
+========================================================= */
 
-function drawChart({
+function showWanted(){
+
+  if(
+    !data.wanted ||
+    data.wanted.length === 0
+  ){
+    return;
+  }
+
+
+  const card =
+    data.wanted[
+      wantedIndex %
+      data.wanted.length
+    ];
+
+
+  wantedIndex++;
+
+
+  const current =
+    card.currentPrice
+    ?? null;
+
+
+  const yesterday =
+    card.yesterdayPrice
+    ?? null;
+
+
+  const reference =
+    card.referencePrice
+    ?? null;
+
+
+  /*
+    targetPriceを最優先。
+    古いcards.jsonにも対応するため、
+    無い場合だけreferencePriceの50%。
+  */
+
+  const target =
+    card.targetPrice
+    ??
+    (
+      reference !== null
+        ? Math.round(
+            reference * 0.5
+          )
+        : null
+    );
+
+
+  const dayChange =
+    percentChange(
+      current,
+      yesterday
+    );
+
+
+  const targetGap =
+    (
+      current !== null &&
+      target !== null &&
+      target !== 0
+    )
+      ? (
+          (
+            current /
+            target
+            - 1
+          )
+          * 100
+        )
+      : null;
+
+
+  /* MODE */
+
+  const mode =
+    document.getElementById(
+      "mode"
+    );
+
+  mode.textContent =
+    "WANTED";
+
+  mode.className =
+    "mode want";
+
+
+  /* CARD */
+
+  document.getElementById(
+    "cardName"
+  ).textContent =
+    card.name || "—";
+
+
+  document.getElementById(
+    "cardNumber"
+  ).textContent =
+    card.number || "—";
+
+
+  document.getElementById(
+    "qty"
+  ).textContent =
+    "WATCH";
+
+
+  document.getElementById(
+    "currentPrice"
+  ).textContent =
+    yen(current);
+
+
+  /* IMAGE */
+
+  setImage(
+    card
+  );
+
+
+  /* METRICS */
+
+  document.getElementById(
+    "metrics"
+  ).innerHTML =
+
+    metricHTML(
+      "TARGET",
+      yen(target),
+      "gold"
+    )
+
+    +
+
+    metricHTML(
+      "TO TARGET",
+      signedPercent(
+        targetGap
+      ),
+      targetGap !== null &&
+      targetGap <= 0
+        ? "positive"
+        : "gold"
+    )
+
+    +
+
+    metricHTML(
+      "DAY CHANGE",
+      signedPercent(
+        dayChange
+      ),
+      valueClass(
+        dayChange
+      )
+    );
+
+
+  /* FOOTER */
+
+  document.getElementById(
+    "count"
+  ).textContent =
+    `WANT ${data.wanted.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
+
+
+  /* CHART */
+
+  drawHistoryChart({
+
+    history:
+      card.history || [],
+
+    purchase:
+      null,
+
+    target:
+      target
+
+  });
+
+}
+
+
+/* =========================================================
+   HISTORY CHART
+========================================================= */
+
+function drawHistoryChart({
+  history,
   purchase,
-  current,
-  yesterday,
   target
 }){
 
   const canvas =
-    document.getElementById("chart");
+    document.getElementById(
+      "chart"
+    );
+
 
   const rect =
     canvas.getBoundingClientRect();
 
+
   const ratio =
-    window.devicePixelRatio || 1;
+    window.devicePixelRatio
+    || 1;
+
 
   canvas.width =
-    rect.width * ratio;
+    Math.max(
+      1,
+      rect.width * ratio
+    );
+
 
   canvas.height =
-    rect.height * ratio;
+    Math.max(
+      1,
+      rect.height * ratio
+    );
 
 
   const ctx =
-    canvas.getContext("2d");
+    canvas.getContext(
+      "2d"
+    );
+
 
   ctx.scale(
     ratio,
@@ -833,30 +1594,114 @@ function drawChart({
   const w =
     rect.width;
 
+
   const h =
     rect.height;
 
 
-  const values =
-    [
-      purchase,
-      current,
-      yesterday,
-      target
-    ].filter(
-      v =>
-        v !== null &&
-        v !== undefined &&
-        isFinite(v)
-    );
-
-
   ctx.clearRect(
-    0,0,w,h
+    0,
+    0,
+    w,
+    h
   );
 
 
-  if(values.length === 0){
+  /* =========================
+     HISTORY
+  ========================= */
+
+  let points =
+    Array.isArray(history)
+      ? history
+          .filter(
+            item =>
+              item &&
+              item.date &&
+              item.price !== null &&
+              item.price !== undefined &&
+              !Number.isNaN(
+                Number(
+                  item.price
+                )
+              )
+          )
+          .map(
+            item => ({
+              date:
+                String(
+                  item.date
+                ),
+
+              price:
+                Number(
+                  item.price
+                )
+            })
+          )
+          .sort(
+            (a,b) =>
+              a.date.localeCompare(
+                b.date
+              )
+          )
+      : [];
+
+
+  /*
+    直近30記録。
+    1日1記録なので、
+    通常は30日分になる。
+  */
+
+  points =
+    points.slice(
+      -30
+    );
+
+
+  /* =========================
+     VALUE RANGE
+  ========================= */
+
+  const values =
+    points.map(
+      item =>
+        item.price
+    );
+
+
+  if(
+    purchase !== null &&
+    purchase !== undefined
+  ){
+
+    values.push(
+      Number(
+        purchase
+      )
+    );
+
+  }
+
+
+  if(
+    target !== null &&
+    target !== undefined
+  ){
+
+    values.push(
+      Number(
+        target
+      )
+    );
+
+  }
+
+
+  if(
+    values.length === 0
+  ){
 
     ctx.fillStyle =
       "#606b79";
@@ -864,358 +1709,783 @@ function drawChart({
     ctx.font =
       "14px -apple-system";
 
+
     ctx.fillText(
-      "価格データを取得するとグラフを表示します",
+      "価格履歴が蓄積されると表示します",
       20,
       h / 2
     );
 
+
     return;
+
   }
 
 
   let min =
-    Math.min(...values) * .82;
+    Math.min(
+      ...values
+    );
+
 
   let max =
-    Math.max(...values) * 1.18;
+    Math.max(
+      ...values
+    );
 
 
-  if(min === max)
-    max = min + 1;
+  const spread =
+    Math.max(
+      max - min,
+      max * 0.10,
+      100
+    );
 
 
-  const y = value =>
-    h - 25 -
-    (
-      (value - min) /
-      (max - min)
-    ) *
-    (h - 50);
+  min -=
+    spread * 0.18;
 
 
-  /*
-    grid
-  */
+  max +=
+    spread * 0.18;
+
+
+  const left =
+    15;
+
+  const right =
+    20;
+
+  const top =
+    31;
+
+  const bottom =
+    28;
+
+
+  const graphW =
+    Math.max(
+      1,
+      w - left - right
+    );
+
+
+  const graphH =
+    Math.max(
+      1,
+      h - top - bottom
+    );
+
+
+  const y =
+    value =>
+      top +
+      (
+        (
+          max - value
+        )
+        /
+        (
+          max - min
+        )
+      )
+      *
+      graphH;
+
+
+  /* =========================
+     GRID
+  ========================= */
 
   ctx.strokeStyle =
-    "rgba(255,255,255,.07)";
-
-  ctx.lineWidth = 1;
+    "rgba(255,255,255,.065)";
 
 
-  for(let i=0;i<4;i++){
+  ctx.lineWidth =
+    1;
+
+
+  for(
+    let i = 0;
+    i < 4;
+    i++
+  ){
 
     const gy =
-      12 +
-      ((h - 35) / 3) * i;
+      top +
+      graphH *
+      (
+        i / 3
+      );
+
 
     ctx.beginPath();
 
+
     ctx.moveTo(
-      0,
+      left,
       gy
     );
 
+
     ctx.lineTo(
-      w,
+      w - right,
       gy
     );
+
 
     ctx.stroke();
 
   }
 
 
-  /*
-    購入価格
-  */
+  /* =========================
+     PURCHASE LINE
+  ========================= */
 
-  if(purchase !== null){
+  if(
+    purchase !== null &&
+    purchase !== undefined
+  ){
+
+    const py =
+      y(
+        Number(
+          purchase
+        )
+      );
+
 
     ctx.strokeStyle =
-      "rgba(255,255,255,.35)";
+      "rgba(255,255,255,.36)";
+
+
+    ctx.lineWidth =
+      1;
+
 
     ctx.setLineDash(
       [6,6]
     );
 
+
     ctx.beginPath();
 
+
     ctx.moveTo(
-      0,
-      y(purchase)
+      left,
+      py
     );
 
+
     ctx.lineTo(
-      w,
-      y(purchase)
+      w - right,
+      py
     );
+
 
     ctx.stroke();
 
-    ctx.setLineDash([]);
+
+    ctx.setLineDash(
+      []
+    );
 
 
     ctx.fillStyle =
-      "#9ba5b3";
+      "#9da7b3";
+
 
     ctx.font =
-      "12px -apple-system";
+      "10px -apple-system";
+
 
     ctx.fillText(
       "PURCHASE " +
-      yen(purchase),
-      10,
-      y(purchase) - 7
+      yen(
+        purchase
+      ),
+      left + 5,
+      Math.max(
+        12,
+        py - 6
+      )
     );
 
   }
 
 
-  /*
-    WANT target
-  */
+  /* =========================
+     TARGET LINE
+  ========================= */
 
-  if(target !== null){
+  if(
+    target !== null &&
+    target !== undefined
+  ){
+
+    const ty =
+      y(
+        Number(
+          target
+        )
+      );
+
 
     ctx.strokeStyle =
-      "#c4a95e";
+      "#d4b85f";
+
+
+    ctx.lineWidth =
+      1.2;
+
 
     ctx.setLineDash(
-      [7,7]
+      [7,6]
     );
+
 
     ctx.beginPath();
 
+
     ctx.moveTo(
-      0,
-      y(target)
+      left,
+      ty
     );
 
+
     ctx.lineTo(
-      w,
-      y(target)
+      w - right,
+      ty
     );
+
 
     ctx.stroke();
 
-    ctx.setLineDash([]);
+
+    ctx.setLineDash(
+      []
+    );
 
 
     ctx.fillStyle =
-      "#dec16c";
+      "#dfc66e";
+
+
+    ctx.font =
+      "10px -apple-system";
+
+
+    ctx.fillText(
+      "TARGET " +
+      yen(
+        target
+      ),
+      left + 5,
+      Math.max(
+        12,
+        ty - 6
+      )
+    );
+
+  }
+
+
+  /* =========================
+     NO HISTORY
+  ========================= */
+
+  if(
+    points.length === 0
+  ){
+
+    ctx.fillStyle =
+      "#606b79";
+
+
+    ctx.font =
+      "13px -apple-system";
+
+
+    ctx.fillText(
+      "履歴収集中",
+      left + 5,
+      h / 2
+    );
+
+
+    return;
+
+  }
+
+
+  /* =========================
+     ONE DAY
+  ========================= */
+
+  if(
+    points.length === 1
+  ){
+
+    const point =
+      points[0];
+
+
+    const px =
+      left +
+      graphW * .72;
+
+
+    const py =
+      y(
+        point.price
+      );
+
+
+    ctx.fillStyle =
+      "#f2f4f7";
+
+
+    ctx.beginPath();
+
+
+    ctx.arc(
+      px,
+      py,
+      5,
+      0,
+      Math.PI * 2
+    );
+
+
+    ctx.fill();
+
+
+    ctx.fillStyle =
+      "#737e8c";
+
+
+    ctx.font =
+      "10px -apple-system";
+
+
+    ctx.fillText(
+      point.date.slice(
+        5
+      ),
+      px - 15,
+      h - 7
+    );
+
+
+    ctx.fillStyle =
+      "#e8ecf1";
+
 
     ctx.font =
       "12px -apple-system";
 
+
     ctx.fillText(
-      "TARGET " +
-      yen(target),
-      10,
-      y(target) - 7
+      yen(
+        point.price
+      ),
+      Math.max(
+        left,
+        px - 24
+      ),
+      Math.max(
+        14,
+        py - 11
+      )
     );
+
+
+    return;
 
   }
 
 
-  /*
-    yesterday → today
-  */
+  /* =========================
+     PRICE LINE
+  ========================= */
 
-  if(
-    yesterday !== null &&
-    current !== null
-  ){
-
-    const x1 =
-      w * .27;
-
-    const x2 =
-      w * .76;
-
-
-    ctx.strokeStyle =
-      "#e0e6ef";
-
-    ctx.lineWidth = 3;
+  const xForIndex =
+    index =>
+      left +
+      graphW *
+      (
+        index /
+        (
+          points.length - 1
+        )
+      );
 
 
-    ctx.beginPath();
+  ctx.strokeStyle =
+    "#e2e7ef";
 
-    ctx.moveTo(
-      x1,
-      y(yesterday)
+
+  ctx.lineWidth =
+    2.4;
+
+
+  ctx.lineJoin =
+    "round";
+
+
+  ctx.lineCap =
+    "round";
+
+
+  ctx.beginPath();
+
+
+  points.forEach(
+    (
+      point,
+      index
+    ) => {
+
+      const px =
+        xForIndex(
+          index
+        );
+
+
+      const py =
+        y(
+          point.price
+        );
+
+
+      if(index === 0){
+
+        ctx.moveTo(
+          px,
+          py
+        );
+
+      }else{
+
+        ctx.lineTo(
+          px,
+          py
+        );
+
+      }
+
+    }
+  );
+
+
+  ctx.stroke();
+
+
+  /* =========================
+     LAST POINT
+  ========================= */
+
+  const lastIndex =
+    points.length - 1;
+
+
+  const last =
+    points[
+      lastIndex
+    ];
+
+
+  const lastX =
+    xForIndex(
+      lastIndex
     );
 
-    ctx.lineTo(
-      x2,
-      y(current)
-    );
 
-    ctx.stroke();
-
-
-    ctx.fillStyle =
-      "#fff";
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-      x1,
-      y(yesterday),
-      5,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-      x2,
-      y(current),
-      5,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    ctx.fillStyle =
-      "#778291";
-
-    ctx.font =
-      "11px -apple-system";
-
-
-    ctx.fillText(
-      "YESTERDAY",
-      x1 - 32,
-      h - 4
+  const lastY =
+    y(
+      last.price
     );
 
 
-    ctx.fillText(
-      "TODAY",
-      x2 - 16,
-      h - 4
+  ctx.fillStyle =
+    "#ffffff";
+
+
+  ctx.beginPath();
+
+
+  ctx.arc(
+    lastX,
+    lastY,
+    5,
+    0,
+    Math.PI * 2
+  );
+
+
+  ctx.fill();
+
+
+  /* =========================
+     DATES
+  ========================= */
+
+  const first =
+    points[0];
+
+
+  ctx.fillStyle =
+    "#6f7a89";
+
+
+  ctx.font =
+    "10px -apple-system";
+
+
+  ctx.fillText(
+    first.date.slice(
+      5
+    ),
+    left,
+    h - 7
+  );
+
+
+  const lastDate =
+    last.date.slice(
+      5
     );
 
-  }
+
+  ctx.fillText(
+    lastDate,
+    Math.max(
+      left,
+      w - right - 31
+    ),
+    h - 7
+  );
+
+
+  /* =========================
+     CURRENT PRICE LABEL
+  ========================= */
+
+  ctx.fillStyle =
+    "#ffffff";
+
+
+  ctx.font =
+    "11px -apple-system";
+
+
+  const priceText =
+    yen(
+      last.price
+    );
+
+
+  const textWidth =
+    ctx.measureText(
+      priceText
+    ).width;
+
+
+  ctx.fillText(
+    priceText,
+    Math.min(
+      w - right - textWidth,
+      Math.max(
+        left,
+        lastX - textWidth - 8
+      )
+    ),
+    Math.max(
+      14,
+      lastY - 10
+    )
+  );
 
 }
 
 
-/* -------------------------
-   画面ローテーション
-------------------------- */
+/* =========================================================
+   ROTATION
+========================================================= */
 
-function nextScreen(){
+function showNext(){
 
   /*
-    3回中2回は保有カード
-    3回中1回はWANT
+    3画面単位
+
+    0 OWNED
+    1 OWNED
+    2 WANT
+
+    → 2:1
   */
 
-  if(modeCounter % 3 === 2){
+  const wantTurn =
+    (
+      modeCounter % 3
+      === 2
+    );
 
-    showNextWanted();
+
+  if(
+    wantTurn &&
+    data.wanted &&
+    data.wanted.length
+  ){
+
+    showWanted();
 
   }else{
 
-    randomOwned();
+    showOwned();
 
   }
+
 
   modeCounter++;
 
 }
 
 
-/* -------------------------
-   時計
-------------------------- */
-
-function updateClock(){
-
-  const now =
-    new Date();
-
-  document.getElementById(
-    "clock"
-  ).textContent =
-    now.toLocaleString(
-      "ja-JP",
-      {
-        month:"2-digit",
-        day:"2-digit",
-        hour:"2-digit",
-        minute:"2-digit"
-      }
-    );
-
-}
-
-
-/* -------------------------
-   起動
-------------------------- */
+/* =========================================================
+   START
+========================================================= */
 
 async function start(){
 
-  const response =
-    await fetch(
-      "cards.json?t=" +
-      Date.now()
+  try{
+
+    const response =
+      await fetch(
+        "cards.json?ts="
+        +
+        Date.now(),
+        {
+          cache:
+            "no-store"
+        }
+      );
+
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        "cards.json load failed"
+      );
+
+    }
+
+
+    data =
+      await response.json();
+
+
+    expandOwnedCards();
+
+
+    showNext();
+
+
+    setInterval(
+      showNext,
+      ROTATE_MS
     );
 
-  data =
-    await response.json();
+
+    updateClock();
 
 
-  expandOwnedCards();
+    setInterval(
+      updateClock,
+      30000
+    );
 
 
-  /*
-    数がおかしければ
-    ブラウザのConsoleにも出る
-  */
+    window.addEventListener(
+      "resize",
+      () => {
 
-  console.log(
-    "保有カード:",
-    physicalCards.length
-  );
+        /*
+          リサイズ後は
+          現在モードの次カードを再描画。
+        */
+
+        if(
+          document
+            .getElementById(
+              "mode"
+            )
+            .classList
+            .contains(
+              "want"
+            )
+        ){
+
+          /*
+            wantedIndexはshowWanted内で
+            +1されるため1つ戻す。
+          */
+
+          wantedIndex =
+            Math.max(
+              0,
+              wantedIndex - 1
+            );
 
 
-  updateClock();
+          showWanted();
 
-  setInterval(
-    updateClock,
-    30000
-  );
+        }else{
+
+          /*
+            resizeではランダムカードを
+            変えない方が理想だが、
+            通常iPad固定表示では
+            ほぼ発生しないため簡略化。
+          */
+
+          showOwned();
+
+        }
+
+      }
+    );
 
 
-  randomOwned();
+  }catch(error){
+
+    console.error(
+      error
+    );
 
 
-  setInterval(
-    nextScreen,
-    PAGE_INTERVAL
-  );
+    document.getElementById(
+      "cardName"
+    ).textContent =
+      "DATA ERROR";
+
+
+    document.getElementById(
+      "cardNumber"
+    ).textContent =
+      "cards.json を確認してください";
+
+  }
 
 }
 
 
-window.addEventListener(
-  "resize",
-  () => nextScreen()
-);
-
+/* =========================================================
+   RUN
+========================================================= */
 
 start();
 
