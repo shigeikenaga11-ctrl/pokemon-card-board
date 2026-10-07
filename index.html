@@ -20,22 +20,14 @@
   box-sizing:border-box;
 }
 
-html{
-  margin:0;
-  width:100%;
-  height:100%;
-  background:#030507;
-}
-
+html,
 body{
   margin:0;
   width:100%;
   height:100%;
   min-height:100%;
   overflow:hidden;
-
   background:#030507;
-
   color:#eef2f6;
 
   font-family:
@@ -74,7 +66,9 @@ body{
 }
 
 
-/* HEADER */
+/* ========================================
+   HEADER
+======================================== */
 
 .header{
   display:flex;
@@ -153,20 +147,25 @@ body{
 
   border-color:
     rgba(223,198,110,.45);
+
+  background:
+    rgba(223,198,110,.05);
 }
 
 .mode.portfolio{
-  color:#7fcfa3;
+  color:#79cfa0;
 
   border-color:
-    rgba(127,207,163,.45);
+    rgba(121,207,160,.45);
 
   background:
-    rgba(127,207,163,.05);
+    rgba(121,207,160,.05);
 }
 
 
-/* MAIN */
+/* ========================================
+   MAIN
+======================================== */
 
 .main{
   min-height:0;
@@ -174,7 +173,9 @@ body{
 }
 
 
-/* CARD PAGE */
+/* ========================================
+   CARD PAGE
+======================================== */
 
 .card-page{
   width:100%;
@@ -190,7 +191,9 @@ body{
 }
 
 
-/* PANEL */
+/* ========================================
+   PANEL
+======================================== */
 
 .panel{
   min-height:0;
@@ -215,7 +218,9 @@ body{
 }
 
 
-/* CARD IMAGE */
+/* ========================================
+   IMAGE
+======================================== */
 
 .image-panel{
   position:relative;
@@ -336,7 +341,9 @@ body{
 }
 
 
-/* INFO */
+/* ========================================
+   INFO
+======================================== */
 
 .info-panel{
   padding:25px 29px 22px;
@@ -347,7 +354,7 @@ body{
     auto
     auto
     auto
-    minmax(120px,1fr);
+    minmax(130px,1fr);
 
   gap:16px;
 }
@@ -399,7 +406,9 @@ body{
 }
 
 
-/* PRICE */
+/* ========================================
+   PRICE
+======================================== */
 
 .price-section{
   padding:17px 0 15px;
@@ -443,7 +452,9 @@ body{
 }
 
 
-/* METRICS */
+/* ========================================
+   METRICS
+======================================== */
 
 .metrics{
   display:grid;
@@ -508,14 +519,14 @@ body{
 }
 
 
-/* HISTORY */
+/* ========================================
+   INDIVIDUAL GRAPH BOX
+======================================== */
 
-.chart-box{
+.graph-box{
   min-height:0;
 
   position:relative;
-
-  padding:14px 12px 4px;
 
   border:
     1px solid rgba(255,255,255,.07);
@@ -524,15 +535,17 @@ body{
 
   background:
     rgba(0,0,0,.13);
+
+  overflow:hidden;
 }
 
-.chart-title{
+.graph-title{
   position:absolute;
 
-  top:10px;
+  top:11px;
   left:15px;
 
-  z-index:2;
+  z-index:5;
 
   font-size:9px;
 
@@ -541,14 +554,127 @@ body{
   color:#65717e;
 }
 
-#chart{
+
+/* ========================================
+   OWNED 2 BAR GRAPH
+======================================== */
+
+.owned-bars{
+  width:100%;
+  height:100%;
+
+  display:none;
+
+  align-items:flex-end;
+  justify-content:center;
+
+  gap:
+    clamp(55px,8vw,110px);
+
+  padding:
+    40px 35px 14px;
+}
+
+.owned-bar-column{
+  height:100%;
+
+  flex:0 1 155px;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.owned-bar-value{
+  margin-bottom:8px;
+
+  font-size:
+    clamp(17px,2.2vw,27px);
+
+  font-weight:730;
+}
+
+.owned-bar-track{
+  width:
+    clamp(65px,8vw,105px);
+
+  height:68%;
+
+  display:flex;
+  align-items:flex-end;
+
+  overflow:hidden;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  border-radius:
+    12px 12px 4px 4px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+.owned-bar-fill{
+  width:100%;
+
+  min-height:4px;
+
+  border-radius:
+    10px 10px 3px 3px;
+
+  transition:
+    height .7s ease;
+}
+
+.owned-bar-fill.purchase{
+  background:
+    linear-gradient(
+      180deg,
+      #939eac,
+      #414b58
+    );
+}
+
+.owned-bar-fill.current{
+  background:
+    linear-gradient(
+      180deg,
+      #ddc978,
+      #806b2c
+    );
+
+  box-shadow:
+    0 0 25px rgba(221,201,120,.15);
+}
+
+.owned-bar-label{
+  margin-top:9px;
+
+  font-size:9px;
+
+  letter-spacing:.13em;
+
+  color:#75808e;
+}
+
+
+/* ========================================
+   WANTED LINE CHART
+======================================== */
+
+#wantedChart{
+  display:none;
+
   width:100%;
   height:100%;
 }
 
 
 /* ========================================
-   PORTFOLIO PAGE
+   PORTFOLIO
 ======================================== */
 
 .portfolio-page{
@@ -596,9 +722,6 @@ body{
   color:#697482;
 }
 
-
-/* BAR AREA */
-
 .portfolio-bars{
   flex:1;
 
@@ -616,7 +739,7 @@ body{
     28px 50px 8px;
 }
 
-.bar-column{
+.portfolio-bar-column{
   height:100%;
 
   flex:0 1 230px;
@@ -628,7 +751,7 @@ body{
   justify-content:flex-end;
 }
 
-.bar-value{
+.portfolio-bar-value{
   margin-bottom:12px;
 
   font-size:
@@ -639,7 +762,7 @@ body{
   letter-spacing:-.035em;
 }
 
-.bar-track{
+.portfolio-bar-track{
   width:
     clamp(100px,13vw,170px);
 
@@ -662,7 +785,7 @@ body{
   overflow:hidden;
 }
 
-.bar-fill{
+.portfolio-bar-fill{
   width:100%;
 
   min-height:4px;
@@ -674,19 +797,16 @@ body{
     height .8s ease;
 }
 
-.bar-fill.purchase{
+.portfolio-bar-fill.purchase{
   background:
     linear-gradient(
       180deg,
       #8995a5,
       #3e4856
     );
-
-  box-shadow:
-    0 0 25px rgba(150,160,175,.12);
 }
 
-.bar-fill.current{
+.portfolio-bar-fill.current{
   background:
     linear-gradient(
       180deg,
@@ -698,7 +818,7 @@ body{
     0 0 30px rgba(215,196,119,.16);
 }
 
-.bar-label{
+.portfolio-bar-label{
   margin-top:14px;
 
   font-size:11px;
@@ -717,7 +837,9 @@ body{
 }
 
 
-/* PORTFOLIO SUMMARY */
+/* ========================================
+   PORTFOLIO SUMMARY
+======================================== */
 
 .portfolio-summary{
   padding:28px;
@@ -804,7 +926,9 @@ body{
 }
 
 
-/* FOOTER */
+/* ========================================
+   FOOTER
+======================================== */
 
 .footer{
   display:flex;
@@ -842,7 +966,9 @@ body{
 }
 
 
-/* MOBILE */
+/* ========================================
+   MOBILE / SMALL SCREEN
+======================================== */
 
 @media(max-width:760px){
 
@@ -915,6 +1041,10 @@ body{
 <div class="board">
 
 
+<!-- =====================================
+     HEADER
+====================================== -->
+
 <header class="header">
 
   <div class="brand">
@@ -946,11 +1076,15 @@ body{
 </header>
 
 
+<!-- =====================================
+     MAIN
+====================================== -->
+
 <main class="main">
 
 
 <!-- =====================================
-     INDIVIDUAL CARD PAGE
+     CARD PAGE
 ====================================== -->
 
 <div
@@ -1046,13 +1180,84 @@ body{
 </div>
 
 
-<div class="chart-box">
+<!-- =====================================
+     GRAPH
+====================================== -->
 
-  <div class="chart-title">
-    PRICE HISTORY · LAST 30 DAYS
+<div class="graph-box">
+
+  <div
+    id="graphTitle"
+    class="graph-title"
+  >
+    PURCHASE vs CURRENT
   </div>
 
-  <canvas id="chart"></canvas>
+
+  <!-- OWNED BAR GRAPH -->
+
+  <div
+    id="ownedBars"
+    class="owned-bars"
+  >
+
+    <div class="owned-bar-column">
+
+      <div
+        id="ownedPurchaseValue"
+        class="owned-bar-value"
+      >
+        —
+      </div>
+
+      <div class="owned-bar-track">
+
+        <div
+          id="ownedPurchaseBar"
+          class="owned-bar-fill purchase"
+        ></div>
+
+      </div>
+
+      <div class="owned-bar-label">
+        PURCHASE
+      </div>
+
+    </div>
+
+
+    <div class="owned-bar-column">
+
+      <div
+        id="ownedCurrentValue"
+        class="owned-bar-value gold"
+      >
+        —
+      </div>
+
+      <div class="owned-bar-track">
+
+        <div
+          id="ownedCurrentBar"
+          class="owned-bar-fill current"
+        ></div>
+
+      </div>
+
+      <div class="owned-bar-label">
+        CURRENT
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- WANTED HISTORY -->
+
+  <canvas
+    id="wantedChart"
+  ></canvas>
 
 </div>
 
@@ -1093,25 +1298,25 @@ body{
   <div class="portfolio-bars">
 
 
-    <div class="bar-column">
+    <div class="portfolio-bar-column">
 
       <div
         id="purchaseBarValue"
-        class="bar-value"
+        class="portfolio-bar-value"
       >
         —
       </div>
 
-      <div class="bar-track">
+      <div class="portfolio-bar-track">
 
         <div
           id="purchaseBar"
-          class="bar-fill purchase"
+          class="portfolio-bar-fill purchase"
         ></div>
 
       </div>
 
-      <div class="bar-label">
+      <div class="portfolio-bar-label">
         取得価格
       </div>
 
@@ -1122,25 +1327,25 @@ body{
     </div>
 
 
-    <div class="bar-column">
+    <div class="portfolio-bar-column">
 
       <div
         id="currentBarValue"
-        class="bar-value gold"
+        class="portfolio-bar-value gold"
       >
         —
       </div>
 
-      <div class="bar-track">
+      <div class="portfolio-bar-track">
 
         <div
           id="currentBar"
-          class="bar-fill current"
+          class="portfolio-bar-fill current"
         ></div>
 
       </div>
 
-      <div class="bar-label">
+      <div class="portfolio-bar-label">
         現在価格
       </div>
 
@@ -1266,6 +1471,10 @@ body{
 
 </main>
 
+
+<!-- =====================================
+     FOOTER
+====================================== -->
 
 <footer class="footer">
 
@@ -1463,7 +1672,7 @@ function updateClock(){
 
 
 /* ========================================
-   PHYSICAL OWNED CARDS
+   EXPAND OWNED
 ======================================== */
 
 function expandOwnedCards(){
@@ -1483,8 +1692,10 @@ function expandOwnedCards(){
 
     const prices =
       Array.isArray(card.purchasePrices)
-        ? card.purchasePrices
-        : [];
+        ?
+        card.purchasePrices
+        :
+        [];
 
     for(
       let i = 0;
@@ -1609,24 +1820,10 @@ function safeFilePart(text){
 function imageBaseNames(card){
 
   const number =
-    safeFilePart(
-      card.number
-    );
+    safeFilePart(card.number);
 
   const name =
-    safeFilePart(
-      card.name
-    );
-
-  /*
-    新方式：
-    名前＋番号
-
-    同一番号の別カードとの
-    ファイル衝突を避ける。
-
-    旧方式も後ろで探す。
-  */
+    safeFilePart(card.name);
 
   return [
 
@@ -1671,8 +1868,10 @@ function setImage(card){
     );
   }
 
+
   const bases =
     imageBaseNames(card);
+
 
   for(
     const base
@@ -1696,7 +1895,9 @@ function setImage(card){
     );
   }
 
+
   let index = 0;
+
 
   function tryNext(){
 
@@ -1718,10 +1919,12 @@ function setImage(card){
       return;
     }
 
+
     const url =
       candidates[index];
 
     index++;
+
 
     image.onload =
       () => {
@@ -1733,18 +1936,22 @@ function setImage(card){
           "none";
       };
 
+
     image.onerror =
       () => {
 
         tryNext();
       };
 
+
     image.src =
       url;
   }
 
+
   image.alt =
     card.name || "";
+
 
   tryNext();
 }
@@ -1777,6 +1984,128 @@ function metricHTML(
 
 
 /* ========================================
+   OWNED BAR GRAPH
+======================================== */
+
+function drawOwnedBars(
+  purchase,
+  current
+){
+
+  const bars =
+    document.getElementById(
+      "ownedBars"
+    );
+
+  const chart =
+    document.getElementById(
+      "wantedChart"
+    );
+
+  bars.style.display =
+    "flex";
+
+  chart.style.display =
+    "none";
+
+
+  document.getElementById(
+    "graphTitle"
+  ).textContent =
+    "PURCHASE vs CURRENT";
+
+
+  document.getElementById(
+    "ownedPurchaseValue"
+  ).textContent =
+    yen(purchase);
+
+
+  document.getElementById(
+    "ownedCurrentValue"
+  ).textContent =
+    yen(current);
+
+
+  const validPurchase =
+    purchase !== null &&
+    purchase !== undefined &&
+    !Number.isNaN(
+      Number(purchase)
+    );
+
+
+  const validCurrent =
+    current !== null &&
+    current !== undefined &&
+    !Number.isNaN(
+      Number(current)
+    );
+
+
+  const purchaseNumber =
+    validPurchase
+      ?
+      Number(purchase)
+      :
+      0;
+
+
+  const currentNumber =
+    validCurrent
+      ?
+      Number(current)
+      :
+      0;
+
+
+  const maxValue =
+    Math.max(
+      purchaseNumber,
+      currentNumber,
+      1
+    );
+
+
+  const purchaseHeight =
+    validPurchase
+      ?
+      (
+        purchaseNumber /
+        maxValue
+      )
+      * 100
+      :
+      0;
+
+
+  const currentHeight =
+    validCurrent
+      ?
+      (
+        currentNumber /
+        maxValue
+      )
+      * 100
+      :
+      0;
+
+
+  document.getElementById(
+    "ownedPurchaseBar"
+  ).style.height =
+    `${purchaseHeight}%`;
+
+
+  document.getElementById(
+    "ownedCurrentBar"
+  ).style.height =
+    `${currentHeight}%`;
+
+}
+
+
+/* ========================================
    OWNED
 ======================================== */
 
@@ -1791,17 +2120,21 @@ function showOwned(){
     return;
   }
 
+
   const current =
     card.currentPrice
     ?? null;
+
 
   const yesterday =
     card.yesterdayPrice
     ?? null;
 
+
   const purchase =
     card.purchasePrice
     ?? null;
+
 
   const purchaseChange =
     percentChange(
@@ -1809,16 +2142,19 @@ function showOwned(){
       purchase
     );
 
+
   const dayChange =
     percentChange(
       current,
       yesterday
     );
 
+
   const mode =
     document.getElementById(
       "mode"
     );
+
 
   mode.textContent =
     "OWNED";
@@ -1826,15 +2162,18 @@ function showOwned(){
   mode.className =
     "mode";
 
+
   document.getElementById(
     "cardName"
   ).textContent =
     card.name || "—";
 
+
   document.getElementById(
     "cardNumber"
   ).textContent =
     card.number || "—";
+
 
   document.getElementById(
     "qty"
@@ -1845,12 +2184,15 @@ function showOwned(){
       :
       "OWNED";
 
+
   document.getElementById(
     "currentPrice"
   ).textContent =
     yen(current);
 
+
   setImage(card);
+
 
   document.getElementById(
     "metrics"
@@ -1885,23 +2227,17 @@ function showOwned(){
       )
     );
 
+
+  drawOwnedBars(
+    purchase,
+    current
+  );
+
+
   document.getElementById(
     "count"
   ).textContent =
     `OWNED ${physicalCards.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
-
-  drawHistoryChart({
-
-    history:
-      card.history || [],
-
-    purchase:
-      purchase,
-
-    target:
-      null
-
-  });
 
 }
 
@@ -1914,6 +2250,7 @@ function showWanted(){
 
   openCardPage();
 
+
   if(
     !data.wanted ||
     data.wanted.length === 0
@@ -1921,25 +2258,31 @@ function showWanted(){
     return;
   }
 
+
   const card =
     data.wanted[
       wantedIndex %
       data.wanted.length
     ];
 
+
   wantedIndex++;
+
 
   const current =
     card.currentPrice
     ?? null;
 
+
   const yesterday =
     card.yesterdayPrice
     ?? null;
 
+
   const reference =
     card.referencePrice
     ?? null;
+
 
   const target =
     card.targetPrice
@@ -1954,11 +2297,13 @@ function showWanted(){
         null
     );
 
+
   const dayChange =
     percentChange(
       current,
       yesterday
     );
+
 
   const targetGap =
     (
@@ -1978,10 +2323,12 @@ function showWanted(){
       :
       null;
 
+
   const mode =
     document.getElementById(
       "mode"
     );
+
 
   mode.textContent =
     "WANTED";
@@ -1989,27 +2336,33 @@ function showWanted(){
   mode.className =
     "mode want";
 
+
   document.getElementById(
     "cardName"
   ).textContent =
     card.name || "—";
+
 
   document.getElementById(
     "cardNumber"
   ).textContent =
     card.number || "—";
 
+
   document.getElementById(
     "qty"
   ).textContent =
     "WATCH";
+
 
   document.getElementById(
     "currentPrice"
   ).textContent =
     yen(current);
 
+
   setImage(card);
+
 
   document.getElementById(
     "metrics"
@@ -2050,23 +2403,724 @@ function showWanted(){
       )
     );
 
+
   document.getElementById(
     "count"
   ).textContent =
     `WANT ${data.wanted.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
 
-  drawHistoryChart({
 
-    history:
-      card.history || [],
+  drawWantedHistory(
+    card.history || [],
+    target
+  );
 
-    purchase:
-      null,
+}
 
-    target:
-      target
 
-  });
+/* ========================================
+   WANTED DAILY HISTORY
+======================================== */
+
+function drawWantedHistory(
+  history,
+  target
+){
+
+  const bars =
+    document.getElementById(
+      "ownedBars"
+    );
+
+  const canvas =
+    document.getElementById(
+      "wantedChart"
+    );
+
+
+  bars.style.display =
+    "none";
+
+  canvas.style.display =
+    "block";
+
+
+  document.getElementById(
+    "graphTitle"
+  ).textContent =
+    "DAILY PRICE HISTORY";
+
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+
+  const ratio =
+    window.devicePixelRatio
+    || 1;
+
+
+  canvas.width =
+    Math.max(
+      1,
+      Math.round(
+        rect.width * ratio
+      )
+    );
+
+
+  canvas.height =
+    Math.max(
+      1,
+      Math.round(
+        rect.height * ratio
+      )
+    );
+
+
+  const ctx =
+    canvas.getContext(
+      "2d"
+    );
+
+
+  ctx.setTransform(
+    ratio,
+    0,
+    0,
+    ratio,
+    0,
+    0
+  );
+
+
+  const w =
+    rect.width;
+
+
+  const h =
+    rect.height;
+
+
+  ctx.clearRect(
+    0,
+    0,
+    w,
+    h
+  );
+
+
+  let points =
+    Array.isArray(history)
+      ?
+      history
+        .filter(
+          item =>
+            item &&
+            item.date &&
+            item.price !== null &&
+            item.price !== undefined &&
+            !Number.isNaN(
+              Number(
+                item.price
+              )
+            )
+        )
+        .map(
+          item => ({
+            date:
+              String(
+                item.date
+              ),
+
+            price:
+              Number(
+                item.price
+              )
+          })
+        )
+        .sort(
+          (a,b) =>
+            a.date.localeCompare(
+              b.date
+            )
+        )
+      :
+      [];
+
+
+  /*
+    同じ日付が複数あっても
+    その日の最後の価格だけを使う。
+  */
+
+  const dailyMap =
+    new Map();
+
+
+  for(
+    const point
+    of points
+  ){
+
+    dailyMap.set(
+      point.date,
+      point.price
+    );
+
+  }
+
+
+  points =
+    Array.from(
+      dailyMap.entries()
+    )
+    .map(
+      ([date,price]) => ({
+        date,
+        price
+      })
+    )
+    .sort(
+      (a,b) =>
+        a.date.localeCompare(
+          b.date
+        )
+    );
+
+
+  /*
+    直近30日分。
+    update_data.pyが毎日historyを
+    追加するので日々増えていく。
+  */
+
+  points =
+    points.slice(-30);
+
+
+  const values =
+    points.map(
+      point =>
+        point.price
+    );
+
+
+  if(
+    target !== null &&
+    target !== undefined &&
+    !Number.isNaN(
+      Number(target)
+    )
+  ){
+
+    values.push(
+      Number(target)
+    );
+
+  }
+
+
+  if(
+    values.length === 0
+  ){
+
+    ctx.fillStyle =
+      "#606b79";
+
+    ctx.font =
+      "14px -apple-system";
+
+    ctx.fillText(
+      "価格履歴を収集中",
+      20,
+      h / 2
+    );
+
+    return;
+  }
+
+
+  let min =
+    Math.min(...values);
+
+
+  let max =
+    Math.max(...values);
+
+
+  const spread =
+    Math.max(
+      max - min,
+      max * .10,
+      100
+    );
+
+
+  min -=
+    spread * .18;
+
+
+  max +=
+    spread * .18;
+
+
+  const left = 54;
+  const right = 22;
+  const top = 39;
+  const bottom = 32;
+
+
+  const graphW =
+    Math.max(
+      1,
+      w - left - right
+    );
+
+
+  const graphH =
+    Math.max(
+      1,
+      h - top - bottom
+    );
+
+
+  const y =
+    value =>
+      top +
+      (
+        (
+          max - value
+        )
+        /
+        (
+          max - min
+        )
+      )
+      *
+      graphH;
+
+
+  /* GRID + PRICE LABELS */
+
+  ctx.lineWidth = 1;
+
+
+  for(
+    let i = 0;
+    i < 4;
+    i++
+  ){
+
+    const ratioY =
+      i / 3;
+
+
+    const gy =
+      top +
+      graphH * ratioY;
+
+
+    const value =
+      max -
+      (
+        max - min
+      )
+      * ratioY;
+
+
+    ctx.strokeStyle =
+      "rgba(255,255,255,.065)";
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      left,
+      gy
+    );
+
+    ctx.lineTo(
+      w - right,
+      gy
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle =
+      "#596573";
+
+    ctx.font =
+      "9px -apple-system";
+
+    ctx.textAlign =
+      "right";
+
+    ctx.fillText(
+      "¥" +
+      Math.round(value)
+        .toLocaleString("ja-JP"),
+      left - 7,
+      gy + 3
+    );
+
+  }
+
+
+  ctx.textAlign =
+    "left";
+
+
+  /* TARGET LINE */
+
+  if(
+    target !== null &&
+    target !== undefined &&
+    !Number.isNaN(
+      Number(target)
+    )
+  ){
+
+    const ty =
+      y(
+        Number(target)
+      );
+
+
+    ctx.strokeStyle =
+      "#d4b85f";
+
+    ctx.lineWidth =
+      1.3;
+
+    ctx.setLineDash(
+      [7,6]
+    );
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      left,
+      ty
+    );
+
+    ctx.lineTo(
+      w - right,
+      ty
+    );
+
+    ctx.stroke();
+
+
+    ctx.setLineDash([]);
+
+
+    ctx.fillStyle =
+      "#dfc66e";
+
+    ctx.font =
+      "10px -apple-system";
+
+
+    ctx.fillText(
+      "TARGET " +
+      yen(target),
+      left + 6,
+      Math.max(
+        15,
+        ty - 6
+      )
+    );
+
+  }
+
+
+  if(
+    points.length === 0
+  ){
+
+    ctx.fillStyle =
+      "#606b79";
+
+    ctx.font =
+      "13px -apple-system";
+
+    ctx.fillText(
+      "価格履歴を収集中",
+      left + 10,
+      h / 2
+    );
+
+    return;
+  }
+
+
+  if(
+    points.length === 1
+  ){
+
+    const point =
+      points[0];
+
+
+    const px =
+      left +
+      graphW / 2;
+
+
+    const py =
+      y(
+        point.price
+      );
+
+
+    ctx.fillStyle =
+      "#ffffff";
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+      px,
+      py,
+      5,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle =
+      "#ffffff";
+
+    ctx.font =
+      "12px -apple-system";
+
+    ctx.textAlign =
+      "center";
+
+
+    ctx.fillText(
+      yen(
+        point.price
+      ),
+      px,
+      Math.max(
+        15,
+        py - 12
+      )
+    );
+
+
+    ctx.fillStyle =
+      "#737e8c";
+
+    ctx.font =
+      "10px -apple-system";
+
+
+    ctx.fillText(
+      point.date.slice(5),
+      px,
+      h - 9
+    );
+
+
+    ctx.textAlign =
+      "left";
+
+
+    return;
+  }
+
+
+  const xForIndex =
+    index =>
+      left +
+      graphW *
+      (
+        index /
+        (
+          points.length - 1
+        )
+      );
+
+
+  /* LINE */
+
+  ctx.strokeStyle =
+    "#e4e8ee";
+
+  ctx.lineWidth =
+    2.4;
+
+  ctx.lineJoin =
+    "round";
+
+  ctx.lineCap =
+    "round";
+
+
+  ctx.beginPath();
+
+
+  points.forEach(
+    (
+      point,
+      index
+    ) => {
+
+      const px =
+        xForIndex(index);
+
+      const py =
+        y(point.price);
+
+
+      if(index === 0){
+
+        ctx.moveTo(
+          px,
+          py
+        );
+
+      }else{
+
+        ctx.lineTo(
+          px,
+          py
+        );
+
+      }
+
+    }
+  );
+
+
+  ctx.stroke();
+
+
+  /* DAILY POINTS */
+
+  points.forEach(
+    (
+      point,
+      index
+    ) => {
+
+      const px =
+        xForIndex(index);
+
+      const py =
+        y(point.price);
+
+
+      ctx.fillStyle =
+        "#ffffff";
+
+
+      ctx.beginPath();
+
+      ctx.arc(
+        px,
+        py,
+        3.3,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+
+    }
+  );
+
+
+  /* DATE LABELS */
+
+  const labelIndexes =
+    new Set([
+      0,
+      Math.floor(
+        (points.length - 1) / 2
+      ),
+      points.length - 1
+    ]);
+
+
+  ctx.fillStyle =
+    "#6f7a89";
+
+  ctx.font =
+    "10px -apple-system";
+
+  ctx.textAlign =
+    "center";
+
+
+  for(
+    const index
+    of labelIndexes
+  ){
+
+    const point =
+      points[index];
+
+
+    ctx.fillText(
+      point.date.slice(5),
+      xForIndex(index),
+      h - 9
+    );
+
+  }
+
+
+  /* LAST VALUE */
+
+  const lastIndex =
+    points.length - 1;
+
+
+  const last =
+    points[lastIndex];
+
+
+  const lastX =
+    xForIndex(lastIndex);
+
+
+  const lastY =
+    y(last.price);
+
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.font =
+    "11px -apple-system";
+
+  ctx.textAlign =
+    "right";
+
+
+  ctx.fillText(
+    yen(last.price),
+    Math.min(
+      w - right,
+      lastX
+    ),
+    Math.max(
+      15,
+      lastY - 11
+    )
+  );
+
+
+  ctx.textAlign =
+    "left";
 
 }
 
@@ -2098,10 +3152,9 @@ function calculatePortfolio(){
     const qty =
       Math.max(
         1,
-        Number(
-          card.qty || 1
-        )
+        Number(card.qty || 1)
       );
+
 
     const prices =
       Array.isArray(
@@ -2112,8 +3165,10 @@ function calculatePortfolio(){
         :
         [];
 
+
     const current =
       card.currentPrice;
+
 
     for(
       let i = 0;
@@ -2122,6 +3177,7 @@ function calculatePortfolio(){
     ){
 
       totalCards++;
+
 
       const purchase =
         Number(
@@ -2132,13 +3188,10 @@ function calculatePortfolio(){
           0
         );
 
+
       totalPurchaseAll +=
         purchase;
 
-      /*
-        currentPriceが存在するカードだけを
-        損益比較に使用する。
-      */
 
       if(
         current !== null &&
@@ -2151,8 +3204,10 @@ function calculatePortfolio(){
         comparablePurchase +=
           purchase;
 
+
         currentValue +=
           Number(current);
+
 
         evaluatedCards++;
 
@@ -2168,8 +3223,7 @@ function calculatePortfolio(){
 
 
   const profit =
-    currentValue
-    -
+    currentValue -
     comparablePurchase;
 
 
@@ -2202,23 +3256,27 @@ function calculatePortfolio(){
 
 
 /* ========================================
-   PORTFOLIO
+   PORTFOLIO PAGE
 ======================================== */
 
 function showPortfolio(){
 
   openPortfolioPage();
 
+
   const p =
     calculatePortfolio();
+
 
   const mode =
     document.getElementById(
       "mode"
     );
 
+
   mode.textContent =
     "PORTFOLIO";
+
 
   mode.className =
     "mode portfolio";
@@ -2239,11 +3297,6 @@ function showPortfolio(){
       p.currentValue
     );
 
-
-  /*
-    棒グラフは高い方を100%として
-    相対的な高さを表示。
-  */
 
   const maxValue =
     Math.max(
@@ -2362,643 +3415,12 @@ function showPortfolio(){
 
 
 /* ========================================
-   HISTORY CHART
-======================================== */
-
-function drawHistoryChart({
-  history,
-  purchase,
-  target
-}){
-
-  const canvas =
-    document.getElementById(
-      "chart"
-    );
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-  const ratio =
-    window.devicePixelRatio
-    || 1;
-
-  canvas.width =
-    Math.max(
-      1,
-      rect.width * ratio
-    );
-
-  canvas.height =
-    Math.max(
-      1,
-      rect.height * ratio
-    );
-
-  const ctx =
-    canvas.getContext(
-      "2d"
-    );
-
-  ctx.scale(
-    ratio,
-    ratio
-  );
-
-  const w =
-    rect.width;
-
-  const h =
-    rect.height;
-
-  ctx.clearRect(
-    0,
-    0,
-    w,
-    h
-  );
-
-
-  let points =
-    Array.isArray(history)
-      ?
-      history
-        .filter(
-          item =>
-            item &&
-            item.date &&
-            item.price !== null &&
-            item.price !== undefined &&
-            !Number.isNaN(
-              Number(
-                item.price
-              )
-            )
-        )
-        .map(
-          item => ({
-            date:
-              String(
-                item.date
-              ),
-
-            price:
-              Number(
-                item.price
-              )
-          })
-        )
-        .sort(
-          (a,b) =>
-            a.date.localeCompare(
-              b.date
-            )
-        )
-      :
-      [];
-
-
-  points =
-    points.slice(
-      -30
-    );
-
-
-  const values =
-    points.map(
-      item =>
-        item.price
-    );
-
-
-  if(
-    purchase !== null &&
-    purchase !== undefined
-  ){
-
-    values.push(
-      Number(
-        purchase
-      )
-    );
-
-  }
-
-
-  if(
-    target !== null &&
-    target !== undefined
-  ){
-
-    values.push(
-      Number(
-        target
-      )
-    );
-
-  }
-
-
-  if(
-    values.length === 0
-  ){
-
-    ctx.fillStyle =
-      "#606b79";
-
-    ctx.font =
-      "14px -apple-system";
-
-    ctx.fillText(
-      "価格履歴が蓄積されると表示します",
-      20,
-      h / 2
-    );
-
-    return;
-  }
-
-
-  let min =
-    Math.min(
-      ...values
-    );
-
-  let max =
-    Math.max(
-      ...values
-    );
-
-
-  const spread =
-    Math.max(
-      max - min,
-      max * .10,
-      100
-    );
-
-
-  min -=
-    spread * .18;
-
-  max +=
-    spread * .18;
-
-
-  const left = 15;
-  const right = 20;
-  const top = 31;
-  const bottom = 28;
-
-
-  const graphW =
-    Math.max(
-      1,
-      w - left - right
-    );
-
-
-  const graphH =
-    Math.max(
-      1,
-      h - top - bottom
-    );
-
-
-  const y =
-    value =>
-      top +
-      (
-        (
-          max - value
-        )
-        /
-        (
-          max - min
-        )
-      )
-      *
-      graphH;
-
-
-  /* GRID */
-
-  ctx.strokeStyle =
-    "rgba(255,255,255,.065)";
-
-  ctx.lineWidth = 1;
-
-
-  for(
-    let i = 0;
-    i < 4;
-    i++
-  ){
-
-    const gy =
-      top +
-      graphH *
-      (
-        i / 3
-      );
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      left,
-      gy
-    );
-
-    ctx.lineTo(
-      w - right,
-      gy
-    );
-
-    ctx.stroke();
-
-  }
-
-
-  /* PURCHASE LINE */
-
-  if(
-    purchase !== null &&
-    purchase !== undefined
-  ){
-
-    const py =
-      y(
-        Number(
-          purchase
-        )
-      );
-
-    ctx.strokeStyle =
-      "rgba(255,255,255,.36)";
-
-    ctx.lineWidth = 1;
-
-    ctx.setLineDash(
-      [6,6]
-    );
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      left,
-      py
-    );
-
-    ctx.lineTo(
-      w - right,
-      py
-    );
-
-    ctx.stroke();
-
-    ctx.setLineDash([]);
-
-    ctx.fillStyle =
-      "#9da7b3";
-
-    ctx.font =
-      "10px -apple-system";
-
-    ctx.fillText(
-      "PURCHASE "
-      +
-      yen(
-        purchase
-      ),
-      left + 5,
-      Math.max(
-        12,
-        py - 6
-      )
-    );
-
-  }
-
-
-  /* TARGET LINE */
-
-  if(
-    target !== null &&
-    target !== undefined
-  ){
-
-    const ty =
-      y(
-        Number(
-          target
-        )
-      );
-
-    ctx.strokeStyle =
-      "#d4b85f";
-
-    ctx.lineWidth =
-      1.2;
-
-    ctx.setLineDash(
-      [7,6]
-    );
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      left,
-      ty
-    );
-
-    ctx.lineTo(
-      w - right,
-      ty
-    );
-
-    ctx.stroke();
-
-    ctx.setLineDash([]);
-
-    ctx.fillStyle =
-      "#dfc66e";
-
-    ctx.font =
-      "10px -apple-system";
-
-    ctx.fillText(
-      "TARGET "
-      +
-      yen(
-        target
-      ),
-      left + 5,
-      Math.max(
-        12,
-        ty - 6
-      )
-    );
-
-  }
-
-
-  if(
-    points.length === 0
-  ){
-
-    ctx.fillStyle =
-      "#606b79";
-
-    ctx.font =
-      "13px -apple-system";
-
-    ctx.fillText(
-      "履歴収集中",
-      left + 5,
-      h / 2
-    );
-
-    return;
-  }
-
-
-  if(
-    points.length === 1
-  ){
-
-    const point =
-      points[0];
-
-    const px =
-      left +
-      graphW * .72;
-
-    const py =
-      y(
-        point.price
-      );
-
-    ctx.fillStyle =
-      "#f2f4f7";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      px,
-      py,
-      5,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fill();
-
-    ctx.fillStyle =
-      "#737e8c";
-
-    ctx.font =
-      "10px -apple-system";
-
-    ctx.fillText(
-      point.date.slice(5),
-      px - 15,
-      h - 7
-    );
-
-    ctx.fillStyle =
-      "#e8ecf1";
-
-    ctx.font =
-      "12px -apple-system";
-
-    ctx.fillText(
-      yen(
-        point.price
-      ),
-      Math.max(
-        left,
-        px - 24
-      ),
-      Math.max(
-        14,
-        py - 11
-      )
-    );
-
-    return;
-  }
-
-
-  const xForIndex =
-    index =>
-      left +
-      graphW *
-      (
-        index /
-        (
-          points.length - 1
-        )
-      );
-
-
-  ctx.strokeStyle =
-    "#e2e7ef";
-
-  ctx.lineWidth =
-    2.4;
-
-  ctx.lineJoin =
-    "round";
-
-  ctx.lineCap =
-    "round";
-
-  ctx.beginPath();
-
-
-  points.forEach(
-    (
-      point,
-      index
-    ) => {
-
-      const px =
-        xForIndex(
-          index
-        );
-
-      const py =
-        y(
-          point.price
-        );
-
-      if(index === 0){
-
-        ctx.moveTo(
-          px,
-          py
-        );
-
-      }else{
-
-        ctx.lineTo(
-          px,
-          py
-        );
-
-      }
-
-    }
-  );
-
-
-  ctx.stroke();
-
-
-  const lastIndex =
-    points.length - 1;
-
-  const last =
-    points[lastIndex];
-
-  const lastX =
-    xForIndex(
-      lastIndex
-    );
-
-  const lastY =
-    y(
-      last.price
-    );
-
-
-  ctx.fillStyle =
-    "#ffffff";
-
-  ctx.beginPath();
-
-  ctx.arc(
-    lastX,
-    lastY,
-    5,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fill();
-
-
-  ctx.fillStyle =
-    "#6f7a89";
-
-  ctx.font =
-    "10px -apple-system";
-
-
-  ctx.fillText(
-    points[0].date.slice(5),
-    left,
-    h - 7
-  );
-
-
-  ctx.fillText(
-    last.date.slice(5),
-    Math.max(
-      left,
-      w - right - 31
-    ),
-    h - 7
-  );
-
-
-  ctx.fillStyle =
-    "#ffffff";
-
-  ctx.font =
-    "11px -apple-system";
-
-
-  const priceText =
-    yen(
-      last.price
-    );
-
-
-  const textWidth =
-    ctx.measureText(
-      priceText
-    ).width;
-
-
-  ctx.fillText(
-    priceText,
-
-    Math.min(
-      w - right - textWidth,
-
-      Math.max(
-        left,
-        lastX - textWidth - 8
-      )
-    ),
-
-    Math.max(
-      14,
-      lastY - 10
-    )
-  );
-
-}
-
-
-/* ========================================
    ROTATION
 
-   0 = OWNED
-   1 = OWNED
-   2 = WANTED
-   3 = PORTFOLIO
+   0 OWNED
+   1 OWNED
+   2 PORTFOLIO
+   3 WANTED
 
 ======================================== */
 
@@ -3018,11 +3440,11 @@ function showNext(){
 
   }else if(step === 2){
 
-    showWanted();
+    showPortfolio();
 
   }else{
 
-    showPortfolio();
+    showWanted();
 
   }
 
@@ -3089,9 +3511,7 @@ async function start(){
 
   }catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     document.getElementById(
@@ -3108,6 +3528,79 @@ async function start(){
   }
 
 }
+
+
+/* ========================================
+   RESIZE
+
+   WANTED表示中にiPadの向きが変わった場合
+   再描画する
+======================================== */
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    if(
+      !data
+    ){
+      return;
+    }
+
+
+    const mode =
+      document.getElementById(
+        "mode"
+      ).textContent;
+
+
+    if(
+      mode === "WANTED" &&
+      data.wanted &&
+      data.wanted.length
+    ){
+
+      const index =
+        (
+          wantedIndex - 1 +
+          data.wanted.length
+        )
+        %
+        data.wanted.length;
+
+
+      const card =
+        data.wanted[index];
+
+
+      const reference =
+        card.referencePrice
+        ?? null;
+
+
+      const target =
+        card.targetPrice
+        ??
+        (
+          reference !== null
+            ?
+            Math.round(
+              reference * .5
+            )
+            :
+            null
+        );
+
+
+      drawWantedHistory(
+        card.history || [],
+        target
+      );
+
+    }
+
+  }
+);
 
 
 /* ========================================
