@@ -1,136 +1,839 @@
 {
   "owned": [
-    {"name":"ヒスイゾロアーク","number":"099/103","qty":1,"purchasePrices":[240]},
-    {"name":"ヒスイゾロア","number":"098/103","qty":1,"purchasePrices":[240]},
-    {"name":"ルギア","number":"097/103","qty":1,"purchasePrices":[240]},
-    {"name":"イッカネズミ","number":"100/103","qty":1,"purchasePrices":[240]},
-    {"name":"イーブイ","number":"094/103","qty":1,"purchasePrices":[240]},
-    {"name":"ニャース","number":"092/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ププリン","number":"096/103","qty":1,"purchasePrices":[240]},
-    {"name":"メタモン","number":"121/103","qty":1,"purchasePrices":[240]},
-    {"name":"メタモン","number":"093/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ジラーチex","number":"081/103","qty":1,"purchasePrices":[240]},
-    {"name":"ディアルガ","number":"082/103","qty":1,"purchasePrices":[240]},
-    {"name":"ザシアン","number":"085/103","qty":1,"purchasePrices":[240]},
-    {"name":"ザマゼンタ","number":"086/103","qty":1,"purchasePrices":[240]},
-    {"name":"サーフゴー","number":"087/103","qty":1,"purchasePrices":[240]},
-    {"name":"ナットレイ","number":"083/103","qty":1,"purchasePrices":[240]},
-    {"name":"ガラルニャース","number":"080/103","qty":1,"purchasePrices":[240]},
-
-    {"name":"ミュウツー","number":"054/103","qty":1,"purchasePrices":[240]},
-    {"name":"ルナアーラ","number":"066/103","qty":1,"purchasePrices":[240]},
-    {"name":"コスモウム","number":"065/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"コスモッグ","number":"064/103","qty":1,"purchasePrices":[240]},
-    {"name":"ゼルネアス","number":"063/103","qty":1,"purchasePrices":[240]},
-    {"name":"ニンフィアex","number":"059/103","qty":1,"purchasePrices":[240]},
-    {"name":"エーフィ","number":"058/103","qty":1,"purchasePrices":[240]},
-    {"name":"フワンテ","number":"101/103","qty":1,"purchasePrices":[240]},
-    {"name":"フワンテ","number":"061/103","qty":1,"purchasePrices":[240]},
-    {"name":"シャンデラ","number":"122/103","qty":1,"purchasePrices":[240]},
-    {"name":"シャンデラ","number":"062/103","qty":1,"purchasePrices":[240]},
-    {"name":"コレクレー","number":"067/103","qty":1,"purchasePrices":[240]},
-    {"name":"アンノーン","number":"060/103","qty":1,"purchasePrices":[240]},
-    {"name":"パルキア","number":"044/103","qty":1,"purchasePrices":[240]},
-    {"name":"カイオーガ","number":"013/103","qty":1,"purchasePrices":[240]},
-    {"name":"ラプラス","number":"011/103","qty":1,"purchasePrices":[240]},
-    {"name":"フリーザー","number":"012/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ヨワシ","number":"016/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ヤドン","number":"010/103","qty":1,"purchasePrices":[240]},
-    {"name":"バルビート","number":"003/103","qty":1,"purchasePrices":[240]},
-    {"name":"イルミーゼ","number":"004/103","qty":1,"purchasePrices":[240]},
-    {"name":"アローラナッシー","number":"002/103","qty":1,"purchasePrices":[240]},
-    {"name":"タマタマ","number":"001/103","qty":1,"purchasePrices":[240]},
-    {"name":"サンダー","number":"049/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ストリンダー","number":"051/103","qty":1,"purchasePrices":[240]},
-    {"name":"モルペコ","number":"052/103","qty":1,"purchasePrices":[240]},
-    {"name":"ミライドン","number":"053/103","qty":1,"purchasePrices":[240]},
-    {"name":"ジャラランガ","number":"091/103","qty":1,"purchasePrices":[240]},
-    {"name":"ジャランゴ","number":"090/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ジャラコ","number":"089/103","qty":1,"purchasePrices":[240]},
-
-    {"name":"ピカチュウ","number":"036/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"018/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"017/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"044/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"021/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"035/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"037/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"034/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"027/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"029/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"023/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"026/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"030/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"033/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"032/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"031/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"020/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"038/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"024/103","qty":1,"purchasePrices":[240]},
-    {"name":"ピカチュウ","number":"028/103","qty":1,"purchasePrices":[240]},
-
-    {"name":"ゲンガーex","number":"076/103","qty":1,"purchasePrices":[240]},
-    {"name":"イベルタル","number":"079/103","qty":1,"purchasePrices":[240]},
-    {"name":"ブラッキー","number":"077/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ニドリーナ","number":"074/103","qty":1,"purchasePrices":[240]},
-    {"name":"ニドラン♀","number":"073/103","qty":1,"purchasePrices":[240]},
-    {"name":"アローラニャース","number":"075/103","qty":1,"purchasePrices":[240]},
-    {"name":"ズルッグ","number":"078/103","qty":1,"purchasePrices":[240]},
-    {"name":"ホゲータex","number":"009/103","qty":1,"purchasePrices":[240]},
-    {"name":"ホウオウ","number":"007/103","qty":1,"purchasePrices":[240]},
-    {"name":"ファイヤー","number":"006/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ルカリオ","number":"069/103","qty":2,"purchasePrices":[240,240]},
-    {"name":"ルガルガン","number":"071/103","qty":1,"purchasePrices":[240]},
-    {"name":"コライドン","number":"072/103","qty":1,"purchasePrices":[240]},
-    {"name":"グラードン","number":"068/103","qty":1,"purchasePrices":[240]},
-    {"name":"ガマゲロゲ","number":"070/103","qty":1,"purchasePrices":[240]},
-    {"name":"ポケパッド","number":"102/103","qty":1,"purchasePrices":[240]},
-    {"name":"ハイパーボール","number":"101/103","qty":1,"purchasePrices":[240]},
-    {"name":"ポケモンいれかえ","number":"103/103","qty":1,"purchasePrices":[240]},
-
-    {"name":"基本水エネルギー","number":"水","qty":2,"purchasePrices":[240,240]},
-    {"name":"基本炎エネルギー","number":"炎","qty":2,"purchasePrices":[240,240]},
-    {"name":"基本草エネルギー","number":"草","qty":2,"purchasePrices":[240,240]},
-    {"name":"基本雷エネルギー","number":"雷","qty":3,"purchasePrices":[240,240,240]},
-    {"name":"基本鋼エネルギー","number":"鋼","qty":3,"purchasePrices":[240,240,240]},
-    {"name":"基本超エネルギー","number":"超","qty":2,"purchasePrices":[240,240]},
-    {"name":"基本闘エネルギー","number":"闘","qty":3,"purchasePrices":[240,240,240]},
-    {"name":"基本悪エネルギー","number":"悪","qty":2,"purchasePrices":[240,240]},
-
-    {"name":"カスミ","number":"138/103","qty":1,"purchasePrices":[240]},
-    {"name":"ラプラス","number":"106/103","qty":1,"purchasePrices":[240]},
-
-    {"name":"ミュウex","number":"135/103","rarity":"FUR","qty":1,"purchasePrices":[14500]},
-    {"name":"ミュウVMAX","number":"163/103","qty":2,"purchasePrices":[1980,1900]},
-    {"name":"ボーマンダex","number":"133/103","rarity":"SAR","qty":1,"purchasePrices":[240]},
-
-    {"name":"リザードン","number":"137/103","qty":1,"purchasePrices":[28000]}
+    {
+      "name": "ヒスイゾロアーク",
+      "number": "099/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ヒスイゾロア",
+      "number": "098/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ルギア",
+      "number": "097/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "イッカネズミ",
+      "number": "100/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "イーブイ",
+      "number": "094/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ニャース",
+      "number": "092/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ププリン",
+      "number": "096/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "メタモン",
+      "number": "121/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "メタモン",
+      "number": "093/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ジラーチex",
+      "number": "081/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ディアルガ",
+      "number": "082/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ザシアン",
+      "number": "085/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ザマゼンタ",
+      "number": "086/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "サーフゴー",
+      "number": "087/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ナットレイ",
+      "number": "083/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ガラルニャース",
+      "number": "080/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ミュウツー",
+      "number": "054/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ルナアーラ",
+      "number": "066/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "コスモウム",
+      "number": "065/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "コスモッグ",
+      "number": "064/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ゼルネアス",
+      "number": "063/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ニンフィアex",
+      "number": "059/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "エーフィ",
+      "number": "058/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "フワンテ",
+      "number": "101/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "フワンテ",
+      "number": "061/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "シャンデラ",
+      "number": "122/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "シャンデラ",
+      "number": "062/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "コレクレー",
+      "number": "067/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "アンノーン",
+      "number": "060/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "パルキア",
+      "number": "044/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "カイオーガ",
+      "number": "013/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ラプラス",
+      "number": "011/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "フリーザー",
+      "number": "012/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ヨワシ",
+      "number": "016/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ヤドン",
+      "number": "010/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "バルビート",
+      "number": "003/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "イルミーゼ",
+      "number": "004/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "アローラナッシー",
+      "number": "002/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "タマタマ",
+      "number": "001/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "サンダー",
+      "number": "049/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ストリンダー",
+      "number": "051/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "モルペコ",
+      "number": "052/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ミライドン",
+      "number": "053/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ジャラランガ",
+      "number": "091/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ジャランゴ",
+      "number": "090/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ジャラコ",
+      "number": "089/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "036/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "018/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "017/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "044/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "021/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "035/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "037/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "034/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "027/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "029/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "023/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "026/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "030/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "033/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "032/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "031/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "020/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "038/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "024/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ピカチュウ",
+      "number": "028/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ゲンガーex",
+      "number": "076/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "イベルタル",
+      "number": "079/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ブラッキー",
+      "number": "077/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ニドリーナ",
+      "number": "074/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ニドラン♀",
+      "number": "073/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "アローラニャース",
+      "number": "075/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ズルッグ",
+      "number": "078/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ホゲータex",
+      "number": "009/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ホウオウ",
+      "number": "007/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ファイヤー",
+      "number": "006/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ルカリオ",
+      "number": "069/103",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "ルガルガン",
+      "number": "071/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "コライドン",
+      "number": "072/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "グラードン",
+      "number": "068/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ガマゲロゲ",
+      "number": "070/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ポケパッド",
+      "number": "102/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ハイパーボール",
+      "number": "101/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ポケモンいれかえ",
+      "number": "103/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "基本水エネルギー",
+      "number": "水",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "基本炎エネルギー",
+      "number": "炎",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "基本草エネルギー",
+      "number": "草",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "基本雷エネルギー",
+      "number": "雷",
+      "qty": 3,
+      "purchasePrices": [
+        240,
+        240,
+        240
+      ]
+    },
+    {
+      "name": "基本鋼エネルギー",
+      "number": "鋼",
+      "qty": 3,
+      "purchasePrices": [
+        240,
+        240,
+        240
+      ]
+    },
+    {
+      "name": "基本超エネルギー",
+      "number": "超",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "基本闘エネルギー",
+      "number": "闘",
+      "qty": 3,
+      "purchasePrices": [
+        240,
+        240,
+        240
+      ]
+    },
+    {
+      "name": "基本悪エネルギー",
+      "number": "悪",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ]
+    },
+    {
+      "name": "カスミ",
+      "number": "138/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ラプラス",
+      "number": "106/103",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "ミュウex",
+      "number": "135/103",
+      "rarity": "FUR",
+      "qty": 1,
+      "purchasePrices": [
+        14500
+      ]
+    },
+    {
+      "name": "ミュウVMAX",
+      "number": "163/103",
+      "qty": 2,
+      "purchasePrices": [
+        1980,
+        1900
+      ]
+    },
+    {
+      "name": "ボーマンダex",
+      "number": "133/103",
+      "rarity": "SAR",
+      "qty": 1,
+      "purchasePrices": [
+        240
+      ]
+    },
+    {
+      "name": "リザードン",
+      "number": "137/103",
+      "qty": 1,
+      "purchasePrices": [
+        28000
+      ]
+    }
   ],
-
   "wanted": [
     {
-      "name":"ルギア",
-      "number":"142/103",
-      "referencePrice":null,
-      "currentPrice":null,
-      "yesterdayPrice":null,
-      "image":""
+      "name": "ルギア",
+      "number": "142/103",
+      "referencePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
     },
     {
-      "name":"コイキング",
-      "number":"165/103",
-      "referencePrice":null,
-      "currentPrice":null,
-      "yesterdayPrice":null,
-      "image":""
+      "name": "コイキング",
+      "number": "165/103",
+      "referencePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
     },
     {
-      "name":"ピカチュウex",
-      "number":"127/103",
-      "referencePrice":null,
-      "currentPrice":null,
-      "yesterdayPrice":null,
-      "image":""
+      "name": "ピカチュウex",
+      "number": "127/103",
+      "referencePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
     }
-  ]
+  ],
+  "lastUpdated": "2026-10-07 13:40"
 }
