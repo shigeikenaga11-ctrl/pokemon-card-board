@@ -9,6 +9,9 @@
   content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
+<meta name="theme-color" content="#030507">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <title>Pokémon Card Board</title>
 
 <style>
@@ -17,20 +20,21 @@
   box-sizing:border-box;
 }
 
-html,
+html{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:#030507;
+}
+
 body{
   margin:0;
   width:100%;
   height:100%;
+  min-height:100%;
   overflow:hidden;
 
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      #17202b 0%,
-      #080c12 42%,
-      #030507 100%
-    );
+  background:#030507;
 
   color:#eef2f6;
 
@@ -40,19 +44,6 @@ body{
     "Segoe UI",
     sans-serif;
 }
-
-body{
-  padding:
-    env(safe-area-inset-top)
-    env(safe-area-inset-right)
-    env(safe-area-inset-bottom)
-    env(safe-area-inset-left);
-}
-
-
-/* ========================================
-   BOARD
-======================================== */
 
 .board{
   width:100%;
@@ -66,17 +57,24 @@ body{
     48px;
 
   padding:
-    14px
-    24px
-    14px;
+    calc(14px + env(safe-area-inset-top))
+    calc(24px + env(safe-area-inset-right))
+    calc(14px + env(safe-area-inset-bottom))
+    calc(24px + env(safe-area-inset-left));
 
   gap:12px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      #17202b 0%,
+      #080c12 42%,
+      #030507 100%
+    );
 }
 
 
-/* ========================================
-   HEADER
-======================================== */
+/* HEADER */
 
 .header{
   display:flex;
@@ -86,8 +84,7 @@ body{
   border-bottom:
     1px solid rgba(255,255,255,.10);
 
-  padding:
-    0 4px 10px;
+  padding:0 4px 10px;
 }
 
 .brand{
@@ -129,10 +126,9 @@ body{
 }
 
 .mode{
-  min-width:126px;
+  min-width:140px;
 
-  padding:
-    10px 18px;
+  padding:10px 18px;
 
   border:
     1px solid rgba(255,255,255,.14);
@@ -157,18 +153,32 @@ body{
 
   border-color:
     rgba(223,198,110,.45);
+}
+
+.mode.portfolio{
+  color:#7fcfa3;
+
+  border-color:
+    rgba(127,207,163,.45);
 
   background:
-    rgba(223,198,110,.06);
+    rgba(127,207,163,.05);
 }
 
 
-/* ========================================
-   MAIN
-======================================== */
+/* MAIN */
 
 .main{
   min-height:0;
+  position:relative;
+}
+
+
+/* CARD PAGE */
+
+.card-page{
+  width:100%;
+  height:100%;
 
   display:grid;
 
@@ -180,9 +190,7 @@ body{
 }
 
 
-/* ========================================
-   PANEL
-======================================== */
+/* PANEL */
 
 .panel{
   min-height:0;
@@ -202,17 +210,12 @@ body{
   box-shadow:
     0 22px 70px rgba(0,0,0,.34);
 
-  backdrop-filter:
-    blur(18px);
-
-  -webkit-backdrop-filter:
-    blur(18px);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 }
 
 
-/* ========================================
-   CARD IMAGE
-======================================== */
+/* CARD IMAGE */
 
 .image-panel{
   position:relative;
@@ -277,8 +280,7 @@ body{
 .image-placeholder{
   width:72%;
 
-  aspect-ratio:
-    63 / 88;
+  aspect-ratio:63 / 88;
 
   display:flex;
   flex-direction:column;
@@ -334,13 +336,10 @@ body{
 }
 
 
-/* ========================================
-   INFO
-======================================== */
+/* INFO */
 
 .info-panel{
-  padding:
-    25px 29px 22px;
+  padding:25px 29px 22px;
 
   display:grid;
 
@@ -369,8 +368,6 @@ body{
   font-weight:750;
 
   line-height:1.08;
-
-  letter-spacing:.01em;
 }
 
 .card-number{
@@ -384,8 +381,7 @@ body{
 }
 
 .qty{
-  padding:
-    7px 11px;
+  padding:7px 11px;
 
   border:
     1px solid rgba(255,255,255,.11);
@@ -403,13 +399,10 @@ body{
 }
 
 
-/* ========================================
-   PRICE
-======================================== */
+/* PRICE */
 
 .price-section{
-  padding:
-    17px 0 15px;
+  padding:17px 0 15px;
 
   border-top:
     1px solid rgba(255,255,255,.07);
@@ -450,9 +443,7 @@ body{
 }
 
 
-/* ========================================
-   METRICS
-======================================== */
+/* METRICS */
 
 .metrics{
   display:grid;
@@ -466,8 +457,7 @@ body{
 .metric{
   min-width:0;
 
-  padding:
-    13px 14px;
+  padding:13px 14px;
 
   border:
     1px solid rgba(255,255,255,.075);
@@ -518,17 +508,14 @@ body{
 }
 
 
-/* ========================================
-   CHART
-======================================== */
+/* HISTORY */
 
 .chart-box{
   min-height:0;
 
   position:relative;
 
-  padding:
-    14px 12px 4px;
+  padding:14px 12px 4px;
 
   border:
     1px solid rgba(255,255,255,.07);
@@ -561,8 +548,263 @@ body{
 
 
 /* ========================================
-   FOOTER
+   PORTFOLIO PAGE
 ======================================== */
+
+.portfolio-page{
+  width:100%;
+  height:100%;
+
+  display:none;
+
+  grid-template-columns:
+    minmax(0,1.5fr)
+    minmax(300px,.7fr);
+
+  gap:22px;
+}
+
+.portfolio-chart-panel{
+  padding:28px 34px 24px;
+
+  display:flex;
+  flex-direction:column;
+}
+
+.portfolio-heading{
+  font-size:12px;
+
+  letter-spacing:.20em;
+
+  color:#737f8d;
+}
+
+.portfolio-title{
+  margin-top:7px;
+
+  font-size:
+    clamp(28px,3.5vw,46px);
+
+  font-weight:750;
+}
+
+.portfolio-sub{
+  margin-top:6px;
+
+  font-size:11px;
+
+  color:#697482;
+}
+
+
+/* BAR AREA */
+
+.portfolio-bars{
+  flex:1;
+
+  min-height:0;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:flex-end;
+
+  gap:
+    clamp(70px,10vw,150px);
+
+  padding:
+    28px 50px 8px;
+}
+
+.bar-column{
+  height:100%;
+
+  flex:0 1 230px;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.bar-value{
+  margin-bottom:12px;
+
+  font-size:
+    clamp(24px,3.2vw,42px);
+
+  font-weight:760;
+
+  letter-spacing:-.035em;
+}
+
+.bar-track{
+  width:
+    clamp(100px,13vw,170px);
+
+  height:72%;
+
+  position:relative;
+
+  display:flex;
+  align-items:flex-end;
+
+  border-radius:
+    16px 16px 5px 5px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  overflow:hidden;
+}
+
+.bar-fill{
+  width:100%;
+
+  min-height:4px;
+
+  border-radius:
+    14px 14px 3px 3px;
+
+  transition:
+    height .8s ease;
+}
+
+.bar-fill.purchase{
+  background:
+    linear-gradient(
+      180deg,
+      #8995a5,
+      #3e4856
+    );
+
+  box-shadow:
+    0 0 25px rgba(150,160,175,.12);
+}
+
+.bar-fill.current{
+  background:
+    linear-gradient(
+      180deg,
+      #d7c477,
+      #7f6a2c
+    );
+
+  box-shadow:
+    0 0 30px rgba(215,196,119,.16);
+}
+
+.bar-label{
+  margin-top:14px;
+
+  font-size:11px;
+
+  letter-spacing:.15em;
+
+  color:#7d8896;
+}
+
+.bar-note{
+  margin-top:5px;
+
+  font-size:9px;
+
+  color:#525d69;
+}
+
+
+/* PORTFOLIO SUMMARY */
+
+.portfolio-summary{
+  padding:28px;
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;
+
+  gap:12px;
+}
+
+.summary-heading{
+  margin-bottom:6px;
+
+  font-size:10px;
+
+  letter-spacing:.18em;
+
+  color:#737f8d;
+}
+
+.summary-main{
+  padding:18px;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius:17px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+.summary-main-label{
+  font-size:9px;
+
+  letter-spacing:.15em;
+
+  color:#6c7784;
+}
+
+.summary-profit{
+  margin-top:6px;
+
+  font-size:
+    clamp(29px,3.7vw,48px);
+
+  font-weight:760;
+}
+
+.summary-row{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:13px 5px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+}
+
+.summary-row:last-child{
+  border-bottom:none;
+}
+
+.summary-label{
+  font-size:10px;
+
+  letter-spacing:.11em;
+
+  color:#697482;
+}
+
+.summary-value{
+  font-size:17px;
+
+  font-weight:680;
+
+  text-align:right;
+}
+
+
+/* FOOTER */
 
 .footer{
   display:flex;
@@ -570,8 +812,7 @@ body{
   align-items:center;
   justify-content:space-between;
 
-  padding:
-    0 5px;
+  padding:0 5px;
 
   font-size:10px;
 
@@ -601,9 +842,7 @@ body{
 }
 
 
-/* ========================================
-   MOBILE
-======================================== */
+/* MOBILE */
 
 @media(max-width:760px){
 
@@ -613,10 +852,14 @@ body{
       1fr
       38px;
 
-    padding:10px;
+    padding:
+      calc(10px + env(safe-area-inset-top))
+      calc(10px + env(safe-area-inset-right))
+      calc(10px + env(safe-area-inset-bottom))
+      calc(10px + env(safe-area-inset-left));
   }
 
-  .main{
+  .card-page{
     grid-template-columns:
       .8fr
       1.2fr;
@@ -626,6 +869,27 @@ body{
 
   .info-panel{
     padding:17px;
+  }
+
+  .portfolio-page{
+    grid-template-columns:
+      1.35fr
+      .65fr;
+
+    gap:10px;
+  }
+
+  .portfolio-chart-panel{
+    padding:18px;
+  }
+
+  .portfolio-summary{
+    padding:17px;
+  }
+
+  .portfolio-bars{
+    gap:35px;
+    padding:20px 10px 5px;
   }
 
   .metrics{
@@ -683,6 +947,16 @@ body{
 
 
 <main class="main">
+
+
+<!-- =====================================
+     INDIVIDUAL CARD PAGE
+====================================== -->
+
+<div
+  id="cardPage"
+  class="card-page"
+>
 
 
 <section class="panel image-panel">
@@ -785,6 +1059,211 @@ body{
 
 </section>
 
+</div>
+
+
+<!-- =====================================
+     PORTFOLIO PAGE
+====================================== -->
+
+<div
+  id="portfolioPage"
+  class="portfolio-page"
+>
+
+
+<section class="panel portfolio-chart-panel">
+
+  <div class="portfolio-heading">
+    COLLECTION VALUE
+  </div>
+
+  <div class="portfolio-title">
+    PORTFOLIO
+  </div>
+
+  <div
+    id="portfolioSub"
+    class="portfolio-sub"
+  >
+    現在価格を取得できたカードで比較
+  </div>
+
+
+  <div class="portfolio-bars">
+
+
+    <div class="bar-column">
+
+      <div
+        id="purchaseBarValue"
+        class="bar-value"
+      >
+        —
+      </div>
+
+      <div class="bar-track">
+
+        <div
+          id="purchaseBar"
+          class="bar-fill purchase"
+        ></div>
+
+      </div>
+
+      <div class="bar-label">
+        取得価格
+      </div>
+
+      <div class="bar-note">
+        COMPARABLE COST
+      </div>
+
+    </div>
+
+
+    <div class="bar-column">
+
+      <div
+        id="currentBarValue"
+        class="bar-value gold"
+      >
+        —
+      </div>
+
+      <div class="bar-track">
+
+        <div
+          id="currentBar"
+          class="bar-fill current"
+        ></div>
+
+      </div>
+
+      <div class="bar-label">
+        現在価格
+      </div>
+
+      <div class="bar-note">
+        CURRENT VALUE
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<section class="panel portfolio-summary">
+
+  <div class="summary-heading">
+    PERFORMANCE
+  </div>
+
+
+  <div class="summary-main">
+
+    <div class="summary-main-label">
+      含み損益
+    </div>
+
+    <div
+      id="portfolioProfit"
+      class="summary-profit"
+    >
+      —
+    </div>
+
+  </div>
+
+
+  <div class="summary-row">
+
+    <div class="summary-label">
+      収益率
+    </div>
+
+    <div
+      id="portfolioReturn"
+      class="summary-value"
+    >
+      —
+    </div>
+
+  </div>
+
+
+  <div class="summary-row">
+
+    <div class="summary-label">
+      評価対象
+    </div>
+
+    <div
+      id="portfolioEvaluated"
+      class="summary-value"
+    >
+      —
+    </div>
+
+  </div>
+
+
+  <div class="summary-row">
+
+    <div class="summary-label">
+      全保有枚数
+    </div>
+
+    <div
+      id="portfolioTotalCards"
+      class="summary-value"
+    >
+      —
+    </div>
+
+  </div>
+
+
+  <div class="summary-row">
+
+    <div class="summary-label">
+      全カード取得総額
+    </div>
+
+    <div
+      id="portfolioTotalCost"
+      class="summary-value"
+    >
+      —
+    </div>
+
+  </div>
+
+
+  <div class="summary-row">
+
+    <div class="summary-label">
+      未評価
+    </div>
+
+    <div
+      id="portfolioMissing"
+      class="summary-value"
+    >
+      —
+    </div>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
 </main>
 
 
@@ -821,28 +1300,22 @@ body{
    SETTINGS
 ======================================== */
 
-const ROTATE_MS =
-  16000;
+const ROTATE_MS = 16000;
 
 
 /* ========================================
    DATA
 ======================================== */
 
-let data =
-  null;
+let data = null;
 
-let physicalCards =
-  [];
+let physicalCards = [];
 
-let previousOwnedIndex =
-  -1;
+let previousOwnedIndex = -1;
 
-let wantedIndex =
-  0;
+let wantedIndex = 0;
 
-let modeCounter =
-  0;
+let modeCounter = 0;
 
 
 /* ========================================
@@ -854,24 +1327,43 @@ function yen(value){
   if(
     value === null ||
     value === undefined ||
-    Number.isNaN(
-      Number(value)
-    )
+    Number.isNaN(Number(value))
   ){
-
     return "—";
-
   }
-
 
   return (
     "¥" +
-    Number(value)
-      .toLocaleString(
-        "ja-JP"
-      )
+    Math.round(Number(value))
+      .toLocaleString("ja-JP")
   );
+}
 
+
+function signedYen(value){
+
+  if(
+    value === null ||
+    value === undefined ||
+    Number.isNaN(Number(value))
+  ){
+    return "—";
+  }
+
+  const number =
+    Math.round(Number(value));
+
+  if(number > 0){
+    return "+" + yen(number);
+  }
+
+  if(number < 0){
+    return "-¥" +
+      Math.abs(number)
+        .toLocaleString("ja-JP");
+  }
+
+  return "¥0";
 }
 
 
@@ -887,11 +1379,8 @@ function percentChange(
     base === undefined ||
     Number(base) === 0
   ){
-
     return null;
-
   }
-
 
   return (
     (
@@ -901,7 +1390,6 @@ function percentChange(
     )
     * 100
   );
-
 }
 
 
@@ -910,26 +1398,24 @@ function signedPercent(value){
   if(
     value === null ||
     value === undefined ||
-    Number.isNaN(value)
+    Number.isNaN(Number(value))
   ){
-
     return "—";
-
   }
 
+  const number =
+    Number(value);
 
   const sign =
-    value > 0
+    number > 0
       ? "+"
       : "";
 
-
   return (
     sign +
-    value.toFixed(1) +
+    number.toFixed(1) +
     "%"
   );
-
 }
 
 
@@ -939,28 +1425,18 @@ function valueClass(value){
     value === null ||
     value === undefined
   ){
-
     return "neutral";
-
   }
-
 
   if(value > 0){
-
     return "positive";
-
   }
-
 
   if(value < 0){
-
     return "negative";
-
   }
 
-
   return "neutral";
-
 }
 
 
@@ -973,7 +1449,6 @@ function updateClock(){
   const now =
     new Date();
 
-
   document.getElementById(
     "clock"
   ).textContent =
@@ -984,19 +1459,16 @@ function updateClock(){
         minute:"2-digit"
       }
     );
-
 }
 
 
 /* ========================================
-   OWNED PHYSICAL CARDS
+   PHYSICAL OWNED CARDS
 ======================================== */
 
 function expandOwnedCards(){
 
-  physicalCards =
-    [];
-
+  physicalCards = [];
 
   for(
     const card
@@ -1006,19 +1478,13 @@ function expandOwnedCards(){
     const qty =
       Math.max(
         1,
-        Number(
-          card.qty || 1
-        )
+        Number(card.qty || 1)
       );
 
-
     const prices =
-      Array.isArray(
-        card.purchasePrices
-      )
+      Array.isArray(card.purchasePrices)
         ? card.purchasePrices
         : [];
-
 
     for(
       let i = 0;
@@ -1061,26 +1527,19 @@ function randomOwned(){
   if(
     physicalCards.length === 0
   ){
-
     return null;
-
   }
-
 
   if(
     physicalCards.length === 1
   ){
 
-    previousOwnedIndex =
-      0;
+    previousOwnedIndex = 0;
 
     return physicalCards[0];
-
   }
 
-
   let index;
-
 
   do{
 
@@ -1092,61 +1551,92 @@ function randomOwned(){
       );
 
   }while(
-    index ===
-    previousOwnedIndex
+    index === previousOwnedIndex
   );
-
 
   previousOwnedIndex =
     index;
 
-
-  return physicalCards[
-    index
-  ];
-
+  return physicalCards[index];
 }
 
 
 /* ========================================
-   IMAGE FILE NAME
+   PAGE SWITCH
 ======================================== */
 
-function imageBaseName(card){
+function openCardPage(){
 
-  /*
-    137/103
-       ↓
-    M6a_137_103
-  */
+  document.getElementById(
+    "cardPage"
+  ).style.display =
+    "grid";
 
-  const number =
-    String(
-      card.number || ""
-    )
-    .trim()
-    .replace(
-      /\//g,
-      "_"
-    )
-    .replace(
-      /\\/g,
-      "_"
-    );
+  document.getElementById(
+    "portfolioPage"
+  ).style.display =
+    "none";
+}
 
 
-  return (
-    "images/M6a_"
-    +
-    number
-  );
+function openPortfolioPage(){
 
+  document.getElementById(
+    "cardPage"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "portfolioPage"
+  ).style.display =
+    "grid";
 }
 
 
 /* ========================================
    IMAGE
 ======================================== */
+
+function safeFilePart(text){
+
+  return String(text || "")
+    .trim()
+    .replace(/[\/\\]/g,"_")
+    .replace(/[<>:"|?*]/g,"_");
+}
+
+
+function imageBaseNames(card){
+
+  const number =
+    safeFilePart(
+      card.number
+    );
+
+  const name =
+    safeFilePart(
+      card.name
+    );
+
+  /*
+    新方式：
+    名前＋番号
+
+    同一番号の別カードとの
+    ファイル衝突を避ける。
+
+    旧方式も後ろで探す。
+  */
+
+  return [
+
+    `images/M6a_${name}_${number}`,
+
+    `images/M6a_${number}`
+
+  ];
+}
+
 
 function setImage(card){
 
@@ -1155,38 +1645,21 @@ function setImage(card){
       "cardImage"
     );
 
-
   const placeholder =
     document.getElementById(
       "imagePlaceholder"
     );
 
-
   image.style.display =
     "none";
-
 
   placeholder.style.display =
     "flex";
 
+  image.onload = null;
+  image.onerror = null;
 
-  image.onload =
-    null;
-
-
-  image.onerror =
-    null;
-
-
-  /*
-    cards.json に image が
-    手動登録されていれば
-    それを最優先。
-  */
-
-  const candidates =
-    [];
-
+  const candidates = [];
 
   if(
     card.image &&
@@ -1194,54 +1667,36 @@ function setImage(card){
   ){
 
     candidates.push(
-      String(
-        card.image
-      ).trim()
+      String(card.image).trim()
     );
-
   }
 
+  const bases =
+    imageBaseNames(card);
 
-  /*
-    自動ファイル名
+  for(
+    const base
+    of bases
+  ){
 
-    jpg
-    jpeg
-    png
-    webp
-
-    の順番で探す。
-  */
-
-  const base =
-    imageBaseName(
-      card
+    candidates.push(
+      base + ".jpg"
     );
 
+    candidates.push(
+      base + ".jpeg"
+    );
 
-  candidates.push(
-    base + ".jpg"
-  );
+    candidates.push(
+      base + ".png"
+    );
 
+    candidates.push(
+      base + ".webp"
+    );
+  }
 
-  candidates.push(
-    base + ".jpeg"
-  );
-
-
-  candidates.push(
-    base + ".png"
-  );
-
-
-  candidates.push(
-    base + ".webp"
-  );
-
-
-  let index =
-    0;
-
+  let index = 0;
 
   function tryNext(){
 
@@ -1254,28 +1709,19 @@ function setImage(card){
         "src"
       );
 
-
       image.style.display =
         "none";
-
 
       placeholder.style.display =
         "flex";
 
-
       return;
-
     }
 
-
     const url =
-      candidates[
-        index
-      ];
-
+      candidates[index];
 
     index++;
-
 
     image.onload =
       () => {
@@ -1283,39 +1729,24 @@ function setImage(card){
         image.style.display =
           "block";
 
-
         placeholder.style.display =
           "none";
-
       };
-
 
     image.onerror =
       () => {
 
         tryNext();
-
       };
-
-
-    /*
-      キャッシュは使ってよい。
-      ファイル名が変われば
-      自動的に新画像になる。
-    */
 
     image.src =
       url;
-
   }
-
 
   image.alt =
     card.name || "";
 
-
   tryNext();
-
 }
 
 
@@ -1342,7 +1773,6 @@ function metricHTML(
 
     </div>
   `;
-
 }
 
 
@@ -1352,31 +1782,26 @@ function metricHTML(
 
 function showOwned(){
 
+  openCardPage();
+
   const card =
     randomOwned();
 
-
   if(!card){
-
     return;
-
   }
-
 
   const current =
     card.currentPrice
     ?? null;
 
-
   const yesterday =
     card.yesterdayPrice
     ?? null;
 
-
   const purchase =
     card.purchasePrice
     ?? null;
-
 
   const purchaseChange =
     percentChange(
@@ -1384,39 +1809,32 @@ function showOwned(){
       purchase
     );
 
-
   const dayChange =
     percentChange(
       current,
       yesterday
     );
 
-
   const mode =
     document.getElementById(
       "mode"
     );
 
-
   mode.textContent =
     "OWNED";
 
-
   mode.className =
     "mode";
-
 
   document.getElementById(
     "cardName"
   ).textContent =
     card.name || "—";
 
-
   document.getElementById(
     "cardNumber"
   ).textContent =
     card.number || "—";
-
 
   document.getElementById(
     "qty"
@@ -1427,19 +1845,12 @@ function showOwned(){
       :
       "OWNED";
 
-
   document.getElementById(
     "currentPrice"
   ).textContent =
-    yen(
-      current
-    );
+    yen(current);
 
-
-  setImage(
-    card
-  );
-
+  setImage(card);
 
   document.getElementById(
     "metrics"
@@ -1447,9 +1858,7 @@ function showOwned(){
 
     metricHTML(
       "PURCHASE",
-      yen(
-        purchase
-      )
+      yen(purchase)
     )
 
     +
@@ -1476,12 +1885,10 @@ function showOwned(){
       )
     );
 
-
   document.getElementById(
     "count"
   ).textContent =
     `OWNED ${physicalCards.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
-
 
   drawHistoryChart({
 
@@ -1500,20 +1907,19 @@ function showOwned(){
 
 
 /* ========================================
-   WANT
+   WANTED
 ======================================== */
 
 function showWanted(){
+
+  openCardPage();
 
   if(
     !data.wanted ||
     data.wanted.length === 0
   ){
-
     return;
-
   }
-
 
   const card =
     data.wanted[
@@ -1521,24 +1927,19 @@ function showWanted(){
       data.wanted.length
     ];
 
-
   wantedIndex++;
-
 
   const current =
     card.currentPrice
     ?? null;
 
-
   const yesterday =
     card.yesterdayPrice
     ?? null;
 
-
   const reference =
     card.referencePrice
     ?? null;
-
 
   const target =
     card.targetPrice
@@ -1553,13 +1954,11 @@ function showWanted(){
         null
     );
 
-
   const dayChange =
     percentChange(
       current,
       yesterday
     );
-
 
   const targetGap =
     (
@@ -1579,51 +1978,38 @@ function showWanted(){
       :
       null;
 
-
   const mode =
     document.getElementById(
       "mode"
     );
 
-
   mode.textContent =
     "WANTED";
 
-
   mode.className =
     "mode want";
-
 
   document.getElementById(
     "cardName"
   ).textContent =
     card.name || "—";
 
-
   document.getElementById(
     "cardNumber"
   ).textContent =
     card.number || "—";
-
 
   document.getElementById(
     "qty"
   ).textContent =
     "WATCH";
 
-
   document.getElementById(
     "currentPrice"
   ).textContent =
-    yen(
-      current
-    );
+    yen(current);
 
-
-  setImage(
-    card
-  );
-
+  setImage(card);
 
   document.getElementById(
     "metrics"
@@ -1631,9 +2017,7 @@ function showWanted(){
 
     metricHTML(
       "TARGET",
-      yen(
-        target
-      ),
+      yen(target),
       "gold"
     )
 
@@ -1666,12 +2050,10 @@ function showWanted(){
       )
     );
 
-
   document.getElementById(
     "count"
   ).textContent =
     `WANT ${data.wanted.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
-
 
   drawHistoryChart({
 
@@ -1685,6 +2067,296 @@ function showWanted(){
       target
 
   });
+
+}
+
+
+/* ========================================
+   PORTFOLIO CALCULATION
+======================================== */
+
+function calculatePortfolio(){
+
+  let totalPurchaseAll = 0;
+
+  let comparablePurchase = 0;
+
+  let currentValue = 0;
+
+  let evaluatedCards = 0;
+
+  let missingCards = 0;
+
+  let totalCards = 0;
+
+
+  for(
+    const card
+    of data.owned || []
+  ){
+
+    const qty =
+      Math.max(
+        1,
+        Number(
+          card.qty || 1
+        )
+      );
+
+    const prices =
+      Array.isArray(
+        card.purchasePrices
+      )
+        ?
+        card.purchasePrices
+        :
+        [];
+
+    const current =
+      card.currentPrice;
+
+    for(
+      let i = 0;
+      i < qty;
+      i++
+    ){
+
+      totalCards++;
+
+      const purchase =
+        Number(
+          prices[i]
+          ??
+          prices[0]
+          ??
+          0
+        );
+
+      totalPurchaseAll +=
+        purchase;
+
+      /*
+        currentPriceが存在するカードだけを
+        損益比較に使用する。
+      */
+
+      if(
+        current !== null &&
+        current !== undefined &&
+        !Number.isNaN(
+          Number(current)
+        )
+      ){
+
+        comparablePurchase +=
+          purchase;
+
+        currentValue +=
+          Number(current);
+
+        evaluatedCards++;
+
+      }else{
+
+        missingCards++;
+
+      }
+
+    }
+
+  }
+
+
+  const profit =
+    currentValue
+    -
+    comparablePurchase;
+
+
+  const returnRate =
+    comparablePurchase > 0
+      ?
+      (
+        profit /
+        comparablePurchase
+      )
+      * 100
+      :
+      null;
+
+
+  return {
+
+    totalPurchaseAll,
+    comparablePurchase,
+    currentValue,
+    profit,
+    returnRate,
+    evaluatedCards,
+    missingCards,
+    totalCards
+
+  };
+
+}
+
+
+/* ========================================
+   PORTFOLIO
+======================================== */
+
+function showPortfolio(){
+
+  openPortfolioPage();
+
+  const p =
+    calculatePortfolio();
+
+  const mode =
+    document.getElementById(
+      "mode"
+    );
+
+  mode.textContent =
+    "PORTFOLIO";
+
+  mode.className =
+    "mode portfolio";
+
+
+  document.getElementById(
+    "purchaseBarValue"
+  ).textContent =
+    yen(
+      p.comparablePurchase
+    );
+
+
+  document.getElementById(
+    "currentBarValue"
+  ).textContent =
+    yen(
+      p.currentValue
+    );
+
+
+  /*
+    棒グラフは高い方を100%として
+    相対的な高さを表示。
+  */
+
+  const maxValue =
+    Math.max(
+      p.comparablePurchase,
+      p.currentValue,
+      1
+    );
+
+
+  const purchaseHeight =
+    (
+      p.comparablePurchase /
+      maxValue
+    )
+    * 100;
+
+
+  const currentHeight =
+    (
+      p.currentValue /
+      maxValue
+    )
+    * 100;
+
+
+  document.getElementById(
+    "purchaseBar"
+  ).style.height =
+    `${purchaseHeight}%`;
+
+
+  document.getElementById(
+    "currentBar"
+  ).style.height =
+    `${currentHeight}%`;
+
+
+  const profitElement =
+    document.getElementById(
+      "portfolioProfit"
+    );
+
+
+  profitElement.textContent =
+    signedYen(
+      p.profit
+    );
+
+
+  profitElement.className =
+    "summary-profit "
+    +
+    valueClass(
+      p.profit
+    );
+
+
+  const returnElement =
+    document.getElementById(
+      "portfolioReturn"
+    );
+
+
+  returnElement.textContent =
+    signedPercent(
+      p.returnRate
+    );
+
+
+  returnElement.className =
+    "summary-value "
+    +
+    valueClass(
+      p.returnRate
+    );
+
+
+  document.getElementById(
+    "portfolioEvaluated"
+  ).textContent =
+    `${p.evaluatedCards} / ${p.totalCards} 枚`;
+
+
+  document.getElementById(
+    "portfolioTotalCards"
+  ).textContent =
+    `${p.totalCards} 枚`;
+
+
+  document.getElementById(
+    "portfolioTotalCost"
+  ).textContent =
+    yen(
+      p.totalPurchaseAll
+    );
+
+
+  document.getElementById(
+    "portfolioMissing"
+  ).textContent =
+    `${p.missingCards} 枚`;
+
+
+  document.getElementById(
+    "portfolioSub"
+  ).textContent =
+    `${p.evaluatedCards}枚の取得価格と現在価格を比較`;
+
+
+  document.getElementById(
+    "count"
+  ).textContent =
+    `PORTFOLIO · ${p.totalCards} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
 
 }
 
@@ -1704,15 +2376,12 @@ function drawHistoryChart({
       "chart"
     );
 
-
   const rect =
     canvas.getBoundingClientRect();
-
 
   const ratio =
     window.devicePixelRatio
     || 1;
-
 
   canvas.width =
     Math.max(
@@ -1720,33 +2389,27 @@ function drawHistoryChart({
       rect.width * ratio
     );
 
-
   canvas.height =
     Math.max(
       1,
       rect.height * ratio
     );
 
-
   const ctx =
     canvas.getContext(
       "2d"
     );
-
 
   ctx.scale(
     ratio,
     ratio
   );
 
-
   const w =
     rect.width;
 
-
   const h =
     rect.height;
-
 
   ctx.clearRect(
     0,
@@ -1843,10 +2506,8 @@ function drawHistoryChart({
     ctx.fillStyle =
       "#606b79";
 
-
     ctx.font =
       "14px -apple-system";
-
 
     ctx.fillText(
       "価格履歴が蓄積されると表示します",
@@ -1854,9 +2515,7 @@ function drawHistoryChart({
       h / 2
     );
 
-
     return;
-
   }
 
 
@@ -1864,7 +2523,6 @@ function drawHistoryChart({
     Math.min(
       ...values
     );
-
 
   let max =
     Math.max(
@@ -1883,25 +2541,14 @@ function drawHistoryChart({
   min -=
     spread * .18;
 
-
   max +=
     spread * .18;
 
 
-  const left =
-    15;
-
-
-  const right =
-    20;
-
-
-  const top =
-    31;
-
-
-  const bottom =
-    28;
+  const left = 15;
+  const right = 20;
+  const top = 31;
+  const bottom = 28;
 
 
   const graphW =
@@ -1939,9 +2586,7 @@ function drawHistoryChart({
   ctx.strokeStyle =
     "rgba(255,255,255,.065)";
 
-
-  ctx.lineWidth =
-    1;
+  ctx.lineWidth = 1;
 
 
   for(
@@ -1957,28 +2602,24 @@ function drawHistoryChart({
         i / 3
       );
 
-
     ctx.beginPath();
-
 
     ctx.moveTo(
       left,
       gy
     );
 
-
     ctx.lineTo(
       w - right,
       gy
     );
-
 
     ctx.stroke();
 
   }
 
 
-  /* PURCHASE */
+  /* PURCHASE LINE */
 
   if(
     purchase !== null &&
@@ -1992,50 +2633,36 @@ function drawHistoryChart({
         )
       );
 
-
     ctx.strokeStyle =
       "rgba(255,255,255,.36)";
 
-
-    ctx.lineWidth =
-      1;
-
+    ctx.lineWidth = 1;
 
     ctx.setLineDash(
       [6,6]
     );
 
-
     ctx.beginPath();
-
 
     ctx.moveTo(
       left,
       py
     );
 
-
     ctx.lineTo(
       w - right,
       py
     );
 
-
     ctx.stroke();
 
-
-    ctx.setLineDash(
-      []
-    );
-
+    ctx.setLineDash([]);
 
     ctx.fillStyle =
       "#9da7b3";
 
-
     ctx.font =
       "10px -apple-system";
-
 
     ctx.fillText(
       "PURCHASE "
@@ -2053,7 +2680,7 @@ function drawHistoryChart({
   }
 
 
-  /* TARGET */
+  /* TARGET LINE */
 
   if(
     target !== null &&
@@ -2067,50 +2694,37 @@ function drawHistoryChart({
         )
       );
 
-
     ctx.strokeStyle =
       "#d4b85f";
 
-
     ctx.lineWidth =
       1.2;
-
 
     ctx.setLineDash(
       [7,6]
     );
 
-
     ctx.beginPath();
-
 
     ctx.moveTo(
       left,
       ty
     );
 
-
     ctx.lineTo(
       w - right,
       ty
     );
 
-
     ctx.stroke();
 
-
-    ctx.setLineDash(
-      []
-    );
-
+    ctx.setLineDash([]);
 
     ctx.fillStyle =
       "#dfc66e";
 
-
     ctx.font =
       "10px -apple-system";
-
 
     ctx.fillText(
       "TARGET "
@@ -2128,8 +2742,6 @@ function drawHistoryChart({
   }
 
 
-  /* NO HISTORY */
-
   if(
     points.length === 0
   ){
@@ -2137,10 +2749,8 @@ function drawHistoryChart({
     ctx.fillStyle =
       "#606b79";
 
-
     ctx.font =
       "13px -apple-system";
-
 
     ctx.fillText(
       "履歴収集中",
@@ -2148,13 +2758,9 @@ function drawHistoryChart({
       h / 2
     );
 
-
     return;
-
   }
 
-
-  /* ONE POINT */
 
   if(
     points.length === 1
@@ -2163,24 +2769,19 @@ function drawHistoryChart({
     const point =
       points[0];
 
-
     const px =
       left +
       graphW * .72;
-
 
     const py =
       y(
         point.price
       );
 
-
     ctx.fillStyle =
       "#f2f4f7";
 
-
     ctx.beginPath();
-
 
     ctx.arc(
       px,
@@ -2190,34 +2791,25 @@ function drawHistoryChart({
       Math.PI * 2
     );
 
-
     ctx.fill();
-
 
     ctx.fillStyle =
       "#737e8c";
 
-
     ctx.font =
       "10px -apple-system";
 
-
     ctx.fillText(
-      point.date.slice(
-        5
-      ),
+      point.date.slice(5),
       px - 15,
       h - 7
     );
 
-
     ctx.fillStyle =
       "#e8ecf1";
 
-
     ctx.font =
       "12px -apple-system";
-
 
     ctx.fillText(
       yen(
@@ -2233,13 +2825,9 @@ function drawHistoryChart({
       )
     );
 
-
     return;
-
   }
 
-
-  /* LINE */
 
   const xForIndex =
     index =>
@@ -2256,18 +2844,14 @@ function drawHistoryChart({
   ctx.strokeStyle =
     "#e2e7ef";
 
-
   ctx.lineWidth =
     2.4;
-
 
   ctx.lineJoin =
     "round";
 
-
   ctx.lineCap =
     "round";
-
 
   ctx.beginPath();
 
@@ -2283,12 +2867,10 @@ function drawHistoryChart({
           index
         );
 
-
       const py =
         y(
           point.price
         );
-
 
       if(index === 0){
 
@@ -2313,23 +2895,16 @@ function drawHistoryChart({
   ctx.stroke();
 
 
-  /* LAST POINT */
-
   const lastIndex =
     points.length - 1;
 
-
   const last =
-    points[
-      lastIndex
-    ];
-
+    points[lastIndex];
 
   const lastX =
     xForIndex(
       lastIndex
     );
-
 
   const lastY =
     y(
@@ -2340,9 +2915,7 @@ function drawHistoryChart({
   ctx.fillStyle =
     "#ffffff";
 
-
   ctx.beginPath();
-
 
   ctx.arc(
     lastX,
@@ -2352,37 +2925,25 @@ function drawHistoryChart({
     Math.PI * 2
   );
 
-
   ctx.fill();
-
-
-  /* DATE LABELS */
-
-  const first =
-    points[0];
 
 
   ctx.fillStyle =
     "#6f7a89";
-
 
   ctx.font =
     "10px -apple-system";
 
 
   ctx.fillText(
-    first.date.slice(
-      5
-    ),
+    points[0].date.slice(5),
     left,
     h - 7
   );
 
 
   ctx.fillText(
-    last.date.slice(
-      5
-    ),
+    last.date.slice(5),
     Math.max(
       left,
       w - right - 31
@@ -2391,11 +2952,8 @@ function drawHistoryChart({
   );
 
 
-  /* LAST PRICE */
-
   ctx.fillStyle =
     "#ffffff";
-
 
   ctx.font =
     "11px -apple-system";
@@ -2436,34 +2994,35 @@ function drawHistoryChart({
 
 /* ========================================
    ROTATION
+
+   0 = OWNED
+   1 = OWNED
+   2 = WANTED
+   3 = PORTFOLIO
+
 ======================================== */
 
 function showNext(){
 
-  /*
-    OWNED
-    OWNED
-    WANT
-  */
-
-  const wantTurn =
-    (
-      modeCounter % 3
-      === 2
-    );
+  const step =
+    modeCounter % 4;
 
 
-  if(
-    wantTurn &&
-    data.wanted &&
-    data.wanted.length
-  ){
+  if(step === 0){
+
+    showOwned();
+
+  }else if(step === 1){
+
+    showOwned();
+
+  }else if(step === 2){
 
     showWanted();
 
   }else{
 
-    showOwned();
+    showPortfolio();
 
   }
 
