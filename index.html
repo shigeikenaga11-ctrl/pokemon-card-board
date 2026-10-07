@@ -10,11 +10,18 @@
 >
 
 <meta name="theme-color" content="#030507">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+>
 
 <title>Pokémon Card Board</title>
 
 <style>
+
+/* =========================================================
+   BASE
+========================================================= */
 
 *{
   box-sizing:border-box;
@@ -45,16 +52,16 @@ body{
 
   grid-template-rows:
     74px
-    1fr
+    minmax(0,1fr)
     48px;
+
+  gap:12px;
 
   padding:
     calc(14px + env(safe-area-inset-top))
     calc(24px + env(safe-area-inset-right))
     calc(14px + env(safe-area-inset-bottom))
     calc(24px + env(safe-area-inset-left));
-
-  gap:12px;
 
   background:
     radial-gradient(
@@ -66,19 +73,19 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    HEADER
-======================================== */
+========================================================= */
 
 .header{
   display:flex;
   align-items:center;
   justify-content:space-between;
 
+  padding:0 4px 10px;
+
   border-bottom:
     1px solid rgba(255,255,255,.10);
-
-  padding:0 4px 10px;
 }
 
 .brand{
@@ -163,9 +170,9 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    MAIN
-======================================== */
+========================================================= */
 
 .main{
   min-height:0;
@@ -173,9 +180,9 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    CARD PAGE
-======================================== */
+========================================================= */
 
 .card-page{
   width:100%;
@@ -191,11 +198,12 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    PANEL
-======================================== */
+========================================================= */
 
 .panel{
+  min-width:0;
   min-height:0;
 
   border:
@@ -218,9 +226,9 @@ body{
 }
 
 
-/* ========================================
-   IMAGE
-======================================== */
+/* =========================================================
+   IMAGE PANEL
+========================================================= */
 
 .image-panel{
   position:relative;
@@ -318,12 +326,12 @@ body{
 
   margin-bottom:18px;
 
+  position:relative;
+
   border:
     1px solid rgba(255,255,255,.11);
 
   border-radius:50%;
-
-  position:relative;
 }
 
 .placeholder-circle::after{
@@ -341,9 +349,9 @@ body{
 }
 
 
-/* ========================================
-   INFO
-======================================== */
+/* =========================================================
+   INFO PANEL
+========================================================= */
 
 .info-panel{
   padding:25px 29px 22px;
@@ -406,9 +414,9 @@ body{
 }
 
 
-/* ========================================
-   PRICE
-======================================== */
+/* =========================================================
+   CURRENT PRICE
+========================================================= */
 
 .price-section{
   padding:17px 0 15px;
@@ -452,15 +460,15 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    METRICS
-======================================== */
+========================================================= */
 
 .metrics{
   display:grid;
 
   grid-template-columns:
-    repeat(3,1fr);
+    repeat(3,minmax(0,1fr));
 
   gap:10px;
 }
@@ -519,14 +527,17 @@ body{
 }
 
 
-/* ========================================
-   INDIVIDUAL GRAPH BOX
-======================================== */
+/* =========================================================
+   GRAPH BOX
+========================================================= */
 
 .graph-box{
+  min-width:0;
   min-height:0;
 
   position:relative;
+
+  overflow:hidden;
 
   border:
     1px solid rgba(255,255,255,.07);
@@ -535,8 +546,6 @@ body{
 
   background:
     rgba(0,0,0,.13);
-
-  overflow:hidden;
 }
 
 .graph-title{
@@ -555,9 +564,9 @@ body{
 }
 
 
-/* ========================================
-   OWNED 2 BAR GRAPH
-======================================== */
+/* =========================================================
+   OWNED HORIZONTAL BAR GRAPH
+========================================================= */
 
 .owned-bars{
   width:100%;
@@ -565,30 +574,100 @@ body{
 
   display:none;
 
-  align-items:flex-end;
+  flex-direction:column;
   justify-content:center;
 
-  gap:
-    clamp(55px,8vw,110px);
+  gap:26px;
 
   padding:
-    40px 35px 14px;
+    45px 34px
+    24px 34px;
 }
 
-.owned-bar-column{
-  height:100%;
+.owned-row{
+  width:100%;
 
-  flex:0 1 155px;
+  display:grid;
 
-  display:flex;
-  flex-direction:column;
+  grid-template-columns:
+    90px
+    minmax(0,1fr)
+    120px;
 
   align-items:center;
-  justify-content:flex-end;
+
+  gap:16px;
 }
 
-.owned-bar-value{
-  margin-bottom:8px;
+.owned-label{
+  text-align:right;
+
+  font-size:10px;
+
+  font-weight:650;
+
+  letter-spacing:.12em;
+
+  color:#75808e;
+}
+
+.owned-track{
+  width:100%;
+  height:42px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  border-radius:8px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+.owned-fill{
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:0;
+
+  border-radius:7px;
+
+  transition:
+    width .7s ease;
+}
+
+.owned-fill.purchase{
+  background:
+    linear-gradient(
+      90deg,
+      #414b58,
+      #939eac
+    );
+}
+
+.owned-fill.current{
+  background:
+    linear-gradient(
+      90deg,
+      #806b2c,
+      #ddc978
+    );
+
+  box-shadow:
+    0 0 25px rgba(221,201,120,.16);
+}
+
+.owned-value{
+  text-align:right;
+
+  white-space:nowrap;
 
   font-size:
     clamp(17px,2.2vw,27px);
@@ -596,74 +675,10 @@ body{
   font-weight:730;
 }
 
-.owned-bar-track{
-  width:
-    clamp(65px,8vw,105px);
 
-  height:68%;
-
-  display:flex;
-  align-items:flex-end;
-
-  overflow:hidden;
-
-  border:
-    1px solid rgba(255,255,255,.07);
-
-  border-radius:
-    12px 12px 4px 4px;
-
-  background:
-    rgba(255,255,255,.025);
-}
-
-.owned-bar-fill{
-  width:100%;
-
-  min-height:4px;
-
-  border-radius:
-    10px 10px 3px 3px;
-
-  transition:
-    height .7s ease;
-}
-
-.owned-bar-fill.purchase{
-  background:
-    linear-gradient(
-      180deg,
-      #939eac,
-      #414b58
-    );
-}
-
-.owned-bar-fill.current{
-  background:
-    linear-gradient(
-      180deg,
-      #ddc978,
-      #806b2c
-    );
-
-  box-shadow:
-    0 0 25px rgba(221,201,120,.15);
-}
-
-.owned-bar-label{
-  margin-top:9px;
-
-  font-size:9px;
-
-  letter-spacing:.13em;
-
-  color:#75808e;
-}
-
-
-/* ========================================
-   WANTED LINE CHART
-======================================== */
+/* =========================================================
+   WANTED CANVAS
+========================================================= */
 
 #wantedChart{
   display:none;
@@ -673,9 +688,9 @@ body{
 }
 
 
-/* ========================================
-   PORTFOLIO
-======================================== */
+/* =========================================================
+   PORTFOLIO PAGE
+========================================================= */
 
 .portfolio-page{
   width:100%;
@@ -773,16 +788,16 @@ body{
   display:flex;
   align-items:flex-end;
 
+  overflow:hidden;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
   border-radius:
     16px 16px 5px 5px;
 
   background:
     rgba(255,255,255,.025);
-
-  border:
-    1px solid rgba(255,255,255,.07);
-
-  overflow:hidden;
 }
 
 .portfolio-bar-fill{
@@ -837,9 +852,9 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    PORTFOLIO SUMMARY
-======================================== */
+========================================================= */
 
 .portfolio-summary{
   padding:28px;
@@ -926,9 +941,9 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    FOOTER
-======================================== */
+========================================================= */
 
 .footer{
   display:flex;
@@ -966,17 +981,19 @@ body{
 }
 
 
-/* ========================================
-   MOBILE / SMALL SCREEN
-======================================== */
+/* =========================================================
+   SMALL SCREEN
+========================================================= */
 
 @media(max-width:760px){
 
   .board{
     grid-template-rows:
       60px
-      1fr
+      minmax(0,1fr)
       38px;
+
+    gap:10px;
 
     padding:
       calc(10px + env(safe-area-inset-top))
@@ -997,6 +1014,47 @@ body{
     padding:17px;
   }
 
+  .brand-title{
+    font-size:18px;
+  }
+
+  .metrics{
+    gap:6px;
+  }
+
+  .metric{
+    padding:10px;
+  }
+
+  .owned-bars{
+    gap:18px;
+
+    padding:
+      40px 14px
+      18px 14px;
+  }
+
+  .owned-row{
+    grid-template-columns:
+      64px
+      minmax(0,1fr)
+      80px;
+
+    gap:8px;
+  }
+
+  .owned-label{
+    font-size:8px;
+  }
+
+  .owned-track{
+    height:34px;
+  }
+
+  .owned-value{
+    font-size:14px;
+  }
+
   .portfolio-page{
     grid-template-columns:
       1.35fr
@@ -1015,19 +1073,9 @@ body{
 
   .portfolio-bars{
     gap:35px;
-    padding:20px 10px 5px;
-  }
 
-  .metrics{
-    gap:6px;
-  }
-
-  .metric{
-    padding:10px;
-  }
-
-  .brand-title{
-    font-size:18px;
+    padding:
+      20px 10px 5px;
   }
 
 }
@@ -1041,9 +1089,9 @@ body{
 <div class="board">
 
 
-<!-- =====================================
+<!-- ======================================================
      HEADER
-====================================== -->
+====================================================== -->
 
 <header class="header">
 
@@ -1076,22 +1124,24 @@ body{
 </header>
 
 
-<!-- =====================================
+<!-- ======================================================
      MAIN
-====================================== -->
+====================================================== -->
 
 <main class="main">
 
 
-<!-- =====================================
+<!-- ======================================================
      CARD PAGE
-====================================== -->
+====================================================== -->
 
 <div
   id="cardPage"
   class="card-page"
 >
 
+
+<!-- IMAGE -->
 
 <section class="panel image-panel">
 
@@ -1118,6 +1168,8 @@ body{
 
 </section>
 
+
+<!-- INFORMATION -->
 
 <section class="panel info-panel">
 
@@ -1153,6 +1205,8 @@ body{
 </div>
 
 
+<!-- CURRENT PRICE -->
+
 <div class="price-section">
 
   <div class="price-label">
@@ -1173,6 +1227,8 @@ body{
 </div>
 
 
+<!-- METRICS -->
+
 <div
   id="metrics"
   class="metrics"
@@ -1180,9 +1236,7 @@ body{
 </div>
 
 
-<!-- =====================================
-     GRAPH
-====================================== -->
+<!-- GRAPH -->
 
 <div class="graph-box">
 
@@ -1194,66 +1248,68 @@ body{
   </div>
 
 
-  <!-- OWNED BAR GRAPH -->
+  <!-- OWNED HORIZONTAL GRAPH -->
 
   <div
     id="ownedBars"
     class="owned-bars"
   >
 
-    <div class="owned-bar-column">
 
-      <div
-        id="ownedPurchaseValue"
-        class="owned-bar-value"
-      >
-        —
-      </div>
+    <div class="owned-row">
 
-      <div class="owned-bar-track">
-
-        <div
-          id="ownedPurchaseBar"
-          class="owned-bar-fill purchase"
-        ></div>
-
-      </div>
-
-      <div class="owned-bar-label">
+      <div class="owned-label">
         PURCHASE
       </div>
 
-    </div>
-
-
-    <div class="owned-bar-column">
-
-      <div
-        id="ownedCurrentValue"
-        class="owned-bar-value gold"
-      >
-        —
-      </div>
-
-      <div class="owned-bar-track">
+      <div class="owned-track">
 
         <div
-          id="ownedCurrentBar"
-          class="owned-bar-fill current"
+          id="ownedPurchaseBar"
+          class="owned-fill purchase"
         ></div>
 
       </div>
 
-      <div class="owned-bar-label">
-        CURRENT
+      <div
+        id="ownedPurchaseValue"
+        class="owned-value"
+      >
+        —
       </div>
 
     </div>
+
+
+    <div class="owned-row">
+
+      <div class="owned-label">
+        CURRENT
+      </div>
+
+      <div class="owned-track">
+
+        <div
+          id="ownedCurrentBar"
+          class="owned-fill current"
+        ></div>
+
+      </div>
+
+      <div
+        id="ownedCurrentValue"
+        class="owned-value gold"
+      >
+        —
+      </div>
+
+    </div>
+
 
   </div>
 
 
-  <!-- WANTED HISTORY -->
+  <!-- WANTED HISTORY GRAPH -->
 
   <canvas
     id="wantedChart"
@@ -1267,9 +1323,9 @@ body{
 </div>
 
 
-<!-- =====================================
+<!-- ======================================================
      PORTFOLIO PAGE
-====================================== -->
+====================================================== -->
 
 <div
   id="portfolioPage"
@@ -1297,6 +1353,8 @@ body{
 
   <div class="portfolio-bars">
 
+
+    <!-- PURCHASE -->
 
     <div class="portfolio-bar-column">
 
@@ -1326,6 +1384,8 @@ body{
 
     </div>
 
+
+    <!-- CURRENT -->
 
     <div class="portfolio-bar-column">
 
@@ -1360,6 +1420,8 @@ body{
 
 </section>
 
+
+<!-- PORTFOLIO SUMMARY -->
 
 <section class="panel portfolio-summary">
 
@@ -1468,13 +1530,12 @@ body{
 
 </div>
 
-
 </main>
 
 
-<!-- =====================================
+<!-- ======================================================
      FOOTER
-====================================== -->
+====================================================== -->
 
 <footer class="footer">
 
@@ -1504,17 +1565,16 @@ body{
 
 <script>
 
-
-/* ========================================
+/* =========================================================
    SETTINGS
-======================================== */
+========================================================= */
 
 const ROTATE_MS = 16000;
 
 
-/* ========================================
-   DATA
-======================================== */
+/* =========================================================
+   STATE
+========================================================= */
 
 let data = null;
 
@@ -1527,15 +1587,16 @@ let wantedIndex = 0;
 let modeCounter = 0;
 
 
-/* ========================================
-   UTIL
-======================================== */
+/* =========================================================
+   BASIC FUNCTIONS
+========================================================= */
 
 function yen(value){
 
   if(
     value === null ||
     value === undefined ||
+    value === "" ||
     Number.isNaN(Number(value))
   ){
     return "—";
@@ -1563,13 +1624,22 @@ function signedYen(value){
     Math.round(Number(value));
 
   if(number > 0){
-    return "+" + yen(number);
+
+    return (
+      "+¥" +
+      number.toLocaleString("ja-JP")
+    );
+
   }
 
   if(number < 0){
-    return "-¥" +
+
+    return (
+      "-¥" +
       Math.abs(number)
-        .toLocaleString("ja-JP");
+        .toLocaleString("ja-JP")
+    );
+
   }
 
   return "¥0";
@@ -1632,16 +1702,17 @@ function valueClass(value){
 
   if(
     value === null ||
-    value === undefined
+    value === undefined ||
+    Number.isNaN(Number(value))
   ){
     return "neutral";
   }
 
-  if(value > 0){
+  if(Number(value) > 0){
     return "positive";
   }
 
-  if(value < 0){
+  if(Number(value) < 0){
     return "negative";
   }
 
@@ -1649,9 +1720,9 @@ function valueClass(value){
 }
 
 
-/* ========================================
+/* =========================================================
    CLOCK
-======================================== */
+========================================================= */
 
 function updateClock(){
 
@@ -1671,18 +1742,21 @@ function updateClock(){
 }
 
 
-/* ========================================
-   EXPAND OWNED
-======================================== */
+/* =========================================================
+   OWNED DATA -> PHYSICAL CARDS
+========================================================= */
 
 function expandOwnedCards(){
 
   physicalCards = [];
 
-  for(
-    const card
-    of data.owned || []
-  ){
+  const owned =
+    Array.isArray(data.owned)
+      ? data.owned
+      : [];
+
+
+  for(const card of owned){
 
     const qty =
       Math.max(
@@ -1690,12 +1764,12 @@ function expandOwnedCards(){
         Number(card.qty || 1)
       );
 
+
     const prices =
       Array.isArray(card.purchasePrices)
-        ?
-        card.purchasePrices
-        :
-        [];
+        ? card.purchasePrices
+        : [];
+
 
     for(
       let i = 0;
@@ -1729,9 +1803,9 @@ function expandOwnedCards(){
 }
 
 
-/* ========================================
+/* =========================================================
    RANDOM OWNED
-======================================== */
+========================================================= */
 
 function randomOwned(){
 
@@ -1740,6 +1814,7 @@ function randomOwned(){
   ){
     return null;
   }
+
 
   if(
     physicalCards.length === 1
@@ -1750,7 +1825,9 @@ function randomOwned(){
     return physicalCards[0];
   }
 
-  let index;
+
+  let index = 0;
+
 
   do{
 
@@ -1765,16 +1842,18 @@ function randomOwned(){
     index === previousOwnedIndex
   );
 
+
   previousOwnedIndex =
     index;
+
 
   return physicalCards[index];
 }
 
 
-/* ========================================
-   PAGE SWITCH
-======================================== */
+/* =========================================================
+   SCREEN SWITCH
+========================================================= */
 
 function openCardPage(){
 
@@ -1804,9 +1883,9 @@ function openPortfolioPage(){
 }
 
 
-/* ========================================
-   IMAGE
-======================================== */
+/* =========================================================
+   CARD IMAGE
+========================================================= */
 
 function safeFilePart(text){
 
@@ -1819,11 +1898,16 @@ function safeFilePart(text){
 
 function imageBaseNames(card){
 
-  const number =
-    safeFilePart(card.number);
-
   const name =
-    safeFilePart(card.name);
+    safeFilePart(
+      card.name
+    );
+
+  const number =
+    safeFilePart(
+      card.number
+    );
+
 
   return [
 
@@ -1847,16 +1931,20 @@ function setImage(card){
       "imagePlaceholder"
     );
 
+
   image.style.display =
     "none";
 
   placeholder.style.display =
     "flex";
 
+
   image.onload = null;
   image.onerror = null;
 
+
   const candidates = [];
+
 
   if(
     card.image &&
@@ -1866,6 +1954,7 @@ function setImage(card){
     candidates.push(
       String(card.image).trim()
     );
+
   }
 
 
@@ -1873,10 +1962,7 @@ function setImage(card){
     imageBaseNames(card);
 
 
-  for(
-    const base
-    of bases
-  ){
+  for(const base of bases){
 
     candidates.push(
       base + ".jpg"
@@ -1893,6 +1979,7 @@ function setImage(card){
     candidates.push(
       base + ".webp"
     );
+
   }
 
 
@@ -1923,24 +2010,27 @@ function setImage(card){
     const url =
       candidates[index];
 
+
     index++;
 
 
     image.onload =
-      () => {
+      function(){
 
         image.style.display =
           "block";
 
         placeholder.style.display =
           "none";
+
       };
 
 
     image.onerror =
-      () => {
+      function(){
 
         tryNext();
+
       };
 
 
@@ -1957,15 +2047,19 @@ function setImage(card){
 }
 
 
-/* ========================================
-   METRIC
-======================================== */
+/* =========================================================
+   METRIC HTML
+========================================================= */
 
 function metricHTML(
   label,
   value,
-  className="neutral"
+  className
 ){
+
+  const cls =
+    className || "neutral";
+
 
   return `
     <div class="metric">
@@ -1974,7 +2068,7 @@ function metricHTML(
         ${label}
       </div>
 
-      <div class="metric-value ${className}">
+      <div class="metric-value ${cls}">
         ${value}
       </div>
 
@@ -1983,9 +2077,9 @@ function metricHTML(
 }
 
 
-/* ========================================
-   OWNED BAR GRAPH
-======================================== */
+/* =========================================================
+   OWNED HORIZONTAL BARS
+========================================================= */
 
 function drawOwnedBars(
   purchase,
@@ -2001,6 +2095,7 @@ function drawOwnedBars(
     document.getElementById(
       "wantedChart"
     );
+
 
   bars.style.display =
     "flex";
@@ -2045,18 +2140,14 @@ function drawOwnedBars(
 
   const purchaseNumber =
     validPurchase
-      ?
-      Number(purchase)
-      :
-      0;
+      ? Number(purchase)
+      : 0;
 
 
   const currentNumber =
     validCurrent
-      ?
-      Number(current)
-      :
-      0;
+      ? Number(current)
+      : 0;
 
 
   const maxValue =
@@ -2067,54 +2158,58 @@ function drawOwnedBars(
     );
 
 
-  const purchaseHeight =
+  const purchaseWidth =
     validPurchase
-      ?
-      (
-        purchaseNumber /
-        maxValue
-      )
-      * 100
-      :
-      0;
+      ? (
+          purchaseNumber /
+          maxValue
+        ) * 100
+      : 0;
 
 
-  const currentHeight =
+  const currentWidth =
     validCurrent
-      ?
-      (
-        currentNumber /
-        maxValue
-      )
-      * 100
-      :
-      0;
+      ? (
+          currentNumber /
+          maxValue
+        ) * 100
+      : 0;
 
 
-  document.getElementById(
-    "ownedPurchaseBar"
-  ).style.height =
-    `${purchaseHeight}%`;
+  const purchaseBar =
+    document.getElementById(
+      "ownedPurchaseBar"
+    );
 
 
-  document.getElementById(
-    "ownedCurrentBar"
-  ).style.height =
-    `${currentHeight}%`;
+  const currentBar =
+    document.getElementById(
+      "ownedCurrentBar"
+    );
+
+
+  purchaseBar.style.width =
+    purchaseWidth + "%";
+
+
+  currentBar.style.width =
+    currentWidth + "%";
 
 }
 
 
-/* ========================================
-   OWNED
-======================================== */
+/* =========================================================
+   SHOW OWNED
+========================================================= */
 
 function showOwned(){
 
   openCardPage();
 
+
   const card =
     randomOwned();
+
 
   if(!card){
     return;
@@ -2179,10 +2274,12 @@ function showOwned(){
     "qty"
   ).textContent =
     card.physicalQty > 1
-      ?
-      `${card.physicalIndex} / ${card.physicalQty}`
-      :
-      "OWNED";
+      ? (
+          card.physicalIndex +
+          " / " +
+          card.physicalQty
+        )
+      : "OWNED";
 
 
   document.getElementById(
@@ -2200,7 +2297,8 @@ function showOwned(){
 
     metricHTML(
       "PURCHASE",
-      yen(purchase)
+      yen(purchase),
+      "neutral"
     )
 
     +
@@ -2237,32 +2335,43 @@ function showOwned(){
   document.getElementById(
     "count"
   ).textContent =
-    `OWNED ${physicalCards.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
+    "OWNED " +
+    physicalCards.length +
+    " CARDS · PRICE " +
+    (
+      data.lastUpdated
+      ?? "—"
+    );
 
 }
 
 
-/* ========================================
-   WANTED
-======================================== */
+/* =========================================================
+   SHOW WANTED
+========================================================= */
 
 function showWanted(){
 
   openCardPage();
 
 
+  const wanted =
+    Array.isArray(data.wanted)
+      ? data.wanted
+      : [];
+
+
   if(
-    !data.wanted ||
-    data.wanted.length === 0
+    wanted.length === 0
   ){
     return;
   }
 
 
   const card =
-    data.wanted[
+    wanted[
       wantedIndex %
-      data.wanted.length
+      wanted.length
     ];
 
 
@@ -2284,18 +2393,22 @@ function showWanted(){
     ?? null;
 
 
-  const target =
+  let target =
     card.targetPrice
-    ??
-    (
-      reference !== null
-        ?
-        Math.round(
-          reference * .5
-        )
-        :
-        null
-    );
+    ?? null;
+
+
+  if(
+    target === null &&
+    reference !== null
+  ){
+
+    target =
+      Math.round(
+        Number(reference) * .5
+      );
+
+  }
 
 
   const dayChange =
@@ -2305,23 +2418,25 @@ function showWanted(){
     );
 
 
-  const targetGap =
-    (
-      current !== null &&
-      target !== null &&
-      target !== 0
-    )
-      ?
+  let targetGap =
+    null;
+
+
+  if(
+    current !== null &&
+    target !== null &&
+    Number(target) !== 0
+  ){
+
+    targetGap =
       (
-        (
-          current /
-          target
-          - 1
-        )
-        * 100
+        Number(current) /
+        Number(target)
+        - 1
       )
-      :
-      null;
+      * 100;
+
+  }
 
 
   const mode =
@@ -2364,6 +2479,15 @@ function showWanted(){
   setImage(card);
 
 
+  const targetClass =
+    (
+      targetGap !== null &&
+      targetGap <= 0
+    )
+      ? "positive"
+      : "gold";
+
+
   document.getElementById(
     "metrics"
   ).innerHTML =
@@ -2381,14 +2505,7 @@ function showWanted(){
       signedPercent(
         targetGap
       ),
-      (
-        targetGap !== null &&
-        targetGap <= 0
-      )
-        ?
-        "positive"
-        :
-        "gold"
+      targetClass
     )
 
     +
@@ -2407,7 +2524,13 @@ function showWanted(){
   document.getElementById(
     "count"
   ).textContent =
-    `WANT ${data.wanted.length} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
+    "WANT " +
+    wanted.length +
+    " CARDS · PRICE " +
+    (
+      data.lastUpdated
+      ?? "—"
+    );
 
 
   drawWantedHistory(
@@ -2418,9 +2541,9 @@ function showWanted(){
 }
 
 
-/* ========================================
+/* =========================================================
    WANTED DAILY HISTORY
-======================================== */
+========================================================= */
 
 function drawWantedHistory(
   history,
@@ -2432,6 +2555,7 @@ function drawWantedHistory(
       "ownedBars"
     );
 
+
   const canvas =
     document.getElementById(
       "wantedChart"
@@ -2440,6 +2564,7 @@ function drawWantedHistory(
 
   bars.style.display =
     "none";
+
 
   canvas.style.display =
     "block";
@@ -2455,26 +2580,36 @@ function drawWantedHistory(
     canvas.getBoundingClientRect();
 
 
-  const ratio =
+  const cssWidth =
+    Math.max(
+      1,
+      rect.width
+    );
+
+
+  const cssHeight =
+    Math.max(
+      1,
+      rect.height
+    );
+
+
+  const pixelRatio =
     window.devicePixelRatio
     || 1;
 
 
   canvas.width =
-    Math.max(
-      1,
-      Math.round(
-        rect.width * ratio
-      )
+    Math.round(
+      cssWidth *
+      pixelRatio
     );
 
 
   canvas.height =
-    Math.max(
-      1,
-      Math.round(
-        rect.height * ratio
-      )
+    Math.round(
+      cssHeight *
+      pixelRatio
     );
 
 
@@ -2485,73 +2620,82 @@ function drawWantedHistory(
 
 
   ctx.setTransform(
-    ratio,
+    pixelRatio,
     0,
     0,
-    ratio,
+    pixelRatio,
     0,
     0
   );
 
 
-  const w =
-    rect.width;
-
-
-  const h =
-    rect.height;
-
-
   ctx.clearRect(
     0,
     0,
-    w,
-    h
+    cssWidth,
+    cssHeight
   );
 
 
-  let points =
-    Array.isArray(history)
-      ?
-      history
-        .filter(
-          item =>
-            item &&
-            item.date &&
-            item.price !== null &&
-            item.price !== undefined &&
-            !Number.isNaN(
-              Number(
-                item.price
-              )
-            )
-        )
-        .map(
-          item => ({
-            date:
-              String(
-                item.date
-              ),
+  let points = [];
 
-            price:
-              Number(
-                item.price
-              )
-          })
+
+  if(
+    Array.isArray(history)
+  ){
+
+    for(
+      const item
+      of history
+    ){
+
+      if(
+        !item ||
+        !item.date ||
+        item.price === null ||
+        item.price === undefined ||
+        Number.isNaN(
+          Number(item.price)
         )
-        .sort(
-          (a,b) =>
-            a.date.localeCompare(
-              b.date
-            )
+      ){
+        continue;
+      }
+
+
+      points.push({
+
+        date:
+          String(
+            item.date
+          ),
+
+        price:
+          Number(
+            item.price
+          )
+
+      });
+
+    }
+
+  }
+
+
+  points.sort(
+    function(a,b){
+
+      return (
+        a.date.localeCompare(
+          b.date
         )
-      :
-      [];
+      );
+
+    }
+  );
 
 
   /*
-    同じ日付が複数あっても
-    その日の最後の価格だけを使う。
+    同じ日付は最後の値を採用
   */
 
   const dailyMap =
@@ -2574,25 +2718,38 @@ function drawWantedHistory(
   points =
     Array.from(
       dailyMap.entries()
-    )
-    .map(
-      ([date,price]) => ({
-        date,
-        price
-      })
-    )
-    .sort(
-      (a,b) =>
-        a.date.localeCompare(
-          b.date
-        )
+    ).map(
+      function(entry){
+
+        return {
+
+          date:
+            entry[0],
+
+          price:
+            entry[1]
+
+        };
+
+      }
     );
 
 
+  points.sort(
+    function(a,b){
+
+      return (
+        a.date.localeCompare(
+          b.date
+        )
+      );
+
+    }
+  );
+
+
   /*
-    直近30日分。
-    update_data.pyが毎日historyを
-    追加するので日々増えていく。
+    直近30日
   */
 
   points =
@@ -2601,8 +2758,11 @@ function drawWantedHistory(
 
   const values =
     points.map(
-      point =>
-        point.price
+      function(point){
+
+        return point.price;
+
+      }
     );
 
 
@@ -2629,24 +2789,35 @@ function drawWantedHistory(
       "#606b79";
 
     ctx.font =
-      "14px -apple-system";
+      "14px -apple-system, BlinkMacSystemFont, sans-serif";
+
+    ctx.textAlign =
+      "left";
+
 
     ctx.fillText(
       "価格履歴を収集中",
       20,
-      h / 2
+      cssHeight / 2
     );
+
 
     return;
   }
 
 
   let min =
-    Math.min(...values);
+    Math.min.apply(
+      null,
+      values
+    );
 
 
   let max =
-    Math.max(...values);
+    Math.max.apply(
+      null,
+      values
+    );
 
 
   const spread =
@@ -2665,43 +2836,63 @@ function drawWantedHistory(
     spread * .18;
 
 
-  const left = 54;
-  const right = 22;
-  const top = 39;
-  const bottom = 32;
+  if(max === min){
+
+    max += 100;
+    min -= 100;
+
+  }
 
 
-  const graphW =
+  const left = 58;
+  const right = 24;
+  const top = 40;
+  const bottom = 34;
+
+
+  const graphWidth =
     Math.max(
       1,
-      w - left - right
+      cssWidth -
+      left -
+      right
     );
 
 
-  const graphH =
+  const graphHeight =
     Math.max(
       1,
-      h - top - bottom
+      cssHeight -
+      top -
+      bottom
     );
 
 
-  const y =
-    value =>
+  function yForValue(value){
+
+    return (
       top +
       (
         (
-          max - value
+          max -
+          Number(value)
         )
         /
         (
-          max - min
+          max -
+          min
         )
       )
       *
-      graphH;
+      graphHeight
+    );
+
+  }
 
 
-  /* GRID + PRICE LABELS */
+  /*
+    GRID
+  */
 
   ctx.lineWidth = 1;
 
@@ -2712,21 +2903,24 @@ function drawWantedHistory(
     i++
   ){
 
-    const ratioY =
+    const gridRatio =
       i / 3;
 
 
-    const gy =
+    const gridY =
       top +
-      graphH * ratioY;
+      graphHeight *
+      gridRatio;
 
 
-    const value =
+    const gridValue =
       max -
       (
-        max - min
+        max -
+        min
       )
-      * ratioY;
+      *
+      gridRatio;
 
 
     ctx.strokeStyle =
@@ -2735,15 +2929,19 @@ function drawWantedHistory(
 
     ctx.beginPath();
 
+
     ctx.moveTo(
       left,
-      gy
+      gridY
     );
 
+
     ctx.lineTo(
-      w - right,
-      gy
+      cssWidth -
+      right,
+      gridY
     );
+
 
     ctx.stroke();
 
@@ -2751,28 +2949,32 @@ function drawWantedHistory(
     ctx.fillStyle =
       "#596573";
 
+
     ctx.font =
-      "9px -apple-system";
+      "9px -apple-system, BlinkMacSystemFont, sans-serif";
+
 
     ctx.textAlign =
       "right";
 
+
     ctx.fillText(
       "¥" +
-      Math.round(value)
-        .toLocaleString("ja-JP"),
+      Math.round(
+        gridValue
+      ).toLocaleString(
+        "ja-JP"
+      ),
       left - 7,
-      gy + 3
+      gridY + 3
     );
 
   }
 
 
-  ctx.textAlign =
-    "left";
-
-
-  /* TARGET LINE */
+  /*
+    TARGET LINE
+  */
 
   if(
     target !== null &&
@@ -2782,8 +2984,8 @@ function drawWantedHistory(
     )
   ){
 
-    const ty =
-      y(
+    const targetY =
+      yForValue(
         Number(target)
       );
 
@@ -2791,8 +2993,10 @@ function drawWantedHistory(
     ctx.strokeStyle =
       "#d4b85f";
 
+
     ctx.lineWidth =
       1.3;
+
 
     ctx.setLineDash(
       [7,6]
@@ -2801,15 +3005,19 @@ function drawWantedHistory(
 
     ctx.beginPath();
 
+
     ctx.moveTo(
       left,
-      ty
+      targetY
     );
 
+
     ctx.lineTo(
-      w - right,
-      ty
+      cssWidth -
+      right,
+      targetY
     );
+
 
     ctx.stroke();
 
@@ -2820,8 +3028,13 @@ function drawWantedHistory(
     ctx.fillStyle =
       "#dfc66e";
 
+
     ctx.font =
-      "10px -apple-system";
+      "10px -apple-system, BlinkMacSystemFont, sans-serif";
+
+
+    ctx.textAlign =
+      "left";
 
 
     ctx.fillText(
@@ -2829,8 +3042,8 @@ function drawWantedHistory(
       yen(target),
       left + 6,
       Math.max(
-        15,
-        ty - 6
+        16,
+        targetY - 6
       )
     );
 
@@ -2844,18 +3057,29 @@ function drawWantedHistory(
     ctx.fillStyle =
       "#606b79";
 
+
     ctx.font =
-      "13px -apple-system";
+      "13px -apple-system, BlinkMacSystemFont, sans-serif";
+
+
+    ctx.textAlign =
+      "left";
+
 
     ctx.fillText(
       "価格履歴を収集中",
       left + 10,
-      h / 2
+      cssHeight / 2
     );
+
 
     return;
   }
 
+
+  /*
+    HISTORY 1 DAY
+  */
 
   if(
     points.length === 1
@@ -2865,13 +3089,13 @@ function drawWantedHistory(
       points[0];
 
 
-    const px =
+    const pointX =
       left +
-      graphW / 2;
+      graphWidth / 2;
 
 
-    const py =
-      y(
+    const pointY =
+      yForValue(
         point.price
       );
 
@@ -2882,13 +3106,15 @@ function drawWantedHistory(
 
     ctx.beginPath();
 
+
     ctx.arc(
-      px,
-      py,
+      pointX,
+      pointY,
       5,
       0,
       Math.PI * 2
     );
+
 
     ctx.fill();
 
@@ -2896,8 +3122,10 @@ function drawWantedHistory(
     ctx.fillStyle =
       "#ffffff";
 
+
     ctx.font =
-      "12px -apple-system";
+      "12px -apple-system, BlinkMacSystemFont, sans-serif";
+
 
     ctx.textAlign =
       "center";
@@ -2907,10 +3135,10 @@ function drawWantedHistory(
       yen(
         point.price
       ),
-      px,
+      pointX,
       Math.max(
-        15,
-        py - 12
+        16,
+        pointY - 12
       )
     );
 
@@ -2918,47 +3146,54 @@ function drawWantedHistory(
     ctx.fillStyle =
       "#737e8c";
 
+
     ctx.font =
-      "10px -apple-system";
+      "10px -apple-system, BlinkMacSystemFont, sans-serif";
 
 
     ctx.fillText(
       point.date.slice(5),
-      px,
-      h - 9
+      pointX,
+      cssHeight - 9
     );
-
-
-    ctx.textAlign =
-      "left";
 
 
     return;
   }
 
 
-  const xForIndex =
-    index =>
+  function xForIndex(index){
+
+    return (
       left +
-      graphW *
+      graphWidth *
       (
         index /
         (
-          points.length - 1
+          points.length -
+          1
         )
-      );
+      )
+    );
+
+  }
 
 
-  /* LINE */
+  /*
+    PRICE LINE
+  */
 
   ctx.strokeStyle =
     "#e4e8ee";
 
+
   ctx.lineWidth =
     2.4;
 
+
   ctx.lineJoin =
     "round";
+
 
   ctx.lineCap =
     "round";
@@ -2967,94 +3202,127 @@ function drawWantedHistory(
   ctx.beginPath();
 
 
-  points.forEach(
-    (
-      point,
-      index
-    ) => {
+  for(
+    let i = 0;
+    i < points.length;
+    i++
+  ){
 
-      const px =
-        xForIndex(index);
-
-      const py =
-        y(point.price);
+    const point =
+      points[i];
 
 
-      if(index === 0){
+    const pointX =
+      xForIndex(i);
 
-        ctx.moveTo(
-          px,
-          py
-        );
 
-      }else{
+    const pointY =
+      yForValue(
+        point.price
+      );
 
-        ctx.lineTo(
-          px,
-          py
-        );
 
-      }
+    if(i === 0){
+
+      ctx.moveTo(
+        pointX,
+        pointY
+      );
+
+    }else{
+
+      ctx.lineTo(
+        pointX,
+        pointY
+      );
 
     }
-  );
+
+  }
 
 
   ctx.stroke();
 
 
-  /* DAILY POINTS */
+  /*
+    DAILY POINTS
+  */
 
-  points.forEach(
-    (
-      point,
-      index
-    ) => {
+  for(
+    let i = 0;
+    i < points.length;
+    i++
+  ){
 
-      const px =
-        xForIndex(index);
-
-      const py =
-        y(point.price);
-
-
-      ctx.fillStyle =
-        "#ffffff";
+    const point =
+      points[i];
 
 
-      ctx.beginPath();
+    const pointX =
+      xForIndex(i);
 
-      ctx.arc(
-        px,
-        py,
-        3.3,
-        0,
-        Math.PI * 2
+
+    const pointY =
+      yForValue(
+        point.price
       );
 
-      ctx.fill();
 
-    }
-  );
+    ctx.fillStyle =
+      "#ffffff";
 
 
-  /* DATE LABELS */
+    ctx.beginPath();
+
+
+    ctx.arc(
+      pointX,
+      pointY,
+      3.3,
+      0,
+      Math.PI * 2
+    );
+
+
+    ctx.fill();
+
+  }
+
+
+  /*
+    DATE LABELS
+  */
 
   const labelIndexes =
-    new Set([
+    [
       0,
       Math.floor(
-        (points.length - 1) / 2
+        (
+          points.length -
+          1
+        )
+        /
+        2
       ),
       points.length - 1
-    ]);
+    ];
+
+
+  const uniqueLabels =
+    Array.from(
+      new Set(
+        labelIndexes
+      )
+    );
 
 
   ctx.fillStyle =
     "#6f7a89";
 
+
   ctx.font =
-    "10px -apple-system";
+    "10px -apple-system, BlinkMacSystemFont, sans-serif";
+
 
   ctx.textAlign =
     "center";
@@ -3062,7 +3330,7 @@ function drawWantedHistory(
 
   for(
     const index
-    of labelIndexes
+    of uniqueLabels
   ){
 
     const point =
@@ -3072,62 +3340,68 @@ function drawWantedHistory(
     ctx.fillText(
       point.date.slice(5),
       xForIndex(index),
-      h - 9
+      cssHeight - 9
     );
 
   }
 
 
-  /* LAST VALUE */
+  /*
+    LATEST VALUE
+  */
 
   const lastIndex =
     points.length - 1;
 
 
-  const last =
+  const lastPoint =
     points[lastIndex];
 
 
   const lastX =
-    xForIndex(lastIndex);
+    xForIndex(
+      lastIndex
+    );
 
 
   const lastY =
-    y(last.price);
+    yForValue(
+      lastPoint.price
+    );
 
 
   ctx.fillStyle =
     "#ffffff";
 
+
   ctx.font =
-    "11px -apple-system";
+    "11px -apple-system, BlinkMacSystemFont, sans-serif";
+
 
   ctx.textAlign =
     "right";
 
 
   ctx.fillText(
-    yen(last.price),
+    yen(
+      lastPoint.price
+    ),
     Math.min(
-      w - right,
+      cssWidth - right,
       lastX
     ),
     Math.max(
-      15,
+      16,
       lastY - 11
     )
   );
 
-
-  ctx.textAlign =
-    "left";
-
 }
 
 
-/* ========================================
+/* =========================================================
    PORTFOLIO CALCULATION
-======================================== */
+========================================================= */
 
 function calculatePortfolio(){
 
@@ -3144,15 +3418,23 @@ function calculatePortfolio(){
   let totalCards = 0;
 
 
+  const owned =
+    Array.isArray(data.owned)
+      ? data.owned
+      : [];
+
+
   for(
     const card
-    of data.owned || []
+    of owned
   ){
 
     const qty =
       Math.max(
         1,
-        Number(card.qty || 1)
+        Number(
+          card.qty || 1
+        )
       );
 
 
@@ -3160,10 +3442,8 @@ function calculatePortfolio(){
       Array.isArray(
         card.purchasePrices
       )
-        ?
-        card.purchasePrices
-        :
-        [];
+        ? card.purchasePrices
+        : [];
 
 
     const current =
@@ -3193,13 +3473,15 @@ function calculatePortfolio(){
         purchase;
 
 
-      if(
+      const currentValid =
         current !== null &&
         current !== undefined &&
         !Number.isNaN(
           Number(current)
-        )
-      ){
+        );
+
+
+      if(currentValid){
 
         comparablePurchase +=
           purchase;
@@ -3227,44 +3509,65 @@ function calculatePortfolio(){
     comparablePurchase;
 
 
-  const returnRate =
+  let returnRate =
+    null;
+
+
+  if(
     comparablePurchase > 0
-      ?
+  ){
+
+    returnRate =
       (
         profit /
         comparablePurchase
       )
-      * 100
-      :
-      null;
+      * 100;
+
+  }
 
 
   return {
 
-    totalPurchaseAll,
-    comparablePurchase,
-    currentValue,
-    profit,
-    returnRate,
-    evaluatedCards,
-    missingCards,
-    totalCards
+    totalPurchaseAll:
+      totalPurchaseAll,
+
+    comparablePurchase:
+      comparablePurchase,
+
+    currentValue:
+      currentValue,
+
+    profit:
+      profit,
+
+    returnRate:
+      returnRate,
+
+    evaluatedCards:
+      evaluatedCards,
+
+    missingCards:
+      missingCards,
+
+    totalCards:
+      totalCards
 
   };
 
 }
 
 
-/* ========================================
-   PORTFOLIO PAGE
-======================================== */
+/* =========================================================
+   SHOW PORTFOLIO
+========================================================= */
 
 function showPortfolio(){
 
   openPortfolioPage();
 
 
-  const p =
+  const portfolio =
     calculatePortfolio();
 
 
@@ -3286,7 +3589,7 @@ function showPortfolio(){
     "purchaseBarValue"
   ).textContent =
     yen(
-      p.comparablePurchase
+      portfolio.comparablePurchase
     );
 
 
@@ -3294,21 +3597,21 @@ function showPortfolio(){
     "currentBarValue"
   ).textContent =
     yen(
-      p.currentValue
+      portfolio.currentValue
     );
 
 
   const maxValue =
     Math.max(
-      p.comparablePurchase,
-      p.currentValue,
+      portfolio.comparablePurchase,
+      portfolio.currentValue,
       1
     );
 
 
   const purchaseHeight =
     (
-      p.comparablePurchase /
+      portfolio.comparablePurchase /
       maxValue
     )
     * 100;
@@ -3316,7 +3619,7 @@ function showPortfolio(){
 
   const currentHeight =
     (
-      p.currentValue /
+      portfolio.currentValue /
       maxValue
     )
     * 100;
@@ -3325,13 +3628,13 @@ function showPortfolio(){
   document.getElementById(
     "purchaseBar"
   ).style.height =
-    `${purchaseHeight}%`;
+    purchaseHeight + "%";
 
 
   document.getElementById(
     "currentBar"
   ).style.height =
-    `${currentHeight}%`;
+    currentHeight + "%";
 
 
   const profitElement =
@@ -3342,15 +3645,14 @@ function showPortfolio(){
 
   profitElement.textContent =
     signedYen(
-      p.profit
+      portfolio.profit
     );
 
 
   profitElement.className =
-    "summary-profit "
-    +
+    "summary-profit " +
     valueClass(
-      p.profit
+      portfolio.profit
     );
 
 
@@ -3362,67 +3664,78 @@ function showPortfolio(){
 
   returnElement.textContent =
     signedPercent(
-      p.returnRate
+      portfolio.returnRate
     );
 
 
   returnElement.className =
-    "summary-value "
-    +
+    "summary-value " +
     valueClass(
-      p.returnRate
+      portfolio.returnRate
     );
 
 
   document.getElementById(
     "portfolioEvaluated"
   ).textContent =
-    `${p.evaluatedCards} / ${p.totalCards} 枚`;
+    portfolio.evaluatedCards +
+    " / " +
+    portfolio.totalCards +
+    " 枚";
 
 
   document.getElementById(
     "portfolioTotalCards"
   ).textContent =
-    `${p.totalCards} 枚`;
+    portfolio.totalCards +
+    " 枚";
 
 
   document.getElementById(
     "portfolioTotalCost"
   ).textContent =
     yen(
-      p.totalPurchaseAll
+      portfolio.totalPurchaseAll
     );
 
 
   document.getElementById(
     "portfolioMissing"
   ).textContent =
-    `${p.missingCards} 枚`;
+    portfolio.missingCards +
+    " 枚";
 
 
   document.getElementById(
     "portfolioSub"
   ).textContent =
-    `${p.evaluatedCards}枚の取得価格と現在価格を比較`;
+    portfolio.evaluatedCards +
+    "枚の取得価格と現在価格を比較";
 
 
   document.getElementById(
     "count"
   ).textContent =
-    `PORTFOLIO · ${p.totalCards} CARDS · PRICE ${data.lastUpdated ?? "—"}`;
+    "PORTFOLIO · " +
+    portfolio.totalCards +
+    " CARDS · PRICE " +
+    (
+      data.lastUpdated
+      ?? "—"
+    );
 
 }
 
 
-/* ========================================
+/* =========================================================
    ROTATION
 
-   0 OWNED
-   1 OWNED
-   2 PORTFOLIO
-   3 WANTED
+   1. OWNED
+   2. OWNED
+   3. PORTFOLIO
+   4. WANTED
 
-======================================== */
+========================================================= */
 
 function showNext(){
 
@@ -3454,9 +3767,96 @@ function showNext(){
 }
 
 
-/* ========================================
+/* =========================================================
+   WANTED RESIZE
+========================================================= */
+
+function redrawWanted(){
+
+  if(!data){
+    return;
+  }
+
+
+  const mode =
+    document.getElementById(
+      "mode"
+    ).textContent;
+
+
+  if(
+    mode !== "WANTED"
+  ){
+    return;
+  }
+
+
+  const wanted =
+    Array.isArray(data.wanted)
+      ? data.wanted
+      : [];
+
+
+  if(
+    wanted.length === 0
+  ){
+    return;
+  }
+
+
+  let index =
+    wantedIndex - 1;
+
+
+  if(index < 0){
+    index = 0;
+  }
+
+
+  index =
+    index %
+    wanted.length;
+
+
+  const card =
+    wanted[index];
+
+
+  const reference =
+    card.referencePrice
+    ?? null;
+
+
+  let target =
+    card.targetPrice
+    ?? null;
+
+
+  if(
+    target === null &&
+    reference !== null
+  ){
+
+    target =
+      Math.round(
+        Number(reference) *
+        .5
+      );
+
+  }
+
+
+  drawWantedHistory(
+    card.history || [],
+    target
+  );
+
+}
+
+
+/* =========================================================
    START
-======================================== */
+========================================================= */
 
 async function start(){
 
@@ -3464,8 +3864,7 @@ async function start(){
 
     const response =
       await fetch(
-        "cards.json?ts="
-        +
+        "./cards.json?ts=" +
         Date.now(),
         {
           cache:"no-store"
@@ -3478,7 +3877,8 @@ async function start(){
     ){
 
       throw new Error(
-        "cards.json load failed"
+        "cards.json HTTP " +
+        response.status
       );
 
     }
@@ -3486,6 +3886,18 @@ async function start(){
 
     data =
       await response.json();
+
+
+    if(
+      !data ||
+      typeof data !== "object"
+    ){
+
+      throw new Error(
+        "cards.json invalid"
+      );
+
+    }
 
 
     expandOwnedCards();
@@ -3511,7 +3923,9 @@ async function start(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     document.getElementById(
@@ -3525,87 +3939,40 @@ async function start(){
     ).textContent =
       "cards.json を確認してください";
 
+
+    document.getElementById(
+      "currentPrice"
+    ).textContent =
+      "—";
+
+
+    document.getElementById(
+      "count"
+    ).textContent =
+      "LOAD ERROR";
+
   }
 
 }
 
 
-/* ========================================
-   RESIZE
-
-   WANTED表示中にiPadの向きが変わった場合
-   再描画する
-======================================== */
+/* =========================================================
+   EVENTS
+========================================================= */
 
 window.addEventListener(
   "resize",
-  () => {
+  function(){
 
-    if(
-      !data
-    ){
-      return;
-    }
-
-
-    const mode =
-      document.getElementById(
-        "mode"
-      ).textContent;
-
-
-    if(
-      mode === "WANTED" &&
-      data.wanted &&
-      data.wanted.length
-    ){
-
-      const index =
-        (
-          wantedIndex - 1 +
-          data.wanted.length
-        )
-        %
-        data.wanted.length;
-
-
-      const card =
-        data.wanted[index];
-
-
-      const reference =
-        card.referencePrice
-        ?? null;
-
-
-      const target =
-        card.targetPrice
-        ??
-        (
-          reference !== null
-            ?
-            Math.round(
-              reference * .5
-            )
-            :
-            null
-        );
-
-
-      drawWantedHistory(
-        card.history || [],
-        target
-      );
-
-    }
+    redrawWanted();
 
   }
 );
 
 
-/* ========================================
+/* =========================================================
    RUN
-======================================== */
+========================================================= */
 
 start();
 
