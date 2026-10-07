@@ -763,6 +763,13 @@
       "qty": 1,
       "purchasePrices": [
         240
+      ],
+      "currentPrice": 880,
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 880
+        }
       ]
     },
     {
@@ -787,7 +794,8 @@
           "date": "2026-10-07",
           "price": 8980
         }
-      ]
+      ],
+      "yesterdayPrice": 8980
     },
     {
       "name": "ミュウVMAX",
@@ -805,6 +813,13 @@
       "qty": 1,
       "purchasePrices": [
         240
+      ],
+      "currentPrice": 1680,
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 1680
+        }
       ]
     },
     {
@@ -813,6 +828,13 @@
       "qty": 1,
       "purchasePrices": [
         28000
+      ],
+      "currentPrice": 19800,
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 19800
+        }
       ]
     }
   ],
@@ -822,7 +844,7 @@
       "number": "142/103",
       "referencePrice": 22800,
       "currentPrice": 22800,
-      "yesterdayPrice": null,
+      "yesterdayPrice": 22800,
       "image": "",
       "targetPrice": 11400,
       "history": [
@@ -835,19 +857,33 @@
     {
       "name": "コイキング",
       "number": "165/103",
-      "referencePrice": null,
-      "currentPrice": null,
+      "referencePrice": 7280,
+      "currentPrice": 7280,
       "yesterdayPrice": null,
-      "image": ""
+      "image": "",
+      "targetPrice": 3640,
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 7280
+        }
+      ]
     },
     {
       "name": "ピカチュウex",
       "number": "127/103",
-      "referencePrice": null,
-      "currentPrice": null,
+      "referencePrice": 8980,
+      "currentPrice": 8980,
       "yesterdayPrice": null,
-      "image": ""
+      "image": "",
+      "targetPrice": 4490,
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 8980
+        }
+      ]
     }
   ],
-  "lastUpdated": "2026-10-07 22:47"
+  "lastUpdated": "2026-10-07 22:51"
 }
