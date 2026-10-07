@@ -64,7 +64,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": null,
+      "yesterdayPrice": 480,
       "currentPrice": 480,
       "priceSource": "カードラッシュ",
       "history": [
@@ -447,7 +447,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": null,
+      "yesterdayPrice": 580,
       "currentPrice": 580,
       "priceSource": "カードラッシュ",
       "history": [
@@ -488,7 +488,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": null,
+      "yesterdayPrice": 480,
       "currentPrice": 480,
       "priceSource": "カードラッシュ",
       "history": [
@@ -808,7 +808,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": null,
+      "yesterdayPrice": 580,
       "currentPrice": 580,
       "priceSource": "カードラッシュ",
       "history": [
@@ -931,7 +931,7 @@
       "priceSource": "カードラッシュ"
     }
   ],
-  "lastUpdated": "2026-10-07 23:01",
+  "lastUpdated": "2026-10-07 23:02",
   "priceSource": "カードラッシュ",
   "updateStats": {
     "success": 11,
