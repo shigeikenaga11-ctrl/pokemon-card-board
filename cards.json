@@ -1,0 +1,48 @@
+{
+  "owned": [
+    {
+      "name": "リザードン",
+      "number": "137/103",
+      "qty": 1,
+      "purchasePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
+    },
+    {
+      "name": "カスミ",
+      "number": "138/103",
+      "qty": 1,
+      "purchasePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
+    }
+  ],
+  "wanted": [
+    {
+      "name": "ルギア",
+      "number": "142/103",
+      "basePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
+    },
+    {
+      "name": "コイキング",
+      "number": "165/103",
+      "basePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
+    },
+    {
+      "name": "ピカチュウex",
+      "number": "127/103",
+      "basePrice": null,
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "image": ""
+    }
+  ]
+}
