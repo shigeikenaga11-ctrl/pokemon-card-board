@@ -3,89 +3,174 @@ import re
 import urllib.parse
 import urllib.request
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 DATA_FILE = "cards.json"
 
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 Chrome/154 Safari/537.36"
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/154.0.0.0 Safari/537.36"
     )
 }
 
-# まずは価格取得を試すカード
 TRACK = {
     "137/103",  # リザードン
     "138/103",  # カスミ
     "135/103",  # ミュウex
     "163/103",  # ミュウVMAX
     "133/103",  # ボーマンダex
-    "142/103",  # WANT ルギア
-    "165/103",  # WANT コイキング
-    "127/103",  # WANT ピカチュウex
+    "142/103",  # ルギア
+    "165/103",  # コイキング
+    "127/103",  # ピカチュウex
 }
 
 
 def download(url):
-    req = urllib.request.Request(url, headers=HEADERS)
+    req = urllib.request.Request(
+        url,
+        headers=HEADERS
+    )
 
-    with urllib.request.urlopen(req, timeout=20) as r:
-        return r.read().decode("utf-8", errors="ignore")
+    with urllib.request.urlopen(
+        req,
+        timeout=30
+    ) as r:
+        return r.read().decode(
+            "utf-8",
+            errors="ignore"
+        )
 
 
 def search_price(number):
-    """
-    カードラッシュでカード番号を検索。
-    状態表記なしの商品を優先して価格を取得する。
-    """
 
-    keyword = urllib.parse.quote(number)
+    # カード番号単独より
+    # M6a全体ページの方が安定して取得できる
+    keyword = urllib.parse.quote("M6a")
 
     url = (
         "https://www.cardrush-pokemon.jp/"
         "product-list/0/0/normal"
-        f"?keyword={keyword}&num=100"
+        f"?keyword={keyword}&num=100&order=desc"
     )
 
     html = download(url)
 
-    # HTMLを検索しやすくする
-    text = re.sub(r"\s+", " ", html)
+    # 改行などを整理
+    text = re.sub(
+        r"\s+",
+        " ",
+        html
+    )
 
-    # {137/103} のようなカード番号を含む商品付近を抽出
+    # HTMLタグを簡易除去
+    text = re.sub(
+        r"<[^>]+>",
+        " ",
+        text
+    )
+
+    # HTML entity
+    text = (
+        text
+        .replace("&yen;", "円")
+        .replace("&#165;", "円")
+        .replace("&nbsp;", " ")
+    )
+
+    text = re.sub(
+        r"\s+",
+        " ",
+        text
+    )
+
     escaped = re.escape(number)
 
-    blocks = re.findall(
-        rf".{{0,500}}\{{{escaped}\}}.{{0,700}}",
-        text,
-        flags=re.I
+    # カード番号の位置を全部探す
+    matches = list(
+        re.finditer(
+            escaped,
+            text
+        )
+    )
+
+    print(
+        f"  number matches = {len(matches)}"
     )
 
     candidates = []
 
-    for block in blocks:
+    for match in matches:
 
-        # 状態A-/B/C等は除外
-        if re.search(r"状態\s*[A-ZＡ-Ｚ]", block):
-            continue
-
-        prices = re.findall(
-            r"([0-9]{1,3}(?:,[0-9]{3})*)円",
-            block
+        start = max(
+            0,
+            match.start() - 250
         )
 
-        if not prices:
+        end = min(
+            len(text),
+            match.end() + 350
+        )
+
+        block = text[start:end]
+
+        # M6a以外を除外
+        if "M6a" not in block:
             continue
 
-        price = int(prices[0].replace(",", ""))
+        # カード番号より前の部分を確認
+        before = text[
+            max(0, match.start() - 180):
+            match.start()
+        ]
+
+        # 状態品を除外
+        if any(
+            x in before
+            for x in [
+                "状態A",
+                "状態Ｂ",
+                "状態B",
+                "状態Ｃ",
+                "状態C"
+            ]
+        ):
+            continue
+
+        # カード番号より後ろから価格を探す
+        after = text[
+            match.end():
+            min(
+                len(text),
+                match.end() + 300
+            )
+        ]
+
+        price_match = re.search(
+            r"([0-9]{1,3}(?:,[0-9]{3})*)\s*円",
+            after
+        )
+
+        if not price_match:
+            continue
+
+        price = int(
+            price_match
+            .group(1)
+            .replace(",", "")
+        )
 
         candidates.append(price)
+
+        print(
+            f"  candidate = {price:,} yen"
+        )
 
     if not candidates:
         return None
 
-    # 同一番号で複数候補がある場合は
-    # 最初の通常商品価格を採用
+    # 最初の通常品を採用
     return candidates[0]
 
 
@@ -97,37 +182,67 @@ def update_card(card):
         return
 
     print(
-        f"Checking {card.get('name')} {number}..."
+        f"\nChecking "
+        f"{card.get('name')} "
+        f"{number}..."
     )
 
     try:
-        new_price = search_price(number)
+
+        new_price = search_price(
+            number
+        )
 
     except Exception as e:
-        print("ERROR:", e)
+
+        print(
+            "  ERROR:",
+            repr(e)
+        )
+
         return
 
     if new_price is None:
-        print("  price not found")
+
+        print(
+            "  PRICE NOT FOUND"
+        )
+
         return
 
-    old_price = card.get("currentPrice")
+    print(
+        f"  FOUND: {new_price:,} yen"
+    )
 
-    # 昨日の値として直前価格を保存
+    old_price = card.get(
+        "currentPrice"
+    )
+
+    # 前回値を保存
     if old_price is not None:
-        card["yesterdayPrice"] = old_price
+        card[
+            "yesterdayPrice"
+        ] = old_price
 
-    card["currentPrice"] = new_price
+    card[
+        "currentPrice"
+    ] = new_price
 
-    # WANTカード
-    # 初回だけ基準価格と狙い価格を固定
+    # WANT
     if "referencePrice" in card:
 
-        if card.get("referencePrice") is None:
+        # 初回だけ固定
+        if card.get(
+            "referencePrice"
+        ) is None:
 
-            card["referencePrice"] = new_price
+            card[
+                "referencePrice"
+            ] = new_price
 
-            card["targetPrice"] = round(
+            card[
+                "targetPrice"
+            ] = round(
                 new_price * 0.5
             )
 
@@ -135,12 +250,19 @@ def update_card(card):
     if "history" not in card:
         card["history"] = []
 
-    today = datetime.now().strftime("%Y-%m-%d")
+    now = datetime.now(
+        ZoneInfo("Asia/Tokyo")
+    )
 
-    # 同じ日の重複を避ける
+    today = now.strftime(
+        "%Y-%m-%d"
+    )
+
+    # 同日のデータは上書き
     card["history"] = [
-        x for x in card["history"]
-        if x.get("date") != today
+        item
+        for item in card["history"]
+        if item.get("date") != today
     ]
 
     card["history"].append({
@@ -148,10 +270,10 @@ def update_card(card):
         "price": new_price
     })
 
-    # 365日だけ保持
-    card["history"] = card["history"][-365:]
-
-    print("  price =", new_price)
+    # 365日保持
+    card["history"] = (
+        card["history"][-365:]
+    )
 
 
 def main():
@@ -164,15 +286,31 @@ def main():
 
         data = json.load(f)
 
-    for card in data.get("owned", []):
+    print(
+        "=== Pokemon Card "
+        "Price Update ==="
+    )
+
+    for card in data.get(
+        "owned",
+        []
+    ):
         update_card(card)
 
-    for card in data.get("wanted", []):
+    for card in data.get(
+        "wanted",
+        []
+    ):
         update_card(card)
+
+    now = datetime.now(
+        ZoneInfo("Asia/Tokyo")
+    )
 
     data["lastUpdated"] = (
-        datetime.now()
-        .strftime("%Y-%m-%d %H:%M")
+        now.strftime(
+            "%Y-%m-%d %H:%M"
+        )
     )
 
     with open(
@@ -188,7 +326,9 @@ def main():
             indent=2
         )
 
-    print("DONE")
+    print(
+        "\n=== DONE ==="
+    )
 
 
 if __name__ == "__main__":
