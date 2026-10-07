@@ -2,6 +2,8 @@ import json
 import re
 import urllib.parse
 import urllib.request
+import time
+
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -16,13 +18,12 @@ DATA_FILE = "cards.json"
 
 SOURCE_NAME = "カードラッシュ"
 
-SOURCE_URL = (
+BASE_URL = (
     "https://www.cardrush-pokemon.jp/"
     "product-list/0/0/normal"
-    "?keyword=M6a"
-    "&num=100"
-    "&order=desc"
 )
+
+SEARCH_KEYWORD = "M6a"
 
 HEADERS = {
     "User-Agent": (
@@ -32,6 +33,8 @@ HEADERS = {
     ),
     "Accept-Language": "ja,en-US;q=0.9,en;q=0.8"
 }
+
+JST = ZoneInfo("Asia/Tokyo")
 
 ENERGY_NUMBERS = {
     "水",
@@ -44,24 +47,28 @@ ENERGY_NUMBERS = {
     "悪"
 }
 
-JST = ZoneInfo("Asia/Tokyo")
+# 暴走防止
+MAX_PAGES = 20
+
+# サイトへの連続アクセスを避ける
+PAGE_WAIT = 1.0
 
 
 # =========================================================
-# 共通処理
+# 共通
 # =========================================================
 
 def normalize(text):
-    """
-    空白・改行を整理
-    """
 
     if text is None:
         return ""
 
     text = str(text)
 
-    text = text.replace("\u3000", " ")
+    text = text.replace(
+        "\u3000",
+        " "
+    )
 
     return re.sub(
         r"\s+",
@@ -71,9 +78,6 @@ def normalize(text):
 
 
 def normalize_name(name):
-    """
-    商品名比較用
-    """
 
     name = normalize(name)
 
@@ -105,9 +109,6 @@ def download(url):
 
 
 def extract_prices(text):
-    """
-    「19,800円」などを価格として抽出
-    """
 
     text = normalize(text)
 
@@ -116,32 +117,36 @@ def extract_prices(text):
         text
     )
 
-    result = []
+    prices = []
 
     for value in matches:
 
         try:
 
             price = int(
-                value.replace(",", "")
+                value.replace(
+                    ",",
+                    ""
+                )
             )
 
-            if 10 <= price <= 10_000_000:
+            if (
+                10
+                <= price
+                <= 10_000_000
+            ):
 
-                result.append(
+                prices.append(
                     price
                 )
 
         except ValueError:
             pass
 
-    return result
+    return prices
 
 
 def is_condition_item(text):
-    """
-    状態A- / 状態B / 状態C等を除外
-    """
 
     text = normalize(text)
 
@@ -151,34 +156,24 @@ def is_condition_item(text):
         r"状態\s*B",
         r"状態\s*Ｂ",
         r"状態\s*C",
-        r"状態\s*Ｃ",
+        r"状態\s*Ｃ"
     ]
 
     return any(
-        re.search(pattern, text)
-        for pattern in patterns
+        re.search(
+            pattern,
+            text
+        )
+        for pattern
+        in patterns
     )
 
 
 # =========================================================
-# カードラッシュの商品一覧を取得
+# 1ページの商品解析
 # =========================================================
 
-def build_product_list():
-
-    print()
-    print(
-        "Downloading Cardrush..."
-    )
-
-    html = download(
-        SOURCE_URL
-    )
-
-    print(
-        f"Downloaded: "
-        f"{len(html):,} bytes"
-    )
+def parse_products(html):
 
     soup = BeautifulSoup(
         html,
@@ -189,10 +184,6 @@ def build_product_list():
 
     seen = set()
 
-
-    # -----------------------------------------------------
-    # 商品リンクを起点に取得
-    # -----------------------------------------------------
 
     for link in soup.find_all(
         "a",
@@ -206,10 +197,17 @@ def build_product_list():
             )
         )
 
-        if "M6a" not in link_text:
+
+        # M6a商品のみ
+        if (
+            SEARCH_KEYWORD.lower()
+            not in
+            link_text.lower()
+        ):
             continue
 
-        # 000/000形式を探す
+
+        # 000/000
         number_match = re.search(
             r"(\d{3}/\d{3})",
             link_text
@@ -218,11 +216,14 @@ def build_product_list():
         if not number_match:
             continue
 
-        number = number_match.group(1)
+
+        number = (
+            number_match.group(1)
+        )
 
 
         # ---------------------------------------------
-        # 親要素から商品全体を探す
+        # 商品を囲む親要素から価格取得
         # ---------------------------------------------
 
         parent = link
@@ -231,10 +232,12 @@ def build_product_list():
 
         prices = []
 
+
         for _ in range(7):
 
             if parent is None:
                 break
+
 
             text = normalize(
                 parent.get_text(
@@ -243,16 +246,24 @@ def build_product_list():
                 )
             )
 
+
             found_prices = (
-                extract_prices(text)
+                extract_prices(
+                    text
+                )
             )
+
 
             if found_prices:
 
                 product_text = text
-                prices = found_prices
+
+                prices = (
+                    found_prices
+                )
 
                 break
+
 
             parent = parent.parent
 
@@ -261,7 +272,7 @@ def build_product_list():
             continue
 
 
-        # 状態品除外
+        # 状態品は除外
         if is_condition_item(
             product_text
         ):
@@ -269,18 +280,20 @@ def build_product_list():
 
 
         # ---------------------------------------------
-        # 名前部分を取得
+        # 商品名
         # ---------------------------------------------
 
         name_part = link_text
 
-        # [M6a]などを削除
+
+        # [M6a] 等削除
         name_part = re.sub(
             r"\[?M6a\]?",
             "",
             name_part,
             flags=re.I
         )
+
 
         # {137/103} 等削除
         name_part = re.sub(
@@ -291,27 +304,37 @@ def build_product_list():
             name_part
         )
 
-        # レアリティ記号などは残しても
-        # 後で部分一致するので問題なし
 
         name_part = normalize(
             name_part
         )
 
 
+        # 最初の価格
         price = prices[0]
 
 
+        href = link.get(
+            "href",
+            ""
+        )
+
+
+        # 商品URLが同じなら重複
         key = (
-            name_part,
+            href,
             number,
             price
         )
 
+
         if key in seen:
             continue
 
-        seen.add(key)
+
+        seen.add(
+            key
+        )
 
 
         products.append({
@@ -329,20 +352,234 @@ def build_product_list():
                 product_text,
 
             "href":
-                link.get("href", "")
+                href
         })
 
-
-    print(
-        f"Normal products parsed: "
-        f"{len(products)}"
-    )
 
     return products
 
 
 # =========================================================
-# カードを商品一覧から検索
+# 全ページ取得
+# =========================================================
+
+def build_product_list():
+
+    print()
+    print(
+        "Downloading Cardrush "
+        "all pages..."
+    )
+
+
+    all_products = []
+
+    seen_products = set()
+
+    previous_page_signature = None
+
+
+    for page in range(
+        1,
+        MAX_PAGES + 1
+    ):
+
+        query = urllib.parse.urlencode({
+
+            "keyword":
+                SEARCH_KEYWORD,
+
+            "num":
+                100,
+
+            "order":
+                "desc",
+
+            "page":
+                page
+        })
+
+
+        url = (
+            BASE_URL
+            + "?"
+            + query
+        )
+
+
+        print()
+        print(
+            f"PAGE {page}"
+        )
+
+
+        try:
+
+            html = download(
+                url
+            )
+
+        except Exception as error:
+
+            print(
+                "  DOWNLOAD ERROR:",
+                repr(error)
+            )
+
+            break
+
+
+        print(
+            f"  downloaded: "
+            f"{len(html):,} bytes"
+        )
+
+
+        page_products = (
+            parse_products(
+                html
+            )
+        )
+
+
+        print(
+            f"  parsed: "
+            f"{len(page_products)}"
+        )
+
+
+        # ---------------------------------------------
+        # 商品ゼロなら終了
+        # ---------------------------------------------
+
+        if not page_products:
+
+            print(
+                "  no products -> stop"
+            )
+
+            break
+
+
+        # ---------------------------------------------
+        # 同じページを返され続けた場合の対策
+        # ---------------------------------------------
+
+        signature = tuple(
+            sorted(
+                (
+                    p["href"],
+                    p["number"],
+                    p["price"]
+                )
+                for p
+                in page_products
+            )
+        )
+
+
+        if (
+            previous_page_signature
+            is not None
+            and
+            signature
+            == previous_page_signature
+        ):
+
+            print(
+                "  same page repeated "
+                "-> stop"
+            )
+
+            break
+
+
+        previous_page_signature = (
+            signature
+        )
+
+
+        # ---------------------------------------------
+        # 全商品へ追加
+        # ---------------------------------------------
+
+        new_count = 0
+
+
+        for product in page_products:
+
+            key = (
+                product["href"],
+                product["number"],
+                product["price"]
+            )
+
+
+            if key in seen_products:
+                continue
+
+
+            seen_products.add(
+                key
+            )
+
+
+            all_products.append(
+                product
+            )
+
+
+            new_count += 1
+
+
+        print(
+            f"  new products: "
+            f"{new_count}"
+        )
+
+
+        print(
+            f"  total: "
+            f"{len(all_products)}"
+        )
+
+
+        # 新商品がゼロなら終了
+        if new_count == 0:
+
+            print(
+                "  no new products "
+                "-> stop"
+            )
+
+            break
+
+
+        time.sleep(
+            PAGE_WAIT
+        )
+
+
+    print()
+    print(
+        "================================"
+    )
+
+    print(
+        f"TOTAL NORMAL PRODUCTS: "
+        f"{len(all_products)}"
+    )
+
+    print(
+        "================================"
+    )
+
+
+    return all_products
+
+
+# =========================================================
+# カード照合
 # =========================================================
 
 def find_card_price(
@@ -356,6 +593,7 @@ def find_card_price(
             ""
         )
     )
+
 
     number = normalize(
         card.get(
@@ -382,6 +620,7 @@ def find_card_price(
 
     for product in products:
 
+        # カード番号完全一致
         if (
             product["number"]
             != number
@@ -389,23 +628,21 @@ def find_card_price(
             continue
 
 
-        product_name = normalize_name(
-            product["name"]
+        product_name = (
+            normalize_name(
+                product["name"]
+            )
         )
 
-        product_text = normalize_name(
-            product["text"]
+
+        product_text = (
+            normalize_name(
+                product["text"]
+            )
         )
 
 
         # 名前一致
-        #
-        # 例：
-        # ミュウex
-        # ミュウex(SAR)
-        #
-        # のようなケースに対応
-
         if (
             name not in product_name
             and
@@ -420,12 +657,13 @@ def find_card_price(
 
 
     if not candidates:
+
         return None
 
 
-    # -----------------------------------------------------
-    # より名前が近い商品を優先
-    # -----------------------------------------------------
+    # =====================================================
+    # 一致度スコア
+    # =====================================================
 
     def score(product):
 
@@ -435,36 +673,50 @@ def find_card_price(
             )
         )
 
-        result = 0
+        product_text = (
+            normalize_name(
+                product["text"]
+            )
+        )
+
+        value = 0
 
 
+        # 名前完全一致
         if product_name == name:
 
-            result += 100
+            value += 200
 
 
+        # 名前から始まる
         if product_name.startswith(
             name
         ):
 
-            result += 50
+            value += 100
 
 
+        # 名前を含む
         if name in product_name:
 
-            result += 20
+            value += 50
 
 
-        # 状態表記が万一残っていたら大幅減点
+        # 本文に名前
+        if name in product_text:
 
+            value += 10
+
+
+        # 状態品なら除外相当
         if is_condition_item(
             product["text"]
         ):
 
-            result -= 1000
+            value -= 10000
 
 
-        return result
+        return value
 
 
     candidates.sort(
@@ -484,12 +736,83 @@ def find_card_price(
     )
 
 
+    # 候補が複数ならログだけ表示
+    if len(candidates) > 1:
+
+        print(
+            f"    candidates: "
+            f"{len(candidates)}"
+        )
+
+
     return best["price"]
 
 
 # =========================================================
-# 履歴更新
+# 履歴処理
 # =========================================================
+
+def get_previous_price(
+    history,
+    today
+):
+
+    if not isinstance(
+        history,
+        list
+    ):
+
+        return None
+
+
+    previous = []
+
+
+    for item in history:
+
+        date = item.get(
+            "date"
+        )
+
+        price = item.get(
+            "price"
+        )
+
+
+        if not date:
+            continue
+
+
+        if price is None:
+            continue
+
+
+        # 今日より前だけ
+        if date < today:
+
+            previous.append(
+                item
+            )
+
+
+    if not previous:
+
+        return None
+
+
+    previous.sort(
+        key=lambda item:
+        item.get(
+            "date",
+            ""
+        )
+    )
+
+
+    return previous[-1].get(
+        "price"
+    )
+
 
 def update_history(
     card,
@@ -501,6 +824,7 @@ def update_history(
         "history"
     )
 
+
     if not isinstance(
         history,
         list
@@ -509,12 +833,13 @@ def update_history(
         history = []
 
 
-    # 同じ日のデータを削除
+    # 今日の記録だけ削除
     history = [
 
         item
 
-        for item in history
+        for item
+        in history
 
         if item.get(
             "date"
@@ -522,6 +847,7 @@ def update_history(
     ]
 
 
+    # 今日の価格を追加
     history.append({
 
         "date":
@@ -534,8 +860,8 @@ def update_history(
 
     # 日付順
     history.sort(
-        key=lambda x:
-        x.get(
+        key=lambda item:
+        item.get(
             "date",
             ""
         )
@@ -549,7 +875,7 @@ def update_history(
 
 
 # =========================================================
-# 1カード更新
+# カード更新
 # =========================================================
 
 def update_card(
@@ -578,14 +904,14 @@ def update_card(
     )
 
 
-    # エネルギー
+    # エネルギーはスキップ
     if number in ENERGY_NUMBERS:
 
         print(
             "    SKIP: energy"
         )
 
-        return False
+        return "skip"
 
 
     price = find_card_price(
@@ -600,17 +926,12 @@ def update_card(
             "    NOT FOUND"
         )
 
-        return False
+        return "fail"
 
 
-    old_price = card.get(
-        "currentPrice"
-    )
-
-
-    # -----------------------------------------------------
-    # 前日価格
-    # -----------------------------------------------------
+    # =====================================================
+    # 本当の前日以前の最新価格
+    # =====================================================
 
     history = card.get(
         "history",
@@ -618,57 +939,22 @@ def update_card(
     )
 
 
-    yesterday_price = None
-
-
-    # 今日以外の最新履歴を探す
-
-    previous = [
-
-        item
-
-        for item in history
-
-        if (
-            item.get("date")
-            and
-            item.get("date") != today
+    previous_price = (
+        get_previous_price(
+            history,
+            today
         )
-    ]
-
-
-    if previous:
-
-        previous.sort(
-            key=lambda x:
-            x.get(
-                "date",
-                ""
-            )
-        )
-
-        yesterday_price = (
-            previous[-1]
-            .get(
-                "price"
-            )
-        )
-
-
-    # 過去履歴がない場合だけ
-    # 既存currentPriceを使用
-
-    elif old_price is not None:
-
-        yesterday_price = (
-            old_price
-        )
+    )
 
 
     card[
         "yesterdayPrice"
-    ] = yesterday_price
+    ] = previous_price
 
+
+    # =====================================================
+    # 現在価格
+    # =====================================================
 
     card[
         "currentPrice"
@@ -680,14 +966,13 @@ def update_card(
     ] = SOURCE_NAME
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # WANT
-    # -----------------------------------------------------
+    # =====================================================
 
     if is_wanted:
 
-        # 初回のみ基準価格固定
-
+        # 初回だけ固定
         if card.get(
             "referencePrice"
         ) is None:
@@ -697,15 +982,17 @@ def update_card(
             ] = price
 
 
-        # targetPriceも初回だけ固定
-
+        # 目標価格も初回だけ固定
         if card.get(
             "targetPrice"
         ) is None:
 
-            reference = card.get(
-                "referencePrice"
+            reference = (
+                card.get(
+                    "referencePrice"
+                )
             )
+
 
             if reference is not None:
 
@@ -716,9 +1003,9 @@ def update_card(
                 )
 
 
-    # -----------------------------------------------------
-    # 履歴
-    # -----------------------------------------------------
+    # =====================================================
+    # 履歴更新
+    # =====================================================
 
     update_history(
         card,
@@ -727,29 +1014,63 @@ def update_card(
     )
 
 
+    # =====================================================
+    # ログ
+    # =====================================================
+
     print(
         f"    CURRENT: "
         f"¥{price:,}"
     )
 
 
-    if (
-        yesterday_price
-        is not None
-    ):
+    if previous_price is None:
+
+        print(
+            "    PREVIOUS: —"
+        )
+
+    else:
 
         difference = (
             price
-            - yesterday_price
+            - previous_price
         )
+
+
+        percentage = (
+
+            (
+                price
+                / previous_price
+                - 1
+            )
+            * 100
+
+            if previous_price
+            else 0
+        )
+
+
+        print(
+            f"    PREVIOUS: "
+            f"¥{previous_price:,}"
+        )
+
 
         print(
             f"    CHANGE: "
-            f"{difference:+,}"
+            f"{difference:+,} "
+            f"({percentage:+.1f}%)"
         )
 
 
     if is_wanted:
+
+        print(
+            f"    REFERENCE: "
+            f"{card.get('referencePrice')}"
+        )
 
         print(
             f"    TARGET: "
@@ -757,7 +1078,7 @@ def update_card(
         )
 
 
-    return True
+    return "success"
 
 
 # =========================================================
@@ -769,6 +1090,7 @@ def main():
     now = datetime.now(
         JST
     )
+
 
     today = now.strftime(
         "%Y-%m-%d"
@@ -794,9 +1116,9 @@ def main():
     )
 
 
-    # -----------------------------------------------------
-    # cards.json
-    # -----------------------------------------------------
+    # =====================================================
+    # JSONロード
+    # =====================================================
 
     with open(
         DATA_FILE,
@@ -809,42 +1131,25 @@ def main():
         )
 
 
-    # -----------------------------------------------------
-    # カードラッシュ
-    # 一度だけ取得
-    # -----------------------------------------------------
+    # =====================================================
+    # カードラッシュ全ページ
+    # =====================================================
 
-    try:
-
-        products = (
-            build_product_list()
-        )
-
-    except Exception as error:
-
-        print()
-        print(
-            "DOWNLOAD ERROR:"
-        )
-
-        print(
-            repr(error)
-        )
-
-        raise
+    products = (
+        build_product_list()
+    )
 
 
     if not products:
 
         raise RuntimeError(
-            "No products parsed. "
-            "Cardrush HTML may have changed."
+            "No Cardrush products parsed."
         )
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # 更新
-    # -----------------------------------------------------
+    # =====================================================
 
     success = 0
 
@@ -853,21 +1158,14 @@ def main():
     skipped = 0
 
 
-    # 保有
+    # -----------------------------------------------------
+    # 保有カード
+    # -----------------------------------------------------
+
     for card in data.get(
         "owned",
         []
     ):
-
-        if (
-            card.get("number")
-            in ENERGY_NUMBERS
-        ):
-
-            skipped += 1
-
-            continue
-
 
         result = update_card(
 
@@ -881,16 +1179,23 @@ def main():
         )
 
 
-        if result:
+        if result == "success":
 
             success += 1
 
-        else:
+        elif result == "fail":
 
             failed += 1
 
+        else:
 
+            skipped += 1
+
+
+    # -----------------------------------------------------
     # WANT
+    # -----------------------------------------------------
+
     for card in data.get(
         "wanted",
         []
@@ -908,18 +1213,22 @@ def main():
         )
 
 
-        if result:
+        if result == "success":
 
             success += 1
 
-        else:
+        elif result == "fail":
 
             failed += 1
 
+        else:
 
-    # -----------------------------------------------------
-    # メタデータ
-    # -----------------------------------------------------
+            skipped += 1
+
+
+    # =====================================================
+    # メタ情報
+    # =====================================================
 
     data[
         "lastUpdated"
@@ -944,13 +1253,16 @@ def main():
             failed,
 
         "skipped":
-            skipped
+            skipped,
+
+        "productsParsed":
+            len(products)
     }
 
 
-    # -----------------------------------------------------
-    # 保存
-    # -----------------------------------------------------
+    # =====================================================
+    # JSON保存
+    # =====================================================
 
     with open(
         DATA_FILE,
@@ -970,9 +1282,9 @@ def main():
         )
 
 
-    # -----------------------------------------------------
-    # 結果
-    # -----------------------------------------------------
+    # =====================================================
+    # 最終結果
+    # =====================================================
 
     print()
     print(
@@ -984,15 +1296,23 @@ def main():
     )
 
     print(
-        f"SUCCESS : {success}"
+        f"PRODUCTS: "
+        f"{len(products)}"
     )
 
     print(
-        f"FAILED  : {failed}"
+        f"SUCCESS : "
+        f"{success}"
     )
 
     print(
-        f"SKIPPED : {skipped}"
+        f"FAILED  : "
+        f"{failed}"
+    )
+
+    print(
+        f"SKIPPED : "
+        f"{skipped}"
     )
 
     print(
