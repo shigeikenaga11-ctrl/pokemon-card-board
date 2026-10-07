@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Pokémon Card Board</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 10%, #18213a 0%, transparent 35%),
+    radial-gradient(circle at 90% 90%, #17111f 0%, transparent 35%),
+    #06080d;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               "Noto Sans JP", sans-serif;
+}
+
+body {
+  padding:
+    env(safe-area-inset-top)
+    env(safe-area-inset-right)
+    env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  padding: 34px 46px 30px;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+.page.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.header {
+  height: 9%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: #aeb8c8;
+  font-weight: 600;
+}
+
+.header-right {
+  font-size: 14px;
+  color: #7f8998;
+}
+
+.content {
+  height: 86%;
+  display: grid;
+  grid-template-columns: 32% 68%;
+  gap: 32px;
+}
+
+.card-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-image-box {
+  width: min(100%, 330px);
+  aspect-ratio: 63 / 88;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background:
+    linear-gradient(145deg,
+      rgba(255,255,255,0.09),
+      rgba(255,255,255,0.025));
+  box-shadow:
+    0 25px 55px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.03);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.no-image {
+  text-align: center;
+  color: #667080;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-area {
+  padding: 3% 2% 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-name {
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.card-number {
+  margin-top: 6px;
+  font-size: 18px;
+  color: #8e99aa;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  margin: 22px 0;
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 30px;
+}
+
+.metric {
+  padding: 13px 0;
+}
+
+.metric-label {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: #7d8795;
+}
+
+.metric-value {
+  margin-top: 5px;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+}
+
+.metric-sub {
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+.up {
+  color: #55d995;
+}
+
+.down {
+  color: #ff6e7d;
+}
+
+.neutral {
+  color: #b2bbc8;
+}
+
+.graph-section {
+  flex: 1;
+  min-height: 170px;
+  margin-top: 12px;
+  border-radius: 17px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.025);
+  padding: 15px 20px 10px;
+}
+
+.graph-title {
+  font-size: 12px;
+  color: #707b8a;
+  letter-spacing: 2px;
+}
+
+canvas {
+  width: 100%;
+  height: calc(100% - 20px);
+}
+
+.target-price {
+  color: #e3c36b;
+}
+
+.status {
+  position: absolute;
+  right: 48px;
+  bottom: 22px;
+  font-size: 12px;
+  color: #5d6674;
+  letter-spacing: 1px;
+}
+
+.dots {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #343b47;
+}
+
+.dot.active {
+  background: #d5d9df;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+
+const PAGE_INTERVAL = 16000;
+const FADE_TIME = 700;
+
+let pages = [];
+let currentPage = 0;
+
+function yen(value) {
+  if (value === null || value === undefined) {
+    return "—";
+  }
+  return "¥" + Math.round(value).toLocaleString("ja-JP");
+}
+
+function percent(value) {
+  if (value === null || !isFinite(value)) return "—";
+
+  const sign = value > 0 ? "+" : "";
+  return sign + value.toFixed(1) + "%";
+}
+
+function diffClass(value) {
+  if (value === null || value === 0) return "neutral";
+  return value > 0 ? "up" : "down";
+}
+
+function imageHTML(card) {
+
+  if (!card.image) {
+    return `
+      <div class="no-image">
+        CARD IMAGE<br>
+        ${card.name}<br>
+        ${card.number}
+      </div>
+    `;
+  }
+
+  return `<img src="${card.image}" alt="${card.name}">`;
+}
+
+function createOwnedPage(card, index) {
+
+  const purchase = card.purchasePrice;
+  const current = card.currentPrice;
+  const yesterday = card.yesterdayPrice;
+
+  const purchaseDiff =
+    purchase !== null && current !== null
+      ? current - purchase
+      : null;
+
+  const purchasePct =
+    purchase !== null &&
+    purchase !== 0 &&
+    current !== null
+      ? ((current / purchase) - 1) * 100
+      : null;
+
+  const dayDiff =
+    yesterday !== null && current !== null
+      ? current - yesterday
+      : null;
+
+  const dayPct =
+    yesterday !== null &&
+    yesterday !== 0 &&
+    current !== null
+      ? ((current / yesterday) - 1) * 100
+      : null;
+
+  return `
+  <section class="page">
+
+    <div class="header">
+      <div class="header-title">MY COLLECTION</div>
+      <div class="header-right">
+        OWNED CARD ${index + 1}
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="card-area">
+        <div class="card-image-box">
+          ${imageHTML(card)}
+        </div>
+      </div>
+
+      <div class="info-area">
+
+        <div class="card-name">${card.name}</div>
+        <div class="card-number">${card.number}　×${card.qty}</div>
+
+        <div class="divider"></div>
+
+        <div class="price-grid">
+
+          <div class="metric">
+            <div class="metric-label">購入価格</div>
+            <div class="metric-value">
+              ${yen(purchase)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">現在相場</div>
+            <div class="metric-value">
+              ${yen(current)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">購入時から</div>
+            <div class="metric-value ${diffClass(purchaseDiff)}">
+              ${purchaseDiff === null
+                ? "—"
+                : (purchaseDiff >= 0 ? "+" : "") + yen(Math.abs(purchaseDiff))}
+            </div>
+            <div class="metric-sub ${diffClass(purchasePct)}">
+              ${percent(purchasePct)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">昨日から</div>
+            <div class="metric-value ${diffClass(dayDiff)}">
+              ${dayDiff === null
+                ? "—"
+                : (dayDiff >= 0 ? "+" : "-") + yen(Math.abs(dayDiff))}
+            </div>
+            <div class="metric-sub ${diffClass(dayPct)}">
+              ${percent(dayPct)}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="graph-section">
+          <div class="graph-title">PRICE HISTORY</div>
+          <canvas class="price-chart"
+                  data-mode="owned"
+                  data-purchase="${purchase ?? ""}"
+                  data-current="${current ?? ""}"
+                  data-yesterday="${yesterday ?? ""}">
+          </canvas>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+  `;
+}
+
+function createWantedPage(card, index) {
+
+  const base = card.basePrice;
+  const current = card.currentPrice;
+  const yesterday = card.yesterdayPrice;
+
+  const target =
+    base !== null
+      ? base * 0.5
+      : null;
+
+  const dayDiff =
+    yesterday !== null && current !== null
+      ? current - yesterday
+      : null;
+
+  const dayPct =
+    yesterday !== null &&
+    yesterday !== 0 &&
+    current !== null
+      ? ((current / yesterday) - 1) * 100
+      : null;
+
+  let targetGap = null;
+  let targetGapPct = null;
+
+  if (target !== null && current !== null) {
+    targetGap = current - target;
+
+    targetGapPct =
+      target !== 0
+        ? ((current / target) - 1) * 100
+        : null;
+  }
+
+  return `
+  <section class="page">
+
+    <div class="header">
+      <div class="header-title">WANT LIST</div>
+      <div class="header-right">
+        TARGET CARD ${index + 1}
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="card-area">
+        <div class="card-image-box">
+          ${imageHTML(card)}
+        </div>
+      </div>
+
+      <div class="info-area">
+
+        <div class="card-name">${card.name}</div>
+        <div class="card-number">${card.number}</div>
+
+        <div class="divider"></div>
+
+        <div class="price-grid">
+
+          <div class="metric">
+            <div class="metric-label">現在相場</div>
+            <div class="metric-value">
+              ${yen(current)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">基準価格</div>
+            <div class="metric-value">
+              ${yen(base)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">狙い価格</div>
+            <div class="metric-value target-price">
+              ${yen(target)}
+            </div>
+            <div class="metric-sub target-price">
+              基準価格 × 50%
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">昨日から</div>
+            <div class="metric-value ${diffClass(dayDiff)}">
+              ${dayDiff === null
+                ? "—"
+                : (dayDiff >= 0 ? "+" : "-") + yen(Math.abs(dayDiff))}
+            </div>
+            <div class="metric-sub ${diffClass(dayPct)}">
+              ${percent(dayPct)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">狙い価格まで</div>
+            <div class="metric-value">
+              ${targetGap === null
+                ? "—"
+                : yen(Math.max(0, targetGap))}
+            </div>
+            <div class="metric-sub">
+              ${targetGapPct === null
+                ? "—"
+                : targetGapPct.toFixed(1) + "% above target"}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="graph-section">
+          <div class="graph-title">PRICE HISTORY / TARGET</div>
+          <canvas class="price-chart"
+                  data-mode="wanted"
+                  data-target="${target ?? ""}"
+                  data-current="${current ?? ""}"
+                  data-yesterday="${yesterday ?? ""}">
+          </canvas>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+  `;
+}
+
+function drawCharts() {
+
+  document.querySelectorAll(".price-chart").forEach(canvas => {
+
+    const rect = canvas.getBoundingClientRect();
+
+    const ratio = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.scale(ratio, ratio);
+
+    const w = rect.width;
+    const h = rect.height;
+
+    const current = Number(canvas.dataset.current);
+    const yesterday = Number(canvas.dataset.yesterday);
+    const purchase = Number(canvas.dataset.purchase);
+    const target = Number(canvas.dataset.target);
+
+    const values = [];
+
+    if (yesterday) values.push(yesterday);
+    if (current) values.push(current);
+    if (purchase) values.push(purchase);
+    if (target) values.push(target);
+
+    if (values.length === 0) {
+
+      ctx.fillStyle = "#596270";
+      ctx.font = "14px -apple-system";
+      ctx.fillText(
+        "価格履歴が蓄積されるとグラフを表示します",
+        20,
+        h / 2
+      );
+
+      return;
+    }
+
+    let min = Math.min(...values) * 0.85;
+    let max = Math.max(...values) * 1.15;
+
+    if (max === min) max = min + 1;
+
+    function y(value) {
+      return h - 25 -
+        ((value - min) / (max - min)) *
+        (h - 50);
+    }
+
+    ctx.strokeStyle = "rgba(255,255,255,0.08)";
+    ctx.lineWidth = 1;
+
+    for (let i = 0; i < 4; i++) {
+
+      const gy = 15 + ((h - 40) / 3) * i;
+
+      ctx.beginPath();
+      ctx.moveTo(0, gy);
+      ctx.lineTo(w, gy);
+      ctx.stroke();
+    }
+
+    if (target) {
+
+      ctx.strokeStyle = "#bca35e";
+      ctx.setLineDash([7, 7]);
+
+      ctx.beginPath();
+      ctx.moveTo(0, y(target));
+      ctx.lineTo(w, y(target));
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#d9bd69";
+      ctx.font = "12px -apple-system";
+
+      ctx.fillText(
+        "TARGET " + yen(target),
+        10,
+        y(target) - 7
+      );
+    }
+
+    if (purchase) {
+
+      ctx.strokeStyle = "rgba(255,255,255,0.35)";
+      ctx.setLineDash([6, 6]);
+
+      ctx.beginPath();
+      ctx.moveTo(0, y(purchase));
+      ctx.lineTo(w, y(purchase));
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#9ca6b5";
+      ctx.font = "12px -apple-system";
+
+      ctx.fillText(
+        "PURCHASE " + yen(purchase),
+        10,
+        y(purchase) - 7
+      );
+    }
+
+    if (yesterday && current) {
+
+      const x1 = w * 0.25;
+      const x2 = w * 0.75;
+
+      ctx.strokeStyle = "#dce3ed";
+      ctx.lineWidth = 3;
+
+      ctx.beginPath();
+      ctx.moveTo(x1, y(yesterday));
+      ctx.lineTo(x2, y(current));
+      ctx.stroke();
+
+      ctx.fillStyle = "#ffffff";
+
+      ctx.beginPath();
+      ctx.arc(x1, y(yesterday), 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(x2, y(current), 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#788393";
+      ctx.font = "12px -apple-system";
+
+      ctx.fillText("YESTERDAY", x1 - 34, h - 4);
+      ctx.fillText("TODAY", x2 - 18, h - 4);
+    }
+
+  });
+}
+
+function createDots(count) {
+
+  return `
+    <div class="dots">
+      ${Array.from({length: count}, (_, i) =>
+        `<div class="dot ${i === 0 ? "active" : ""}"></div>`
+      ).join("")}
+    </div>
+  `;
+}
+
+function showPage(index) {
+
+  pages.forEach((page, i) => {
+    page.classList.toggle("active", i === index);
+  });
+
+  document.querySelectorAll(".dot").forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
+}
+
+async function start() {
+
+  const response = await fetch(
+    "cards.json?t=" + Date.now()
+  );
+
+  const data = await response.json();
+
+  const app = document.getElementById("app");
+
+  let html = "";
+
+  data.owned.forEach((card, index) => {
+    html += createOwnedPage(card, index);
+  });
+
+  data.wanted.forEach((card, index) => {
+    html += createWantedPage(card, index);
+  });
+
+  const total =
+    data.owned.length +
+    data.wanted.length;
+
+  html += createDots(total);
+
+  html += `
+    <div class="status">
+      AUTO ROTATE · 16 SEC
+    </div>
+  `;
+
+  app.innerHTML = html;
+
+  pages = [...document.querySelectorAll(".page")];
+
+  if (pages.length === 0) return;
+
+  showPage(0);
+
+  requestAnimationFrame(() => {
+    drawCharts();
+  });
+
+  setInterval(() => {
+
+    currentPage =
+      (currentPage + 1) % pages.length;
+
+    showPage(currentPage);
+
+  }, PAGE_INTERVAL);
+}
+
+window.addEventListener("resize", () => {
+  drawCharts();
+});
+
+start();
+
+</script>
+
+</body>
+</html>
