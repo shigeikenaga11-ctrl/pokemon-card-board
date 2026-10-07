@@ -3740,18 +3740,13 @@ function showPortfolio(){
 function showNext(){
 
   const step =
-    modeCounter % 4;
+    modeCounter % 10;
 
-
-  if(step === 0){
-
-    showOwned();
-
-  }else if(step === 1){
+  if(step < 8){
 
     showOwned();
 
-  }else if(step === 2){
+  }else if(step === 8){
 
     showPortfolio();
 
@@ -3760,7 +3755,6 @@ function showNext(){
     showWanted();
 
   }
-
 
   modeCounter++;
 
