@@ -780,6 +780,13 @@
       "qty": 1,
       "purchasePrices": [
         14500
+      ],
+      "currentPrice": 8980,
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 8980
+        }
       ]
     },
     {
@@ -813,10 +820,17 @@
     {
       "name": "ルギア",
       "number": "142/103",
-      "referencePrice": null,
-      "currentPrice": null,
+      "referencePrice": 22800,
+      "currentPrice": 22800,
       "yesterdayPrice": null,
-      "image": ""
+      "image": "",
+      "targetPrice": 11400,
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 22800
+        }
+      ]
     },
     {
       "name": "コイキング",
@@ -835,5 +849,5 @@
       "image": ""
     }
   ],
-  "lastUpdated": "2026-10-07 13:40"
+  "lastUpdated": "2026-10-07 22:47"
 }
