@@ -1780,7 +1780,7 @@
         240
       ],
       "yesterdayPrice": 120,
-      "currentPrice": 120,
+      "currentPrice": 80,
       "priceSource": "カードラッシュ",
       "history": [
         {
@@ -1789,7 +1789,7 @@
         },
         {
           "date": "2026-10-08",
-          "price": 120
+          "price": 80
         }
       ],
       "image": "images/101-103_ハイパーボール.jpg"
@@ -1943,7 +1943,7 @@
       "purchasePrices": [
         14500
       ],
-      "currentPrice": 8980,
+      "currentPrice": 8480,
       "history": [
         {
           "date": "2026-10-07",
@@ -1951,7 +1951,7 @@
         },
         {
           "date": "2026-10-08",
-          "price": 8980
+          "price": 8480
         }
       ],
       "yesterdayPrice": 8980,
@@ -1967,7 +1967,7 @@
         1900
       ],
       "yesterdayPrice": 2180,
-      "currentPrice": 2180,
+      "currentPrice": 2280,
       "priceSource": "カードラッシュ",
       "history": [
         {
@@ -1976,7 +1976,7 @@
         },
         {
           "date": "2026-10-08",
-          "price": 2180
+          "price": 2280
         }
       ],
       "image": "images/163-103_ミュウVMAX.jpg"
@@ -1989,7 +1989,7 @@
       "purchasePrices": [
         240
       ],
-      "currentPrice": 1680,
+      "currentPrice": 1780,
       "history": [
         {
           "date": "2026-10-07",
@@ -1997,7 +1997,7 @@
         },
         {
           "date": "2026-10-08",
-          "price": 1680
+          "price": 1780
         }
       ],
       "yesterdayPrice": 1680,
@@ -2032,7 +2032,7 @@
       "name": "ルギア",
       "number": "142/103",
       "referencePrice": 22800,
-      "currentPrice": 22800,
+      "currentPrice": 21800,
       "yesterdayPrice": 22800,
       "image": "images/142-103_ルギア.jpg",
       "targetPrice": 11400,
@@ -2043,7 +2043,7 @@
         },
         {
           "date": "2026-10-08",
-          "price": 22800
+          "price": 21800
         }
       ],
       "priceSource": "カードラッシュ"
@@ -2089,7 +2089,7 @@
       "priceSource": "カードラッシュ"
     }
   ],
-  "lastUpdated": "2026-10-08 00:59",
+  "lastUpdated": "2026-10-08 15:08",
   "priceSource": "カードラッシュ",
   "updateStats": {
     "success": 90,
