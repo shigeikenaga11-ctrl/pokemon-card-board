@@ -74,6 +74,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/099-103_ヒスイゾロアーク.jpg"
@@ -151,6 +155,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -230,6 +238,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/097-103_ルギア.jpg"
@@ -308,6 +320,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/100-103_イッカネズミ.jpg"
@@ -385,6 +401,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -465,6 +485,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/092-103_ニャース.jpg"
@@ -543,6 +567,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/096-103_ププリン.jpg"
@@ -620,6 +648,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 480
+        },
+        {
+          "date": "2026-10-23",
           "price": 480
         }
       ],
@@ -700,6 +732,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/093-103_メタモン.jpg"
@@ -777,6 +813,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -856,6 +896,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/082-103_ディアルガ.jpg"
@@ -933,6 +977,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -1012,6 +1060,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/086-103_ザマゼンタ.jpg"
@@ -1089,6 +1141,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -1168,6 +1224,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/083-103_ナットレイ.jpg"
@@ -1245,6 +1305,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -1324,6 +1388,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/054-103_ミュウツー.jpg"
@@ -1401,6 +1469,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -1481,6 +1553,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/065-103_コスモウム.jpg"
@@ -1558,6 +1634,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -1637,6 +1717,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/063-103_ゼルネアス.jpg"
@@ -1715,6 +1799,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/059-103_ニンフィアex.jpg"
@@ -1792,6 +1880,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -1879,6 +1971,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/061-103_フワンテ.jpg"
@@ -1965,6 +2061,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/062-103_シャンデラ.jpg"
@@ -2043,6 +2143,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/067-103_コレクレー.jpg"
@@ -2120,6 +2224,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -2207,6 +2315,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/013-103_カイオーガ.jpg"
@@ -2284,6 +2396,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -2364,6 +2480,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/012-103_フリーザー.jpg"
@@ -2443,6 +2563,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/016-103_ヨワシ.jpg"
@@ -2520,6 +2644,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -2599,6 +2727,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/003-103_バルビート.jpg"
@@ -2676,6 +2808,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -2755,6 +2891,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/002-103_アローラナッシー.jpg"
@@ -2832,6 +2972,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -2912,6 +3056,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/049-103_サンダー.jpg"
@@ -2989,6 +3137,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -3068,6 +3220,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/052-103_モルペコ.jpg"
@@ -3146,6 +3302,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/053-103_ミライドン.jpg"
@@ -3223,6 +3383,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -3303,6 +3467,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/090-103_ジャランゴ.jpg"
@@ -3381,6 +3549,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/089-103_ジャラコ.jpg"
@@ -3392,7 +3564,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -3459,6 +3631,10 @@
         {
           "date": "2026-10-22",
           "price": 220
+        },
+        {
+          "date": "2026-10-23",
+          "price": 220
         }
       ],
       "image": "images/036-103_ピカチュウ.jpg"
@@ -3470,7 +3646,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -3536,6 +3712,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -3615,6 +3795,10 @@
         {
           "date": "2026-10-22",
           "price": 280
+        },
+        {
+          "date": "2026-10-23",
+          "price": 280
         }
       ],
       "image": "images/017-103_ピカチュウ.jpg"
@@ -3626,7 +3810,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -3692,6 +3876,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -3704,7 +3892,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -3771,6 +3959,10 @@
         {
           "date": "2026-10-22",
           "price": 220
+        },
+        {
+          "date": "2026-10-23",
+          "price": 220
         }
       ],
       "image": "images/021-103_ピカチュウ.jpg"
@@ -3782,7 +3974,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -3848,6 +4040,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -3927,6 +4123,10 @@
         {
           "date": "2026-10-22",
           "price": 280
+        },
+        {
+          "date": "2026-10-23",
+          "price": 280
         }
       ],
       "image": "images/037-103_ピカチュウ.jpg"
@@ -3938,7 +4138,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 320,
+      "yesterdayPrice": 280,
       "currentPrice": 280,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4005,6 +4205,10 @@
         {
           "date": "2026-10-22",
           "price": 280
+        },
+        {
+          "date": "2026-10-23",
+          "price": 280
         }
       ],
       "image": "images/034-103_ピカチュウ.jpg"
@@ -4016,7 +4220,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4082,6 +4286,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4094,7 +4302,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4160,6 +4368,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4172,7 +4384,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4238,6 +4450,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4250,7 +4466,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4316,6 +4532,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4328,7 +4548,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4394,6 +4614,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4406,7 +4630,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4472,6 +4696,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4484,7 +4712,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4550,6 +4778,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4562,7 +4794,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4628,6 +4860,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4640,7 +4876,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4706,6 +4942,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4718,7 +4958,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4785,6 +5025,10 @@
         {
           "date": "2026-10-22",
           "price": 220
+        },
+        {
+          "date": "2026-10-23",
+          "price": 220
         }
       ],
       "image": "images/038-103_ピカチュウ.jpg"
@@ -4796,7 +5040,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 280,
+      "yesterdayPrice": 220,
       "currentPrice": 220,
       "priceSource": "カードラッシュ",
       "history": [
@@ -4862,6 +5106,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 220
+        },
+        {
+          "date": "2026-10-23",
           "price": 220
         }
       ],
@@ -4941,6 +5189,10 @@
         {
           "date": "2026-10-22",
           "price": 280
+        },
+        {
+          "date": "2026-10-23",
+          "price": 280
         }
       ],
       "image": "images/028-103_ピカチュウ.jpg"
@@ -4952,7 +5204,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 220,
+      "yesterdayPrice": 180,
       "currentPrice": 180,
       "priceSource": "カードラッシュ",
       "history": [
@@ -5018,6 +5270,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 180
+        },
+        {
+          "date": "2026-10-23",
           "price": 180
         }
       ],
@@ -5096,6 +5352,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -5176,6 +5436,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/077-103_ブラッキー.jpg"
@@ -5253,6 +5517,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -5332,6 +5600,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/073-103_ニドラン♀.jpg"
@@ -5409,6 +5681,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -5488,6 +5764,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/078-103_ズルッグ.jpg"
@@ -5566,6 +5846,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/009-103_ホゲータex.jpg"
@@ -5643,6 +5927,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -5723,6 +6011,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/006-103_ファイヤー.jpg"
@@ -5802,6 +6094,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/069-103_ルカリオ.jpg"
@@ -5879,6 +6175,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 50
+        },
+        {
+          "date": "2026-10-23",
           "price": 50
         }
       ],
@@ -5958,6 +6258,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/072-103_コライドン.jpg"
@@ -6035,6 +6339,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -6114,6 +6422,10 @@
         {
           "date": "2026-10-22",
           "price": 50
+        },
+        {
+          "date": "2026-10-23",
+          "price": 50
         }
       ],
       "image": "images/070-103_ガマゲロゲ.jpg"
@@ -6125,7 +6437,7 @@
       "purchasePrices": [
         240
       ],
-      "yesterdayPrice": 120,
+      "yesterdayPrice": 80,
       "currentPrice": 80,
       "priceSource": "カードラッシュ",
       "history": [
@@ -6191,6 +6503,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -6270,6 +6586,10 @@
         {
           "date": "2026-10-22",
           "price": 80
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80
         }
       ],
       "image": "images/101-103_ハイパーボール.jpg"
@@ -6347,6 +6667,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 80
+        },
+        {
+          "date": "2026-10-23",
           "price": 80
         }
       ],
@@ -6499,6 +6823,10 @@
         {
           "date": "2026-10-22",
           "price": 780
+        },
+        {
+          "date": "2026-10-23",
+          "price": 780
         }
       ],
       "yesterdayPrice": 780,
@@ -6579,6 +6907,10 @@
         {
           "date": "2026-10-22",
           "price": 480
+        },
+        {
+          "date": "2026-10-23",
+          "price": 480
         }
       ],
       "image": "images/106-103_ラプラス.jpg"
@@ -6656,9 +6988,13 @@
         {
           "date": "2026-10-22",
           "price": 5980
+        },
+        {
+          "date": "2026-10-23",
+          "price": 5980
         }
       ],
-      "yesterdayPrice": 6280,
+      "yesterdayPrice": 5980,
       "priceSource": "カードラッシュ",
       "image": "images/135-103_ミュウex.jpg"
     },
@@ -6670,7 +7006,7 @@
         1980,
         1900
       ],
-      "yesterdayPrice": 2180,
+      "yesterdayPrice": 1980,
       "currentPrice": 1980,
       "priceSource": "カードラッシュ",
       "history": [
@@ -6736,6 +7072,10 @@
         },
         {
           "date": "2026-10-22",
+          "price": 1980
+        },
+        {
+          "date": "2026-10-23",
           "price": 1980
         }
       ],
@@ -6814,9 +7154,13 @@
         {
           "date": "2026-10-22",
           "price": 2180
+        },
+        {
+          "date": "2026-10-23",
+          "price": 2180
         }
       ],
-      "yesterdayPrice": 1980,
+      "yesterdayPrice": 2180,
       "priceSource": "カードラッシュ",
       "image": "images/133-103_ボーマンダex.jpg"
     },
@@ -6892,6 +7236,10 @@
         {
           "date": "2026-10-22",
           "price": 19800
+        },
+        {
+          "date": "2026-10-23",
+          "price": 19800
         }
       ],
       "yesterdayPrice": 19800,
@@ -6905,7 +7253,7 @@
       "number": "142/103",
       "referencePrice": 22800,
       "currentPrice": 19800,
-      "yesterdayPrice": 20800,
+      "yesterdayPrice": 19800,
       "image": "images/142-103_ルギア.jpg",
       "targetPrice": 11400,
       "history": [
@@ -6972,6 +7320,10 @@
         {
           "date": "2026-10-22",
           "price": 19800
+        },
+        {
+          "date": "2026-10-23",
+          "price": 19800
         }
       ],
       "priceSource": "カードラッシュ"
@@ -6981,7 +7333,7 @@
       "number": "165/103",
       "referencePrice": 7280,
       "currentPrice": 5280,
-      "yesterdayPrice": 5780,
+      "yesterdayPrice": 5280,
       "image": "images/165-103_コイキング.jpg",
       "targetPrice": 3640,
       "history": [
@@ -7048,6 +7400,10 @@
         {
           "date": "2026-10-22",
           "price": 5280
+        },
+        {
+          "date": "2026-10-23",
+          "price": 5280
         }
       ],
       "priceSource": "カードラッシュ"
@@ -7057,7 +7413,7 @@
       "number": "127/103",
       "referencePrice": 8980,
       "currentPrice": 6480,
-      "yesterdayPrice": 7280,
+      "yesterdayPrice": 6480,
       "image": "images/127-103_ピカチュウex.jpg",
       "targetPrice": 4490,
       "history": [
@@ -7124,12 +7480,16 @@
         {
           "date": "2026-10-22",
           "price": 6480
+        },
+        {
+          "date": "2026-10-23",
+          "price": 6480
         }
       ],
       "priceSource": "カードラッシュ"
     }
   ],
-  "lastUpdated": "2026-10-22 13:51",
+  "lastUpdated": "2026-10-23 13:53",
   "priceSource": "カードラッシュ",
   "updateStats": {
     "success": 90,
