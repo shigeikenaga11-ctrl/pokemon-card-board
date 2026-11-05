@@ -10888,89 +10888,113 @@
       ],
       "image": "images/103-103_ポケモンいれかえ.jpg"
     },
-    
-   
-{
-  "name": "基本水エネルギー",
-  "number": "水",
-  "qty": 2,
-  "purchasePrices": [240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本水エネルギー.jpg"
-},
-{
-  "name": "基本炎エネルギー",
-  "number": "炎",
-  "qty": 2,
-  "purchasePrices": [240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本炎エネルギー.jpg"
-},
-{
-  "name": "基本草エネルギー",
-  "number": "草",
-  "qty": 2,
-  "purchasePrices": [240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本草エネルギー.jpg"
-},
-{
-  "name": "基本雷エネルギー",
-  "number": "雷",
-  "qty": 3,
-  "purchasePrices": [240, 240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本雷エネルギー.jpg"
-},
-{
-  "name": "基本鋼エネルギー",
-  "number": "鋼",
-  "qty": 3,
-  "purchasePrices": [240, 240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本鋼エネルギー.jpg"
-},
-{
-  "name": "基本超エネルギー",
-  "number": "超",
-  "qty": 2,
-  "purchasePrices": [240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本超エネルギー.jpg"
-},
-{
-  "name": "基本闘エネルギー",
-  "number": "闘",
-  "qty": 3,
-  "purchasePrices": [240, 240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本闘エネルギー.jpg"
-},
-{
-  "name": "基本悪エネルギー",
-  "number": "悪",
-  "qty": 2,
-  "purchasePrices": [240, 240],
-  "currentPrice": null,
-  "yesterdayPrice": null,
-  "history": [],
-  "image": "images/基本悪エネルギー.jpg"
-},
-
+    {
+      "name": "基本水エネルギー",
+      "number": "水",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本水エネルギー.jpg"
+    },
+    {
+      "name": "基本炎エネルギー",
+      "number": "炎",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本炎エネルギー.jpg"
+    },
+    {
+      "name": "基本草エネルギー",
+      "number": "草",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本草エネルギー.jpg"
+    },
+    {
+      "name": "基本雷エネルギー",
+      "number": "雷",
+      "qty": 3,
+      "purchasePrices": [
+        240,
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本雷エネルギー.jpg"
+    },
+    {
+      "name": "基本鋼エネルギー",
+      "number": "鋼",
+      "qty": 3,
+      "purchasePrices": [
+        240,
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本鋼エネルギー.jpg"
+    },
+    {
+      "name": "基本超エネルギー",
+      "number": "超",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本超エネルギー.jpg"
+    },
+    {
+      "name": "基本闘エネルギー",
+      "number": "闘",
+      "qty": 3,
+      "purchasePrices": [
+        240,
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本闘エネルギー.jpg"
+    },
+    {
+      "name": "基本悪エネルギー",
+      "number": "悪",
+      "qty": 2,
+      "purchasePrices": [
+        240,
+        240
+      ],
+      "currentPrice": null,
+      "yesterdayPrice": null,
+      "history": [],
+      "image": "images/基本悪エネルギー.jpg"
+    },
     {
       "name": "カスミ",
       "number": "138/103",
@@ -12169,7 +12193,7 @@
       "priceSource": "カードラッシュ"
     }
   ],
-  "lastUpdated": "2026-11-05 15:11",
+  "lastUpdated": "2026-11-05 15:22",
   "priceSource": "カードラッシュ",
   "updateStats": {
     "success": 90,
